@@ -1,0 +1,58 @@
+.comments-explanation {
+    display: table;
+    position: relative;
+    margin: 10px 0 10px #{-$commentsDialogSidePadding};
+    width: $commentsDialogWidth - 2*$commentsDialogSideMargin;
+    height: 138px;
+
+    .explanation-text-container {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        width: 100%;
+
+        .explanation-text-bg {
+            background: #F8F8F8;
+
+            .explanation-text {
+                width: 220px;
+                padding: 10px 0 10px 25px;
+            }
+        }
+    }
+
+    .explanation-image-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+        position: absolute;
+        right: 25px;
+        top: 0;
+        height: 100%;
+
+        .explanation-image-container {
+            display: table;
+            vertical-align: middle;
+            height: 100%;
+
+            .explanation-image-innerContainer {
+                display: table-cell;
+                vertical-align: middle;
+
+                .explanation-image {
+                    display: inline-block;
+                    width: 138px;
+                    height: 138px;
+                    vertical-align: middle;
+                }
+
+                .explanation-follow {
+                    background: url($imagePath + '/images/magnifier_follow.png') no-repeat;
+                }
+
+                .explanation-settings {
+                    background: url($imagePath + '/images/magnifier_settings.png') no-repeat;
+                }
+            }
+        }
+    }
+}

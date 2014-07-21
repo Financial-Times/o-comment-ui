@@ -1,0 +1,27 @@
+@mixin comments-button() {
+    display: inline-block;
+    margin: 0;
+    padding: 0 8px;
+    border-width: 0;
+
+    background: #4e8fbd;
+    background: -webkit-gradient(linear,left top,left bottom,from(#549ccf),to(#4782ab));
+    background: -moz-linear-gradient(#549ccf,#4782ab);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#549ccf,endColorstr=#4782ab);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#549ccf, endColorstr=#4782ab)";
+
+    zoom: 1;
+
+    font-family: Arial,Helvetica,sans-serif;
+    color: #fff;
+    text-shadow: 0 0 0 #FFF;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+
+    min-height: 24px;
+    line-height: 24px;
+    font-size: 14px;
+
+    border-radius: .3em;
+}
