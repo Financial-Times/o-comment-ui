@@ -1,7 +1,7 @@
 var i18n = require('./i18n.js'),
     templates = require('./templates.js');
 
-function Ui (widgetContainer) {
+function WidgetUi (widgetContainer) {
     "use strict";
 
     function scrollTo (withinElement, to, duration, callback) {
@@ -71,18 +71,18 @@ function Ui (widgetContainer) {
     this.addAuthNotAvailableMessage = undefined;
     this.addSettingsLink = undefined;
 }
-Ui.__extend = function(child) {
+WidgetUi.__extend = function(child) {
     "use strict";
 
     if (typeof Object.create === 'function') {
-        child.prototype = Object.create(Ui.prototype);
-        child.prototype = Object.create(Ui.prototype);
+        child.prototype = Object.create(WidgetUi.prototype);
+        child.prototype = Object.create(WidgetUi.prototype);
     } else {
         var Tmp = function () {};
-        Tmp.prototype = Ui.prototype;
+        Tmp.prototype = WidgetUi.prototype;
         child.prototype = new Tmp();
         child.prototype.constructor = child;
     }
 };
 
-module.exports = Ui;
+module.exports = WidgetUi;

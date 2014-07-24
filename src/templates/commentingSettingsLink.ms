@@ -1,4 +1,4 @@
 <div class="comments-settings">
     |<div class="comments-settings-text">
-    <span class="comments-settings-icon">&nbsp;</span> Commenting settings</div>
+    <span class="comments-settings-icon">&nbsp;</span> {{label}}</div>
 </div>

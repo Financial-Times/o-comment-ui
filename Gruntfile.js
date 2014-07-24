@@ -26,11 +26,11 @@ module.exports = function (grunt) {
 
     gruntModuleAggregator.addModule(gruntBower);
     gruntModuleAggregator.addModule(gruntJsDoc);
-    gruntModuleAggregator.addModule(gruntBrowserifyBuild, "commentscore");
+    gruntModuleAggregator.addModule(gruntBrowserifyBuild, "commentsUi");
     gruntModuleAggregator.addModule(gruntJsHint);
     gruntModuleAggregator.addModule(gruntQunit);
 
-    grunt.registerTask('default', 'Default', ['jshint:all', 'test', 'build', 'docs']);
+    grunt.registerTask('default', 'Default', ['jshint:all', /*'test',*/ 'build', 'docs']);
     
     grunt.registerTask('jenkins-jshint', ['jshint:jenkins']);
     grunt.registerTask('jenkins-test', ['test-jenkins']);

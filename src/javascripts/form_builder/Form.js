@@ -4,7 +4,7 @@ var sizzle = require('sizzle');
 
 var templates = require('../templates.js');
 
-var uiUtils = require('../uiUtils.js');
+var utils = require('../utils.js');
 var formFragments = require('./formFragments.js');
 
 var errorMessageContainerTemplate = hogan.compile(requireText('../../templates/form/errorMessageContainer.ms'));
@@ -38,7 +38,7 @@ function Form (config) {
         formObject.setAttribute('method', config.method || "");
         formObject.setAttribute('action', config.action || "");
 
-        formObject.appendChild(uiUtils.toDOM(errorMessageContainerTemplate.render()));
+        formObject.appendChild(utils.toDOM(errorMessageContainerTemplate.render()));
 
 
         if (config.items && config.items.length) {
@@ -46,15 +46,15 @@ function Form (config) {
                 item = config.items[i];
 
                 if (typeof item === 'object' && typeof formFragments[item.type] === 'function') {
-                    formObject.appendChild(uiUtils.toDOM(formFragments[item.type].call(myself, item)));
+                    formObject.appendChild(utils.toDOM(formFragments[item.type].call(myself, item)));
                 } else if (typeof item === 'string') {
-                    formObject.appendChild(uiUtils.toDOM(item));
+                    formObject.appendChild(utils.toDOM(item));
                 }
             }
         }
 
         if (config.buttons && config.buttons.length) {
-            formObject.appendChild(uiUtils.toDOM(buttonContainerTemplate.render()));
+            formObject.appendChild(utils.toDOM(buttonContainerTemplate.render()));
             var buttonContainer = sizzle('.buttonContainer', formObject)[0];
 
             for (i = 0; i < config.buttons.length; i++) {
@@ -63,31 +63,31 @@ function Form (config) {
                 switch(button.type) {
                     case 'button':
                         if (typeof button.label !== "undefined") {
-                            buttonContainer.appendChild(uiUtils.toDOM(buttonTemplate.render({
+                            buttonContainer.appendChild(utils.toDOM(buttonTemplate.render({
                                 type: 'button',
                                 label: button.label
                             })));
                         }
                         break;
                     case 'submitButton':
-                        buttonContainer.appendChild(uiUtils.toDOM(buttonTemplate.render({
+                        buttonContainer.appendChild(utils.toDOM(buttonTemplate.render({
                             type: 'submit',
                             label: button.label ? button.label : 'Submit'
                         })));
                         break;
                     case 'cancelButton':
-                        buttonContainer.appendChild(uiUtils.toDOM(buttonCancelTemplate.render({
+                        buttonContainer.appendChild(utils.toDOM(buttonCancelTemplate.render({
                             label: button.label ? button.label : 'cancel'
                         })));
                         break;
                     case 'dismiss':
-                        buttonContainer.appendChild(uiUtils.toDOM(dismissTemplate.render({
+                        buttonContainer.appendChild(utils.toDOM(dismissTemplate.render({
                             label: button.label
                         })));
                 }
             }
 
-            formObject.appendChild(uiUtils.toDOM(clearTemplate.render()));
+            formObject.appendChild(utils.toDOM(clearTemplate.render()));
 
             var cancelButtons = sizzle('.comments-dialog-cancel-button', formObject);
             var triggerCancel = function () {
@@ -95,7 +95,7 @@ function Form (config) {
             };
 
             for (var j = 0; j < cancelButtons.length; j++) {
-                uiUtils.addEventListener('click', cancelButtons[j], triggerCancel);
+                utils.addEventListener('click', cancelButtons[j], triggerCancel);
             }
         }
     }
@@ -104,14 +104,14 @@ function Form (config) {
     
     this.on = function () {
         if (arguments[0] === 'submit') {
-            uiUtils.addEventListener('submit', formObject, arguments[1]);
+            utils.addEventListener('submit', formObject, arguments[1]);
         } else {
             events.on.apply(events, arguments);
         }
     };
     this.off = function () {
         if (arguments[0] === 'submit') {
-            uiUtils.removeEventListener('submit', formObject, arguments[1]);
+            utils.removeEventListener('submit', formObject, arguments[1]);
         } else {
             events.off.apply(events, arguments);
         }

@@ -1,7 +1,7 @@
 var hogan = require('hogan');
 var Events = require('js-events');
 var sizzle = require('sizzle');
-var uiUtils = require('../uiUtils.js');
+var utils = require('../utils.js');
 
 var modalBgTemplate = hogan.compile(requireText('../../templates/dialog/modalBg.ms'));
 
@@ -34,8 +34,8 @@ var reposition = function () {
     "use strict";
 
     if (currentElement) {
-        currentElement.style.width = uiUtils.windowSize().width + "px";
-        currentElement.style.height = uiUtils.windowSize().height + "px";
+        currentElement.style.width = utils.windowSize().width + "px";
+        currentElement.style.height = utils.windowSize().height + "px";
     }
 };
 
@@ -46,7 +46,7 @@ var reposition = function () {
 function enableResizeMonitoring () {
     "use strict";
 
-    uiUtils.addEventListener('resize', window, reposition);
+    utils.addEventListener('resize', window, reposition);
 }
 
 /**
@@ -55,7 +55,7 @@ function enableResizeMonitoring () {
 function disableResizeMonitoring () {
     "use strict";
 
-    uiUtils.removeEventListener('resize', window, reposition);
+    utils.removeEventListener('resize', window, reposition);
 }
 
 
@@ -71,10 +71,10 @@ exports.open = function () {
         return;
     }
 
-    bodyEl.appendChild(uiUtils.toDOM(html));
+    bodyEl.appendChild(utils.toDOM(html));
     currentElement = sizzle('.comments-dialog-modalBg', bodyEl)[0];
 
-    uiUtils.addEventListener('click', currentElement, function () {
+    utils.addEventListener('click', currentElement, function () {
         events.trigger('click');
     });
 

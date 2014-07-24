@@ -1,53 +1,18 @@
 var Dialog = require('./dialog/Dialog.js'),
     Form = require('./form_builder/Form.js'),
-
-    Events = require('js-events'),
     logger = require('js-logger');
-
-
-/**
- * Error messages coming from SUDS could be not user friendly.
- * So some of the messages are mapped to a more user friendly message.
- * @type {Object}
- */
-var sudsMessageOverrides = {
-    'User session is not valid.': 'You are not currently signed in to FT.com, please '+
-            '<a href="https://registration.ft.com/registration/barrier/login?location='+ encodeURIComponent(document.location.href) +'">sign in</a> to create a pseudonym'
-};
-exports.sudsMessageOverrides = sudsMessageOverrides;
-
-
-exports.login = function () {};
-exports.logout = function () {};
-
-var events = new Events();
-exports.on = events.on;
-exports.off = events.off;
 
 
 var showSetPseudonymDialogShown = false;
 /**
  * Shows the set pseudonym dialog.
- * @param  {Object} delegate
  */
-exports.showSetPseudonymDialog = function (config, callbacks) {
+exports.showSetPseudonymDialog = function (onSubmit, onClose) {
     "use strict";
 
     if (showSetPseudonymDialogShown === false) {
-        if (!callbacks || typeof callbacks !== 'object') {
-            throw new Error("Callbacks not provided.");
-        }
-
-        if (typeof callbacks.onSubmit) {
+        if (typeof onSubmit !== 'function') {
             throw new Error("Submit callback not provided.");
-        }
-
-        if (!config || typeof config !== 'object') {
-            throw new Error("Configuration not provided.");
-        }
-
-        if (!config.user || config.user !== 'object') {
-            throw new Error("User object not provided.");
         }
 
 
@@ -84,7 +49,7 @@ exports.showSetPseudonymDialog = function (config, callbacks) {
 
                 var formData = form.serialize();
 
-                callbacks.onSubmit(formData, config.user, function (err) {
+                onSubmit(formData, function (err) {
                     if (err) {
                         form.showError(err);
 
@@ -92,10 +57,6 @@ exports.showSetPseudonymDialog = function (config, callbacks) {
                         inProgress = false;
 
                         return;
-                    }
-
-                    if (config.delegate) {
-                        config.delegate.success();
                     }
 
                     showSetPseudonymDialogShown = false;
@@ -114,16 +75,12 @@ exports.showSetPseudonymDialog = function (config, callbacks) {
         });
 
 
-        var onClose = function () {
+        var onCloseInternalHandler = function () {
             showSetPseudonymDialogShown = false;
             
             //events.trigger('refusedPseudonym');
-            if (typeof callbacks.onClose === 'object') {
-                callbacks.onClose();
-            }
-            
-            if (config.delegate && typeof config.delegate.failure === 'function') {
-                config.delegate.failure();
+            if (typeof onClose === 'function') {
+                onClose();
             }
 
             if (!inProgress) {
@@ -131,8 +88,8 @@ exports.showSetPseudonymDialog = function (config, callbacks) {
             }
         };
 
-        form.on('cancel', onClose);
-        dialog.on('close', onClose);
+        form.on('cancel', onCloseInternalHandler);
+        dialog.on('close', onCloseInternalHandler);
 
         dialog.open();
     }
@@ -143,31 +100,15 @@ var showSettingsDialogShown = false;
 /**
  * Shows the change pseudonym dialog.
  */
-exports.showSettingsDialog = function (config, callbacks) {
+exports.showSettingsDialog = function (currentData, onSubmit, onClose) {
     "use strict";
 
     if (showSettingsDialogShown === false) {
-        if (!callbacks || typeof callbacks !== 'object') {
-            throw new Error("Callbacks not provided.");
-        }
-
-        if (typeof callbacks.onSubmit) {
+        if (typeof onSubmit !== 'function') {
             throw new Error("Submit callback not provided.");
         }
 
-        if (!config || typeof config !== 'object') {
-            throw new Error("Configuration not provided.");
-        }
-
-        if (!config.user || config.user !== 'object') {
-            throw new Error("User object not provided.");
-        }
-
-        if (!config.hasOwnProperty('auth')) {
-            throw new Error("Auth object not provided.");
-        }
-
-        if (!config.auth || config.auth === 'expired') {
+        if (!currentData) {
             exports.showInactivityMessage();
             return;
         }
@@ -176,12 +117,8 @@ exports.showSettingsDialog = function (config, callbacks) {
         var inProgress = false;
 
 
-        var settings = config.auth && typeof config.auth === 'object' && config.auth.settings ? config.auth.settings : {};
-
-        var currentPseudonym = "";
-        if (config.auth && typeof config.auth === 'object' && config.auth.displayName) {
-            currentPseudonym = config.auth.displayName;
-        }
+        var currentSettings = (currentData && typeof currentData === 'object' && currentData.settings) ? currentData.settings : {};
+        var currentPseudonym = (currentData && typeof currentData === 'object' && currentData.displayName) ? currentData.displayName : "";
 
         var form = new Form({
             method: 'GET',
@@ -194,7 +131,7 @@ exports.showSettingsDialog = function (config, callbacks) {
                 },
                 {
                     type: 'emailSettings',
-                    currentSettings: settings
+                    currentSettings: currentSettings
                 }
             ],
             buttons: [
@@ -222,7 +159,7 @@ exports.showSettingsDialog = function (config, callbacks) {
                     formData.emailautofollow = 'off';
                 }
 
-                callbacks.onSubmit(formData, config.user, function (err) {
+                onSubmit(formData, function (err) {
                     if (err) {
                         form.showError(err);
 
@@ -230,10 +167,6 @@ exports.showSettingsDialog = function (config, callbacks) {
                         inProgress = false;
 
                         return;
-                    }
-
-                    if (config.delegate) {
-                        config.delegate.success();
                     }
 
                     showSettingsDialogShown = false;
@@ -251,16 +184,16 @@ exports.showSettingsDialog = function (config, callbacks) {
             return false;
         });
 
-        var onClose = function () {
+        var onCloseInternalHandler = function () {
             showSettingsDialogShown = false;
 
-            if (typeof callbacks.onClose === 'function') {
-                callbacks.onClose();
+            if (typeof onClose === 'function') {
+                onClose();
             }
         };
 
-        dialog.on('close', onClose);
-        form.on('cancel', onClose);
+        dialog.on('close', onCloseInternalHandler);
+        form.on('cancel', onCloseInternalHandler);
 
         dialog.open();
     }
@@ -270,26 +203,13 @@ exports.showSettingsDialog = function (config, callbacks) {
 var showEmailAlertDialogShown = false;
 /**
  * Shows a dialog with email alert settings only.
- * Once the user saves their settings, a flag is set not to show this dialog again.
  */
-exports.showEmailAlertDialog = function (config, callbacks) {
+exports.showEmailAlertDialog = function (onSubmit, onClose) {
     "use strict";
 
     if (showEmailAlertDialogShown === false) {
-        if (!callbacks || typeof callbacks !== 'object') {
-            throw new Error("Callbacks not provided.");
-        }
-
-        if (typeof callbacks.onSubmit) {
+        if (typeof onSubmit !== 'function') {
             throw new Error("Submit callback not provided.");
-        }
-
-        if (!config || typeof config !== 'object') {
-            throw new Error("Configuration not provided.");
-        }
-
-        if (!config.user || config.user !== 'object') {
-            throw new Error("User object not provided.");
         }
 
 
@@ -341,7 +261,7 @@ exports.showEmailAlertDialog = function (config, callbacks) {
 
                 dialog.disableButtons();
 
-                callbacks.onSubmit(formData, config.user, function (err) {
+                onSubmit(formData, function (err) {
                     if (err) {
                         form.showError(err);
 
@@ -364,16 +284,16 @@ exports.showEmailAlertDialog = function (config, callbacks) {
             return false;
         });
 
-        var onCancelClose = function () {
+        var onCloseInternalHandler = function () {
             showEmailAlertDialogShown = false;
 
-            if (typeof callbacks.onClose === 'function') {
-                callbacks.onClose();
+            if (typeof onClose === 'function') {
+                onClose();
             }
         };
 
-        dialog.on('close', onCancelClose);
-        form.on('cancel', onCancelClose);
+        dialog.on('close', onCloseInternalHandler);
+        form.on('cancel', onCloseInternalHandler);
 
         dialog.open();
     }
@@ -384,15 +304,11 @@ var showInactivityMessageDialogShown = false;
 /**
  * Shows inactivity message when the user's session is expired.
  */
-exports.showInactivityMessage = function (callbacks) {
+exports.showInactivityMessage = function (onSubmit, onClose) {
     "use strict";
 
     if (showInactivityMessageDialogShown === false) {
-        if (!callbacks || typeof callbacks !== 'object') {
-            throw new Error("Callbacks not provided.");
-        }
-
-        if (typeof callbacks.onSubmit) {
+        if (typeof onSubmit !== 'function') {
             throw new Error("Submit callback not provided.");
         }
 
@@ -401,7 +317,7 @@ exports.showInactivityMessage = function (callbacks) {
         var form = new Form(
             {
                 method: 'GET',
-                action: 'https://registration.ft.com/registration/barrier/login?location='+ encodeURIComponent(document.location.href),
+                action: '',
                 name: 'sessionexpired',
                 items: [
                     {
@@ -424,7 +340,7 @@ exports.showInactivityMessage = function (callbacks) {
         });
         
         form.on('submit', function (event) {
-            callbacks.onSubmit();
+            onSubmit();
             //window.location.href = 'https://registration.ft.com/registration/barrier/login?location='+ encodeURIComponent(document.location.href);
 
             if (event.preventDefault) {
@@ -436,12 +352,16 @@ exports.showInactivityMessage = function (callbacks) {
             return false;
         });
 
-        var onCancelClose = function () {
+        var onCloseInternalHandler = function () {
             showInactivityMessageDialogShown = false;
+
+            if (typeof onClose === 'function') {
+                onClose();
+            }
         };
 
-        dialog.on('close', onCancelClose);
-        form.on('cancel', onCancelClose);
+        dialog.on('close', onCloseInternalHandler);
+        form.on('cancel', onCloseInternalHandler);
 
         dialog.open();
     }

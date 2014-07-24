@@ -1,6 +1,6 @@
 var Events = require('js-events'),
     callbackSync = require('js-callback-sync'),
-    Ui = require('./Ui.js');
+    WidgetUi = require('./WidgetUi.js');
 
 function Widget (config) {
     "use strict";
@@ -53,7 +53,7 @@ function Widget (config) {
     this.config = config;
 
 
-    this.ui = new Ui(widgetEl);
+    this.ui = new WidgetUi(widgetEl);
 
     /**
      * Returns the widget container DOM element

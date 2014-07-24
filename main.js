@@ -1,50 +1,49 @@
 var logger = require('js-logger');
 
-module.exports = {
-    /**
-     * Widget.js exposed.
-     * @type {object}
-     */
-    Widget: require('./src/javascripts/Widget.js'),
+/**
+ * Widget.js exposed.
+ * @type {object}
+ */
+exports.Widget = require('./src/javascripts/Widget.js');
+exports.WidgetUi = require('./src/javascripts/WidgetUi.js');
+exports.userDialogs = require('./src/javascripts/userDialogs.js');
 
-    i18n: require('./src/javascripts/i18n.js'),
-    templates: require('./src/javascripts/templates.js'),
-    Ui: require('./src/javascripts/Ui.js'),
-    uiUtils: require('./src/javascripts/uiUtils.js'),
-    commonUi: require('./src/javascripts/commonUi.js'),
-    formBuilder: {
-        Form: require('./src/javascripts/form_builder/Form.js'),
-        formFragments: require('./src/javascripts/form_builder/formFragments.js')
-    },
-    dialog: {
-        Dialog: require('./src/javascripts/dialog/Dialog.js'),
-        modal: require('./src/javascripts/dialog/modal.js')
-    },
+exports.i18n = require('./src/javascripts/i18n.js');
+exports.templates = require('./src/javascripts/templates.js');
+exports.utils = require('./src/javascripts/utils.js');
 
-    /**
-     * Enables logging.
-     * @type {function}
-     */
-    enableLogging: function () {
-        "use strict";
-        logger.enable.apply(this, arguments);
-    },
+exports.form = {
+    Form: require('./src/javascripts/form_builder/Form.js'),
+    formFragments: require('./src/javascripts/form_builder/formFragments.js')
+};
+exports.dialog = {
+    Dialog: require('./src/javascripts/dialog/Dialog.js'),
+    modal: require('./src/javascripts/dialog/modal.js')
+};
 
-    /**
-     * Disables logging.
-     * @type {function}
-     */
-    disableLogging: function () {
-        "use strict";
-        logger.disable.apply(this, arguments);
-    },
+/**
+ * Enables logging.
+ * @type {function}
+ */
+exports.enableLogging = function () {
+    "use strict";
+    logger.enable.apply(this, arguments);
+};
 
-    /**
-     * Sets logging level.
-     * @type {number|string}
-     */
-    setLoggingLevel: function () {
-        "use strict";
-        logger.setLevel.apply(this, arguments);
-    }
+/**
+ * Disables logging.
+ * @type {function}
+ */
+exports.disableLogging = function () {
+    "use strict";
+    logger.disable.apply(this, arguments);
+};
+
+/**
+ * Sets logging level.
+ * @type {number|string}
+ */
+exports.setLoggingLevel = function () {
+    "use strict";
+    logger.setLevel.apply(this, arguments);
 };

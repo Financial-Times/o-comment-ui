@@ -3,7 +3,7 @@ var Events = require('js-events');
 var merge = require('js-merge');
 var sizzle = require('sizzle');
 
-var uiUtils = require('../uiUtils.js');
+var utils = require('../utils.js');
 var Form = require('../form_builder/Form.js');
 var modal = require('./modal.js');
 
@@ -73,8 +73,8 @@ function Dialog (htmlOrForm, userOptions) {
 
     var repositionToCenter = function() {
         if (container) {
-            var containerWidthCalculated = uiUtils.getComputedStyle(container).getPropertyValue('width');
-            var containerHeightCalculated = uiUtils.getComputedStyle(container).getPropertyValue('height');
+            var containerWidthCalculated = utils.getComputedStyle(container).getPropertyValue('width');
+            var containerHeightCalculated = utils.getComputedStyle(container).getPropertyValue('height');
 
             var containerWidthValueMatch = containerWidthCalculated.match(/([0-9.]+)px/);
             var containerHeightValueMatch = containerHeightCalculated.match(/([0-9.]+)px/);
@@ -82,15 +82,15 @@ function Dialog (htmlOrForm, userOptions) {
             if (containerWidthValueMatch && containerWidthValueMatch[1]) {
                 var containerWidthValue = parseFloat(containerWidthValueMatch[1]);
 
-                container.style.left = (uiUtils.windowSize().width - containerWidthValue) / 2 + "px";
+                container.style.left = (utils.windowSize().width - containerWidthValue) / 2 + "px";
             } else if (containerWidthCalculated === 'auto') {
-                container.style.left = (uiUtils.windowSize().width - 500) / 2 + "px";
+                container.style.left = (utils.windowSize().width - 500) / 2 + "px";
             }
 
             if (containerHeightValueMatch && containerHeightValueMatch[1]) {
                 var containerHeightValue = parseFloat(containerHeightValueMatch[1]);
 
-                container.style.top = (uiUtils.windowSize().height - containerHeightValue) / 2 + "px";
+                container.style.top = (utils.windowSize().height - containerHeightValue) / 2 + "px";
             } else if (containerHeightCalculated === 'auto') {
                 container.style.top = 50 + "px";
             }
@@ -113,7 +113,7 @@ function Dialog (htmlOrForm, userOptions) {
      * adjusts the modal background.
      */
     function enableResizeMonitoring() {
-        uiUtils.addEventListener('resize', window, repositionToCenter);
+        utils.addEventListener('resize', window, repositionToCenter);
     }
 
     /**
@@ -121,7 +121,7 @@ function Dialog (htmlOrForm, userOptions) {
      * @return {[type]} [description]
      */
     function disableResizeMonitoring() {
-        uiUtils.removeEventListener('resize', window, repositionToCenter);
+        utils.removeEventListener('resize', window, repositionToCenter);
     }
 
 
@@ -141,9 +141,9 @@ function Dialog (htmlOrForm, userOptions) {
 
     /**
      * Returns the current dialog container instance.
-     * @return {jQuery DOM Object}
+     * @return {DOM Object}
      */
-    this.getPopupContainer = function() {
+    this.getContainer = function() {
         return container;
     };
 
@@ -155,14 +155,14 @@ function Dialog (htmlOrForm, userOptions) {
      */
     this.open = function() {
         if (!container) {
-            bodyEl.appendChild(uiUtils.toDOM(html));
+            bodyEl.appendChild(utils.toDOM(html));
             container = document.getElementById(id);
 
             contentContainer = sizzle('.comments-dialog-container', container)[0];
             bodyEl.appendChild(container);
 
             if (typeof(options.title) !== 'undefined') {
-                contentContainer.appendChild(uiUtils.toDOM(titleTemplate.render({
+                contentContainer.appendChild(utils.toDOM(titleTemplate.render({
                     title: options.title
                 })));
             }
@@ -181,7 +181,7 @@ function Dialog (htmlOrForm, userOptions) {
         } else {
             // plain html
 
-            contentContainer.appendChild(uiUtils.toDOM(htmlOrForm));
+            contentContainer.appendChild(utils.toDOM(htmlOrForm));
         }
 
         if (options.modal === true) {
@@ -193,10 +193,10 @@ function Dialog (htmlOrForm, userOptions) {
 
         var closeButtons = sizzle('.closeButton', container);
         for (var i = 0; i < closeButtons.length; i++) {
-            uiUtils.addEventListener('click', closeButtons[i], onCloseNeeded);
+            utils.addEventListener('click', closeButtons[i], onCloseNeeded);
         }
 
-        uiUtils.addEventListener('keyup', document, onKeyUp);
+        utils.addEventListener('keyup', document, onKeyUp);
 
         repositionToCenter();
         enableResizeMonitoring();
