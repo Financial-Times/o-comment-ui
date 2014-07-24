@@ -1,4 +1,9 @@
-exports.toDOM = function (domString) {
+/**
+ * Converts a plain HTML string into a DOM object.
+ * @param  {String} htmlString Plain HTML in a string format.
+ * @return {DOM object}
+ */
+exports.toDOM = function (htmlString) {
     "use strict";
 
     var d = document,
@@ -6,7 +11,7 @@ exports.toDOM = function (domString) {
         a = d.createElement("div"),
         b = d.createDocumentFragment();
 
-    a.innerHTML = domString;
+    a.innerHTML = htmlString;
 
     while (a.firstChild) {
         i = a.firstChild;
@@ -16,6 +21,12 @@ exports.toDOM = function (domString) {
     return b;
 };
 
+/**
+ * Adds an event listener to a DOM object. Bubbling disabled.
+ * @param {String}     event   Type of the event (e.g. click)
+ * @param {DOMObject} elem    DOM object to which the handler will be attached.
+ * @param {Function}   handler Event handler function.
+ */
 exports.addEventListener = function (event, elem, handler) {
     "use strict";
 
@@ -30,6 +41,12 @@ exports.addEventListener = function (event, elem, handler) {
     }
 };
 
+/**
+ * Removes an event listener from a DOM object. Bubbling disabled.
+ * @param {String}     event   Type of the event (e.g. click)
+ * @param {DOMObject} elem    DOM object from which the handler will be removed.
+ * @param {Function}   handler Event handler function that should be removed.
+ */
 exports.removeEventListener = function (event, elem, handler) {
     "use strict";
 
@@ -40,7 +57,12 @@ exports.removeEventListener = function (event, elem, handler) {
     }
 };
 
-exports.getComputedStyle = function (el, pseudo) {
+/**
+ * getComputedStyle polyfill for IE. If native function is available, that one is used.
+ * @param  {DOMObject} el     DOM element of which style will be computed.
+ * @return {Object}            Object that has a getPropertyValue function which gets a property name as parameter.
+ */
+exports.getComputedStyle = function (el) {
     "use strict";
 
     if (!window.getComputedStyle) {
@@ -60,11 +82,14 @@ exports.getComputedStyle = function (el, pseudo) {
             }
         };
     } else {
-        return window.getComputedStyle(el, pseudo);
+        return window.getComputedStyle(el);
     }
 };
 
-
+/**
+ * Computes the window's size.
+ * @return {Object} {width: XX, height: YY}
+ */
 exports.windowSize = function () {
     "use strict";
 

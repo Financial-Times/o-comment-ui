@@ -31,13 +31,13 @@ The module should be built using `browserify` (with `debowerify` and `textrequir
 Logging can be enabled for debugging purposes. It logs using the global 'console' if available (if not, nothing happens and it degrades gracefully).
 By default logging is disabled.
 
-### enableLogging
+##### enableLogging
 This method enables logging of the module.
 
-### disableLogging
+##### disableLogging
 This method disables logging of the module.
 
-### setLoggingLevel
+##### setLoggingLevel
 This method sets the logging level. This could be a number from 0 to 4 (where 0 is debug, 4 is error), or a string from the available methods of 'console' (debug, log, info, warn, error).
 Default is 3 (warn).
 
@@ -49,32 +49,44 @@ The submodules that are exposed are the following:
 ### Widget
 Widget is responsible to coordinate getting initialization data, loading resources and initializing the Ui. While this class implements some of the basic functionality (handling errors, loading timeout), it should be extended by providing an implementation for getting the initialization data and loading the resources.
 
-##### Constructor
+#### Constructor
+
 ```javascript
 new commentsUi.Widget(config);
 ```
 
 To create an instance, you need to provide a configuration object. This should have the following structure:
 
-###### Mandatory fields:
+##### Mandatory fields:
 
 - elId: ID of the HTML element in which the widget should be loaded
 - articleId: ID of the article, any string
 - url: canonical URL of the page
 - title: Title of the page
 
-###### Optional fields:
+##### Optional fields:
 
  - timeout: Period of time after a timeout is triggered. Default is 15000 ms (15 sec). Its value should be given in milliseconds (ms).
 
-##### Final methods
+#### Example
+
+```javascript
+new commentsUi.Widget({
+    elId: 'container_id',
+    articleId: 'e113c91c-10d9-11e4-812b-00144feabdc0',
+    url: 'http://www.ft.com/cms/s/0/e113c91c-10d9-11e4-812b-00144feabdc0.html',
+    title: 'Rolls-Royce seeks to catch-up with rivals on margins - FT.com'
+});
+```
+
+#### Final methods
 ###### load
 This method will initiate the process of loading the resources that are needed to render the widget and the rendering of the UI. This method uses hook methods which are not implemented in this module, but should be implemented in the module that extends it.
 Load will handle errors of the process of loading the widget, also timeout if an error is not clearly available.
 
 This method can be called once (calling it multiple types will have no effect).
 
-##### Abstract methods (not implemented in this module)
+#### Abstract methods (not implemented in this module)
 ###### init
 This method is responsible for gathering data that is needed to initialize the widget (e.g. metadata, site ID, comments, etc.).
 
@@ -90,8 +102,7 @@ render(initData);
 ```
 
 
-
-##### Methods that can be overriden (they have default implementation)
+#### Methods that can be overriden (they have default implementation)
 ###### onError
 This method is responsible to handle any error that appears during the initialization.
 
@@ -106,28 +117,56 @@ This method is responsible to handle the case when within a given time the loadi
 
 The default implementation clears out the container of the widget and shows the unavailable message template (available using the template object).
 
+
+#### Extend
+Extending of Widget can be done in the following way:
+
+```javascript
+var WidgetExtend = function () {
+    commentsUi.Widget.apply(this, arguments);
+}
+commentsUi.Widget.extend(WidgetExtend);
+```
+
 ---
 
 ### WidgetUi
 This class is responsible to handle the UI part of a commenting widget. An instance of this is created within an instance of the `Widget`.
 While this implementation has predefined methods, it can be extended with particular UI methods.
 
-##### Constructor
+#### Constructor
 ```javascript
 new commentsUi.WidgetUi(widgetContainer);
 ```
 
 Where `widgetContainer` should be a DOM element in which the widget is loaded.
 
-##### Methods
+#### Methods
+###### scrollToWidget
+Scrolls the page to the widget. A callback function is called when the scroll finished (optional).
 
+###### addNotAvailableMessage
+Inserts message when comments is not available, either because of the web services or Livefyre.
+
+###### clearContainer
+Clears the container's content.
+
+#### Extend
+Extending of Widget can be done in the following way:
+
+```javascript
+var WidgetUiExtend = function () {
+    commentsUi.WidgetUi.apply(this, arguments);
+}
+commentsUi.WidgetUi.extend(WidgetUiExtend);
+```
 
 ---
 
 ### userDialogs
 Generic Ui functionality which is common across all istances of the comments. These are mostly dialogs which show on the page and are unrelated of the Widget's container or widget instance.
 
-##### Methods
+#### Methods
 ###### showSetPseudonymDialog
 Shows a dialog for setting the initial pseudonym (shown when the user doesn't have a pseudonym set).
 
@@ -196,10 +235,10 @@ commentsUi.userDialogs.showInactivityMessage(
 });
 ```
 
-#### Parameters
+### Parameters
 All functions has the same parameters: 
 
-##### onSubmit
+###### onSubmit
 <strong>Required.</strong> Function that is called when the form is submitted. As parameters the form data is provided (serialized into an object of key-value pairs), and a callback which should be called with either an error message (if an error occurred) or without parameters if submission is successful.
 Example:
 
@@ -216,15 +255,15 @@ onSubmit({
 }
 });
 ```
-##### onClose
+###### onClose
 Optional. Function that is called when the dialog is closed.
 
 ---
 
 ### dialog.Dialog
-Dialog injected into the DOM with custom content. Can be opened either with modal background or without it.
+Dialog built within the DOM with custom content. Can be opened either with modal background or without it.
 
-##### Constructor
+#### Constructor
 ```javascript
 new commentsUi.dialog.Dialog(htmlOrForm, userOptions)
 ```
@@ -237,7 +276,7 @@ Where:
      + modal: whether a modal overlay should be displayed or not. Default is true.
      + title: Title of the dialog
 
-##### Methods
+#### Methods
 
 ###### on
 Listen to events. The only available event within the module is 'close'.
@@ -272,18 +311,26 @@ Returns the container HTML element.
 ### dialog.modal
 Creates a modal overlay background which masks the whole page.
 
-##### Methods
- - open: creates the HTML needed and inserts as the last element in the <body>.
- - close: closes the modal and removes the HTML created.
- - on: listen to events. The only available event is 'click'.
- - off: remove the listeners.
+#### Methods
+###### open
+Creates the HTML needed and inserts as the last element in the <body>.
+
+###### close
+Closes the modal and removes the HTML created.
+
+###### on
+Listen to events. The only available event is 'click'.
+
+###### off
+Remove the listeners.
+
 
 ---
 
 ### formBuilder.Form
 Form is a helper for creating a form. It handles constructing the form element, generating buttons, forwarding submit and cancel events.
 
-##### Constructor
+#### Constructor
 
 ```javascript
 new Form(config);
@@ -312,25 +359,52 @@ Where config should have the following structure:
 }
 ```
 
-##### Methods
- - on: listen on submit/cancel events
- - off: remove listeners
- - render: returns a jQuery built HTML form with the elements specified in the config
- - serialize: returns the data of the form in a JSON format
- - showError: shows an error within the form
- - clearError: clears the error messages
+#### Methods
+###### on
+Listen on submit/cancel events.
+
+###### off
+Remove listeners.
+
+###### render
+Returns an HTML fragment of the form built using the initialization parameters.
+The response of this method can be used in the native `appendChild` function.
+
+###### serialize
+Returns the data of the form in a JSON format.
+
+###### showError
+Shows an error within the form.
+
+###### clearError
+Clears the error messages.
+
 
 ### formBuild.formFragments
-formFragments contains predefined form fragments that can be used within a Form instance.
+This helper module contains predefined form fragments that can be used within a Form instance.
 
-##### Methods
- - initialPseudonym: form fragment for setting the initial pseudonym
- - changePseudonym: form fragment for changing an existing pseudonym
- - emailSettings: form fragment for changing the email preferences
- - emailSettingsStandalone: form fragment for the email alert dialog where email settings is the only fragment that is shown
- - followExplanation: explanation of the Follow functionality with images
- - commentingSettingsExplanation: explanation of changing the settings with images
- - sessionExpired: session expired fragment with sign in link.
+#### Methods
+###### initialPseudonym
+Form fragment for setting the initial pseudonym.
+
+###### changePseudonym
+Form fragment for changing an existing pseudonym.
+
+###### emailSettings
+Form fragment for changing the email preferences.
+
+###### emailSettingsStandalone
+Form fragment for the email alert dialog where email settings is the only fragment that is shown.
+
+###### followExplanation
+Explanation of the Follow functionality with images.
+
+###### commentingSettingsExplanation
+Explanation of changing the settings with images.
+
+###### sessionExpired
+Session expired fragment with sign in link.
+
 
 ---
 
@@ -339,25 +413,25 @@ This contains common Mustache templates which are compiled and can be rendered w
 
 Templates that are available:
 
-#### unavailableTemplate
+##### unavailableTemplate
 Message that appears when an error occured or loading the widget takes longer than the timeout period. It has a default style added.
 
 Parameters:
 
 - message: message to show. By default i18n.unavailable is used to render within the WidgetUi.
 
-#### termsAndGuidelinesTemplate
+##### termsAndGuidelinesTemplate
 Terms and guidelines message with default style.
 Requires no parameters to render.
 
-#### commentingSettingsLink
+##### commentingSettingsLink
 Link that is used for changing user settings.
 
 Parameters:
 
 - label: Label of the link. i18n.commentingSettings can be used for it.
 
-#### clearLine
+##### clearLine
 Clearfix. Separates rows horizontally that have float.
 
 These templates can be overriden on a global level.

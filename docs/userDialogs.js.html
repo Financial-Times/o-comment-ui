@@ -72,6 +72,10 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
+            <li><a href="dialog\Dialog.js.html">dialog\Dialog.js</a></li>
+            <li><a href="dialog\modal.js.html">dialog\modal.js</a></li>
+            <li><a href="form_builder\Form.js.html">form_builder\Form.js</a></li>
+            <li><a href="form_builder\formFragments.js.html">form_builder\formFragments.js</a></li>
             <li><a href="i18n.js.html">i18n.js</a></li>
             <li><a href="main.js.html">main.js</a></li>
             <li class="active"><a href="userDialogs.js.html">userDialogs.js</a></li>
@@ -100,7 +104,28 @@
               <div class="label label-info radius ctx-type">method</div><span>exports.showSetPseudonymDialog()</span>
             </p>
           </section>
-          <div class="description"><p>Shows the set pseudonym dialog.</p> </div>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>onSubmit</td>
+                <td>Function</td>
+                <td>Required. Function that is called when the form is submitted. </td>
+              </tr>
+              <tr>
+                <td>onClose</td>
+                <td>Function</td>
+                <td>Optional. Function that is called when the dialog is closed.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Shows a dialog for setting the initial pseudonym (shown when the user doesn't have a pseudonym set).</p> </div>
           <pre><code class="language-javascript">exports.showSetPseudonymDialog = function (onSubmit, onClose) {
     &quot;use strict&quot;;
 
@@ -198,7 +223,33 @@ var showSettingsDialogShown = false;</code></pre>
               <div class="label label-info radius ctx-type">method</div><span>exports.showSettingsDialog()</span>
             </p>
           </section>
-          <div class="description"><p>Shows the change pseudonym dialog.</p> </div>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>currentData</td>
+                <td>[type]</td>
+                <td>Required. Function that is called when the form is submitted. </td>
+              </tr>
+              <tr>
+                <td>onSubmit</td>
+                <td>Function</td>
+                <td>Required. Function that is called when the form is submitted. </td>
+              </tr>
+              <tr>
+                <td>onClose</td>
+                <td>Function</td>
+                <td>Optional. Function that is called when the dialog is closed.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Settings dialog where the user can change its pseudonym or email preferences.</p> </div>
           <pre><code class="language-javascript">exports.showSettingsDialog = function (currentData, onSubmit, onClose) {
     &quot;use strict&quot;;
 
@@ -307,7 +358,28 @@ var showEmailAlertDialogShown = false;</code></pre>
               <div class="label label-info radius ctx-type">method</div><span>exports.showEmailAlertDialog()</span>
             </p>
           </section>
-          <div class="description"><p>Shows a dialog with email alert settings only.</p> </div>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>onSubmit</td>
+                <td>Function</td>
+                <td>Required. Function that is called when the form is submitted. </td>
+              </tr>
+              <tr>
+                <td>onClose</td>
+                <td>Function</td>
+                <td>Optional. Function that is called when the dialog is closed.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Shows a dialog which reminds the user to save its email preferences if he/she didn't do so.</p> </div>
           <pre><code class="language-javascript">exports.showEmailAlertDialog = function (onSubmit, onClose) {
     &quot;use strict&quot;;
 
@@ -412,7 +484,28 @@ var showInactivityMessageDialogShown = false;</code></pre>
               <div class="label label-info radius ctx-type">method</div><span>exports.showInactivityMessage()</span>
             </p>
           </section>
-          <div class="description"><p>Shows inactivity message when the user's session is expired.</p> </div>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>onSubmit</td>
+                <td>Function</td>
+                <td>Required. Function that is called when the form is submitted. </td>
+              </tr>
+              <tr>
+                <td>onClose</td>
+                <td>Function</td>
+                <td>Optional. Function that is called when the dialog is closed.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Shows a dialog with a sign in link to re-login after a session expire.</p> </div>
           <pre><code class="language-javascript">exports.showInactivityMessage = function (onSubmit, onClose) {
     &quot;use strict&quot;;
 

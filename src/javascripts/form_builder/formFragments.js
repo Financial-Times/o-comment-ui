@@ -6,6 +6,10 @@ var emailSettingsTemplate = hogan.compile(requireText('../../templates/formFragm
 var explanationTemplate = hogan.compile(requireText('../../templates/formFragments/explanation.ms'));
 var sessionExpiredTemplate = hogan.compile(requireText('../../templates/formFragments/sessionExpired.ms'));
 
+/**
+ * Form fragment that contains setting the initial pseudonym.
+ * @return {Mustache compiled template}
+ */
 exports.initialPseudonym = function () {
     "use strict";
 
@@ -20,7 +24,12 @@ exports.initialPseudonym = function () {
     });
 };
 
-exports.changePseudonym = function (config) {
+/**
+ * Form fragment that contains changing the initial pseudonym.
+ * @param  {Object} config Configuration object. If a pseudonym exists, it should be set in config.currentPseudonym.
+ * @return {Mustache compiled template}
+ */
+exports.changePseudonym = function (currentPseudonym) {
     "use strict";
 
     return fieldsetTemplate.render({
@@ -29,12 +38,16 @@ exports.changePseudonym = function (config) {
             name: 'pseudonym',
             label: 'This is displayed with your comments. If you change it, previous '+
                 'comments will also be attributed to the new pseudonym.',
-            currentPseudonym: config.currentPseudonym || ''
+            currentPseudonym: currentPseudonym || ''
         })
     });
 };
 
-
+/**
+ * Form fragment that contains the form inputs for the email preferences.
+ * @param  {Object} config Current settings.
+ * @return {Mustache compiled template}
+ */
 var emailSettingsForm = function (config) {
     "use strict";
 
@@ -122,6 +135,11 @@ var emailSettingsForm = function (config) {
     });
 };
 
+/**
+ * Email settings fragment within a dialog that contains pseudonym as well.
+ * @param  {Object} config Current settings.
+ * @return {Mustache compiled template}
+ */
 exports.emailSettings = function (config) {
     "use strict";
 
@@ -131,6 +149,11 @@ exports.emailSettings = function (config) {
     });
 };
 
+/**
+ * Email settings fragment which is shown standalone within the dialog.
+ * @param  {Object} config Current settings.
+ * @return {Mustache compiled template}
+ */
 exports.emailSettingsStandalone = function (config) {
     "use strict";
 
@@ -140,6 +163,10 @@ exports.emailSettingsStandalone = function (config) {
     });
 };
 
+/**
+ * Explanation with image of the Follow functionality.
+ * @return {Mustache compiled template}
+ */
 exports.followExplanation = function () {
     "use strict";
 
@@ -150,6 +177,10 @@ exports.followExplanation = function () {
     });
 };
 
+/**
+ * Explanation with image of the commenting settings dialog.
+ * @return {Mustache compiled template}
+ */
 exports.commentingSettingsExplanation = function () {
     "use strict";
 
@@ -159,6 +190,10 @@ exports.commentingSettingsExplanation = function () {
     });
 };
 
+/**
+ * Session expired dialog content.
+ * @return {Mustache compiled template}
+ */
 exports.sessionExpired = function () {
     "use strict";
 

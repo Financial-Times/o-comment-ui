@@ -14,6 +14,10 @@ var buttonCancelTemplate = hogan.compile(requireText('../../templates/form/butto
 var dismissTemplate = hogan.compile(requireText('../../templates/form/dismiss.ms'));
 var clearTemplate = templates.clearLine;
 
+/**
+ * Form is a helper for creating a form. It handles constructing the form element, generating buttons, forwarding submit and cancel events.
+ * @param {Object} config Configuration object which specifies the elements of the form (form fragments, buttons).
+ */
 function Form (config) {
     "use strict";
 
@@ -101,7 +105,9 @@ function Form (config) {
     }
     init.call(this);
 
-    
+    /**
+     * Listen on events.
+     */
     this.on = function () {
         if (arguments[0] === 'submit') {
             utils.addEventListener('submit', formObject, arguments[1]);
@@ -109,6 +115,10 @@ function Form (config) {
             events.on.apply(events, arguments);
         }
     };
+
+    /**
+     * Remove event listeners.
+     */
     this.off = function () {
         if (arguments[0] === 'submit') {
             utils.removeEventListener('submit', formObject, arguments[1]);
@@ -117,12 +127,20 @@ function Form (config) {
         }
     };
 
+    /**
+     * Return the rendered HTML fragment.
+     * @return {DocumentFragment}
+     */
     this.render = function () {
         return formObject;
     };
 
 
-
+    /**
+     * Helper to serialize form values into JavaScript Object (key-value pairs).
+     * @param  {DOMObject} form DOM Object of the form element.
+     * @return {Object}     Serialized key-value pairs of the form.
+     */
     var serializeForm = function (form) {
         var field,
             assocArray = {},
@@ -153,10 +171,18 @@ function Form (config) {
         return assocArray;
     };
 
+    /**
+     * Serializes the form that is built by this instance.
+     * @return {Object} Serialized key-value pairs of the form.
+     */
     this.serialize = function () {
         return serializeForm(formObject);
     };
 
+    /**
+     * Shows an error message on top of the form.
+     * @param  {String} errMessages The error message to show.
+     */
     this.showError = function (errMessages) {
         var errMessageContainer = sizzle('.errorMessage', formObject);
 
@@ -165,6 +191,9 @@ function Form (config) {
         }
     };
 
+    /**
+     * Clears all the errors.
+     */
     this.clearError = function () {
         var errMessageContainer = sizzle('.errorMessage', formObject);
 
@@ -173,4 +202,9 @@ function Form (config) {
         }
     };
 }
+
+/**
+ * Export the Form class.
+ * @type {Form}
+ */
 module.exports = Form;

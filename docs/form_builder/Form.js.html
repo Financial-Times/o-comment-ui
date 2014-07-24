@@ -74,36 +74,44 @@
             <li><a href="index.html">Main</a></li>
             <li><a href="dialog\Dialog.js.html">dialog\Dialog.js</a></li>
             <li><a href="dialog\modal.js.html">dialog\modal.js</a></li>
-            <li><a href="form_builder\Form.js.html">form_builder\Form.js</a></li>
+            <li class="active"><a href="form_builder\Form.js.html">form_builder\Form.js</a></li>
             <li><a href="form_builder\formFragments.js.html">form_builder\formFragments.js</a></li>
             <li><a href="i18n.js.html">i18n.js</a></li>
             <li><a href="main.js.html">main.js</a></li>
             <li><a href="userDialogs.js.html">userDialogs.js</a></li>
-            <li class="active"><a href="utils.js.html">utils.js</a></li>
+            <li><a href="utils.js.html">utils.js</a></li>
             <li><a href="Widget.js.html">Widget.js</a></li>
             <li><a href="WidgetUi.js.html">WidgetUi.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#toDOM"><i class="alert alert-info"></i><span>toDOM</span></a>
+              <li><a href="#Form"><i class="alert alert-info"></i><span>Form</span></a>
               </li>
-              <li><a href="#addEventListener"><i class="alert alert-info"></i><span>addEventListener</span></a>
+              <li><a href="#on"><i class="alert alert-info"></i><span>on</span></a>
               </li>
-              <li><a href="#removeEventListener"><i class="alert alert-info"></i><span>removeEventListener</span></a>
+              <li><a href="#off"><i class="alert alert-info"></i><span>off</span></a>
               </li>
-              <li><a href="#getComputedStyle"><i class="alert alert-info"></i><span>getComputedStyle</span></a>
+              <li><a href="#render"><i class="alert alert-info"></i><span>render</span></a>
               </li>
-              <li><a href="#windowSize"><i class="alert alert-info"></i><span>windowSize</span></a>
+              <li><a href="#serializeForm"><i class="alert alert-info"></i><span>serializeForm</span></a>
+              </li>
+              <li><a href="#serialize"><i class="alert alert-info"></i><span>serialize</span></a>
+              </li>
+              <li><a href="#showError"><i class="alert alert-info"></i><span>showError</span></a>
+              </li>
+              <li><a href="#clearError"><i class="alert alert-info"></i><span>clearError</span></a>
+              </li>
+              <li><a href="#exports"><i class="alert alert-success"></i><span>exports</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="toDOM">
-            <h1>toDOM</h1>
+          <section id="Form">
+            <h1>Form</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>exports.toDOM()</span> -><span>DOM</span>
+              <div class="label label-info radius ctx-type">function</div><span>Form()</span>
             </p>
           </section>
           <table class="table table-bordered table-striped">
@@ -116,190 +124,260 @@
             </thead>
             <tbody>
               <tr>
-                <td>htmlString</td>
-                <td>String</td>
-                <td>Plain HTML in a string format.</td>
+                <td>config</td>
+                <td>Object</td>
+                <td>Configuration object which specifies the elements of the form (form fragments, buttons).</td>
               </tr>
             </tbody>
           </table>
-          <div class="description"><p>Converts a plain HTML string into a DOM object.</p> </div>
-          <pre><code class="language-javascript">exports.toDOM = function (htmlString) {
+          <div class="description"><p>Form is a helper for creating a form. It handles constructing the form element, generating buttons, forwarding submit and cancel events.</p> </div>
+          <pre><code class="language-javascript">function Form (config) {
     &quot;use strict&quot;;
 
-    var d = document,
-        i,
-        a = d.createElement(&quot;div&quot;),
-        b = d.createDocumentFragment();
 
-    a.innerHTML = htmlString;
-
-    while (a.firstChild) {
-        i = a.firstChild;
-        b.appendChild(i);
+    if (!config || typeof config !== 'object') {
+        throw &quot;Configuration missing or invalid.&quot;;
     }
 
-    return b;
-};</code></pre>
-          <section id="addEventListener">
-            <h1>addEventListener</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>exports.addEventListener()</span>
-            </p>
-          </section>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th style="width:20%">Option name</th>
-                <th style="width:20%">Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>event</td>
-                <td>String</td>
-                <td>Type of the event (e.g. click)</td>
-              </tr>
-              <tr>
-                <td>elem</td>
-                <td>DOMObject</td>
-                <td>DOM object to which the handler will be attached.</td>
-              </tr>
-              <tr>
-                <td>handler</td>
-                <td>Function</td>
-                <td>Event handler function.</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="description"><p>Adds an event listener to a DOM object. Bubbling disabled.</p> </div>
-          <pre><code class="language-javascript">exports.addEventListener = function (event, elem, handler) {
-    &quot;use strict&quot;;
+    var myself = this;
+    var formObject;
 
-    if (elem.addEventListener) {
-        // W3C DOM
-        elem.addEventListener(event, handler, false);
-    } else if (elem.attachEvent) {
-        // IE DOM
-        elem.attachEvent(&quot;on&quot; + event, handler);
-    } else {
-        elem[event] = handler;
-    }
-};</code></pre>
-          <section id="removeEventListener">
-            <h1>removeEventListener</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>exports.removeEventListener()</span>
-            </p>
-          </section>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th style="width:20%">Option name</th>
-                <th style="width:20%">Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>event</td>
-                <td>String</td>
-                <td>Type of the event (e.g. click)</td>
-              </tr>
-              <tr>
-                <td>elem</td>
-                <td>DOMObject</td>
-                <td>DOM object from which the handler will be removed.</td>
-              </tr>
-              <tr>
-                <td>handler</td>
-                <td>Function</td>
-                <td>Event handler function that should be removed.</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="description"><p>Removes an event listener from a DOM object. Bubbling disabled.</p> </div>
-          <pre><code class="language-javascript">exports.removeEventListener = function (event, elem, handler) {
-    &quot;use strict&quot;;
+    var events = new Events();
 
-    if (elem.removeEventListener) {
-        elem.removeEventListener(event, handler, false);
-    } else if (elem.detachEvent) {
-        elem.detachEvent('on' + event, handler);
-    }
-};</code></pre>
-          <section id="getComputedStyle">
-            <h1>getComputedStyle</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>exports.getComputedStyle()</span> -><span>Object</span>
-            </p>
-          </section>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th style="width:20%">Option name</th>
-                <th style="width:20%">Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>el</td>
-                <td>DOMObject</td>
-                <td>DOM element of which style will be computed.</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="description"><p>getComputedStyle polyfill for IE. If native function is available, that one is used.</p> </div>
-          <pre><code class="language-javascript">exports.getComputedStyle = function (el) {
-    &quot;use strict&quot;;
+    function init () {
+        var item;
+        var button;
+        var i;
 
-    if (!window.getComputedStyle) {
-        return {
-            getPropertyValue: function (prop) {
-                var re = /(\-([a-zA-Z]){1})/g;
-                if (prop === 'float') {
-                    prop = 'styleFloat';
+        formObject = document.createElement('form');
+
+        formObject.setAttribute('name', config.name || &quot;&quot;);
+        formObject.setAttribute('method', config.method || &quot;&quot;);
+        formObject.setAttribute('action', config.action || &quot;&quot;);
+
+        formObject.appendChild(utils.toDOM(errorMessageContainerTemplate.render()));
+
+
+        if (config.items &amp;&amp; config.items.length) {
+            for (i = 0; i &lt; config.items.length; i++) {
+                item = config.items[i];
+
+                if (typeof item === 'object' &amp;&amp; typeof formFragments[item.type] === 'function') {
+                    formObject.appendChild(utils.toDOM(formFragments[item.type].call(myself, item)));
+                } else if (typeof item === 'string') {
+                    formObject.appendChild(utils.toDOM(item));
                 }
-
-                if (re.test(prop)) {
-                    prop = prop.replace(re, function () {
-                        return arguments[2].toUpperCase();
-                    });
-                }
-                return el.currentStyle[prop] ? el.currentStyle[prop] : null;
             }
-        };
-    } else {
-        return window.getComputedStyle(el);
+        }
+
+        if (config.buttons &amp;&amp; config.buttons.length) {
+            formObject.appendChild(utils.toDOM(buttonContainerTemplate.render()));
+            var buttonContainer = sizzle('.buttonContainer', formObject)[0];
+
+            for (i = 0; i &lt; config.buttons.length; i++) {
+                button = config.buttons[i];
+                
+                switch(button.type) {
+                    case 'button':
+                        if (typeof button.label !== &quot;undefined&quot;) {
+                            buttonContainer.appendChild(utils.toDOM(buttonTemplate.render({
+                                type: 'button',
+                                label: button.label
+                            })));
+                        }
+                        break;
+                    case 'submitButton':
+                        buttonContainer.appendChild(utils.toDOM(buttonTemplate.render({
+                            type: 'submit',
+                            label: button.label ? button.label : 'Submit'
+                        })));
+                        break;
+                    case 'cancelButton':
+                        buttonContainer.appendChild(utils.toDOM(buttonCancelTemplate.render({
+                            label: button.label ? button.label : 'cancel'
+                        })));
+                        break;
+                    case 'dismiss':
+                        buttonContainer.appendChild(utils.toDOM(dismissTemplate.render({
+                            label: button.label
+                        })));
+                }
+            }
+
+            formObject.appendChild(utils.toDOM(clearTemplate.render()));
+
+            var cancelButtons = sizzle('.comments-dialog-cancel-button', formObject);
+            var triggerCancel = function () {
+                events.trigger('cancel');
+            };
+
+            for (var j = 0; j &lt; cancelButtons.length; j++) {
+                utils.addEventListener('click', cancelButtons[j], triggerCancel);
+            }
+        }
     }
-};</code></pre>
-          <section id="windowSize">
-            <h1>windowSize</h1>
+    init.call(this);</code></pre>
+          <section id="on">
+            <h1>on</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>exports.windowSize()</span> -><span>Object</span>
+              <div class="label label-info radius ctx-type">method</div><span>this.on()</span>
             </p>
           </section>
-          <div class="description"><p>Computes the window's size.</p> </div>
-          <pre><code class="language-javascript">exports.windowSize = function () {
-    &quot;use strict&quot;;
+          <div class="description"><p>Listen on events.</p> </div>
+          <pre><code class="language-javascript">this.on = function () {
+        if (arguments[0] === 'submit') {
+            utils.addEventListener('submit', formObject, arguments[1]);
+        } else {
+            events.on.apply(events, arguments);
+        }
+    };</code></pre>
+          <section id="off">
+            <h1>off</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>this.off()</span>
+            </p>
+          </section>
+          <div class="description"><p>Remove event listeners.</p> </div>
+          <pre><code class="language-javascript">this.off = function () {
+        if (arguments[0] === 'submit') {
+            utils.removeEventListener('submit', formObject, arguments[1]);
+        } else {
+            events.off.apply(events, arguments);
+        }
+    };</code></pre>
+          <section id="render">
+            <h1>render</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>this.render()</span> -><span>DocumentFragment</span>
+            </p>
+          </section>
+          <div class="description"><p>Return the rendered HTML fragment.</p> </div>
+          <pre><code class="language-javascript">this.render = function () {
+        return formObject;
+    };</code></pre>
+          <section id="serializeForm">
+            <h1>serializeForm</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>serializeForm()</span> -><span>Object</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>form</td>
+                <td>DOMObject</td>
+                <td>DOM Object of the form element.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Helper to serialize form values into JavaScript Object (key-value pairs).</p> </div>
+          <pre><code class="language-javascript">var serializeForm = function (form) {
+        var field,
+            assocArray = {},
+            i,
+            j;
 
-    var w = window,
-        d = document,
-        e = d.documentElement,
-        g = d.getElementsByTagName('body')[0],
-        x = w.innerWidth || e.clientWidth || g.clientWidth,
-        y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+        if (typeof form === 'object' &amp;&amp; form.nodeName === &quot;FORM&quot;){
+            for (i = form.elements.length-1; i &gt;= 0; i--){
+                field = form.elements[i];
+                if (field.name &amp;&amp; field.type !== 'file' &amp;&amp; field.type !== 'reset' &amp;&amp; !field.hasAttribute('disabled')) {
+                    if (field.type === 'select-multiple'){
+                        for (j = form.elements[i].options.length-1; j &gt;= 0; j--) {
+                            if (field.options[j].selected) {
+                                assocArray[field.name] = field.options[j].value;
+                            }
+                        }
+                    } else {
+                        if ((field.type !== 'submit' &amp;&amp; field.type !== 'button')) {
+                            if ((field.type !== 'checkbox' &amp;&amp; field.type !== 'radio') || field.checked) {
+                                assocArray[field.name] = field.value;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-    return {
-        width: x,
-        height: y
+        return assocArray;
+    };</code></pre>
+          <section id="serialize">
+            <h1>serialize</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>this.serialize()</span> -><span>Object</span>
+            </p>
+          </section>
+          <div class="description"><p>Serializes the form that is built by this instance.</p> </div>
+          <pre><code class="language-javascript">this.serialize = function () {
+        return serializeForm(formObject);
+    };</code></pre>
+          <section id="showError">
+            <h1>showError</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>this.showError()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>errMessages</td>
+                <td>String</td>
+                <td>The error message to show.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Shows an error message on top of the form.</p> </div>
+          <pre><code class="language-javascript">this.showError = function (errMessages) {
+        var errMessageContainer = sizzle('.errorMessage', formObject);
+
+        if (errMessageContainer.length) {
+            errMessageContainer[0].innerHTML = errMessages;
+        }
+    };</code></pre>
+          <section id="clearError">
+            <h1>clearError</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>this.clearError()</span>
+            </p>
+          </section>
+          <div class="description"><p>Clears all the errors.</p> </div>
+          <pre><code class="language-javascript">this.clearError = function () {
+        var errMessageContainer = sizzle('.errorMessage', formObject);
+
+        if (errMessageContainer.length) {
+            errMessageContainer[0].innerHTML = &quot;&quot;;
+        }
     };
-};</code></pre>
+}</code></pre>
+          <section id="exports">
+            <h1>exports</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>module.exports</span>
+            </p>
+          </section>
+          <div class="description"><p>Export the Form class.</p> </div>
+          <pre><code class="language-javascript">module.exports = Form;</code></pre>
         </div>
       </div>
     </div>

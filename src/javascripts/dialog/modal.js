@@ -14,7 +14,7 @@ var html = modalBgTemplate.render();
 
 /**
  * The body DOM object.
- * @type {DOM Object}
+ * @type {DOMObject}
  */
 var bodyEl = document.body || document.getElementsByTagName('body')[0];
 
@@ -30,6 +30,9 @@ var events = new Events();
 var currentElement;
 
 
+/**
+ * Recalculates the size of modal background in case of a browser resize.
+ */
 var reposition = function () {
     "use strict";
 
@@ -82,6 +85,9 @@ exports.open = function () {
     enableResizeMonitoring();
 };
 
+/**
+ * Removes the modal bg from the DOM.
+ */
 exports.close = function () {
     "use strict";
 
@@ -95,11 +101,18 @@ exports.close = function () {
     disableResizeMonitoring();
 };
 
+/**
+ * Handles events of this module.
+ */
 exports.on = function () {
     "use strict";
 
     events.on.apply(events, arguments);
 };
+
+/**
+ * Removes event handlers.
+ */
 exports.off = function () {
     "use strict";
 

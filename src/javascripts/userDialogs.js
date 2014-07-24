@@ -5,7 +5,9 @@ var Dialog = require('./dialog/Dialog.js'),
 
 var showSetPseudonymDialogShown = false;
 /**
- * Shows the set pseudonym dialog.
+ * Shows a dialog for setting the initial pseudonym (shown when the user doesn't have a pseudonym set).
+ * @param  {Function} onSubmit Required. Function that is called when the form is submitted. 
+ * @param  {Function} onClose  Optional. Function that is called when the dialog is closed.
  */
 exports.showSetPseudonymDialog = function (onSubmit, onClose) {
     "use strict";
@@ -98,7 +100,10 @@ exports.showSetPseudonymDialog = function (onSubmit, onClose) {
 
 var showSettingsDialogShown = false;
 /**
- * Shows the change pseudonym dialog.
+ * Settings dialog where the user can change its pseudonym or email preferences.
+ * @param  {[type]} currentData Required. Function that is called when the form is submitted. 
+ * @param  {Function} onSubmit Required. Function that is called when the form is submitted. 
+ * @param  {Function} onClose  Optional. Function that is called when the dialog is closed.
  */
 exports.showSettingsDialog = function (currentData, onSubmit, onClose) {
     "use strict";
@@ -202,7 +207,9 @@ exports.showSettingsDialog = function (currentData, onSubmit, onClose) {
 
 var showEmailAlertDialogShown = false;
 /**
- * Shows a dialog with email alert settings only.
+ * Shows a dialog which reminds the user to save its email preferences if he/she didn't do so.
+ * @param  {Function} onSubmit Required. Function that is called when the form is submitted. 
+ * @param  {Function} onClose  Optional. Function that is called when the dialog is closed.
  */
 exports.showEmailAlertDialog = function (onSubmit, onClose) {
     "use strict";
@@ -302,7 +309,9 @@ exports.showEmailAlertDialog = function (onSubmit, onClose) {
 
 var showInactivityMessageDialogShown = false;
 /**
- * Shows inactivity message when the user's session is expired.
+ * Shows a dialog with a sign in link to re-login after a session expire.
+ * @param  {Function} onSubmit Required. Function that is called when the form is submitted. 
+ * @param  {Function} onClose  Optional. Function that is called when the dialog is closed.
  */
 exports.showInactivityMessage = function (onSubmit, onClose) {
     "use strict";

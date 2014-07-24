@@ -72,6 +72,10 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
+            <li><a href="dialog\Dialog.js.html">dialog\Dialog.js</a></li>
+            <li><a href="dialog\modal.js.html">dialog\modal.js</a></li>
+            <li><a href="form_builder\Form.js.html">form_builder\Form.js</a></li>
+            <li><a href="form_builder\formFragments.js.html">form_builder\formFragments.js</a></li>
             <li><a href="i18n.js.html">i18n.js</a></li>
             <li><a href="main.js.html">main.js</a></li>
             <li><a href="userDialogs.js.html">userDialogs.js</a></li>
@@ -81,6 +85,8 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#Widget"><i class="alert alert-info"></i><span>Widget</span></a>
+              </li>
               <li><a href="#getWidgetEl"><i class="alert alert-info"></i><span>getWidgetEl</span></a>
               </li>
               <li><a href="#on"><i class="alert alert-success"></i><span>on</span></a>
@@ -93,10 +99,59 @@
               </li>
               <li><a href="#init"><i class="alert alert-success"></i><span>init</span></a>
               </li>
+              <li><a href="#exports"><i class="alert alert-success"></i><span>exports</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
+          <section id="Widget">
+            <h1>Widget</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>Widget()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>config</td>
+                <td>Object</td>
+                <td>Configuration object, as described in the class description.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Widget is responsible to coordinate getting initialization data, loading resources and initializing the Ui.<br />While this class implements some of the basic functionality (handling errors, loading timeout),<br />it should be extended by providing an implementation for getting the initialization data and loading the resources.</p>
+
+<h4>Configuration</h4>
+
+<h6>Mandatory fields:</h6>
+
+<ul>
+<li>elId: ID of the HTML element in which the widget should be loaded</li>
+<li>articleId: ID of the article, any string</li>
+<li>url: canonical URL of the page</li>
+<li>title: Title of the page</li>
+</ul>
+
+<h6>Optional fields:</h6>
+
+<ul>
+<li>timeout: Period of time after a timeout is triggered. Default is 15000 ms (15 sec). Its value should be given in milliseconds (ms).</li>
+</ul> </div>
+          <pre><code class="language-javascript">function Widget (config) {
+    &quot;use strict&quot;;
+
+    var widgetEl, event, self;
+
+    self = this;</code></pre>
           <div class="description"><p>Validation of the initial configuration object.</p> </div>
           <pre><code class="language-javascript">if (!config) {
         throw &quot;Config not specified.&quot;;
@@ -341,9 +396,16 @@ Widget.__extend = function(child) {
         child.prototype = new Tmp();
         child.prototype.constructor = child;
     }
-};
-
-module.exports = Widget;</code></pre>
+};</code></pre>
+          <section id="exports">
+            <h1>exports</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>module.exports</span>
+            </p>
+          </section>
+          <div class="description"><p>Export of Widget.</p> </div>
+          <pre><code class="language-javascript">module.exports = Widget;</code></pre>
         </div>
       </div>
     </div>

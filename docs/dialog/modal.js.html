@@ -73,232 +73,183 @@
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
             <li><a href="dialog\Dialog.js.html">dialog\Dialog.js</a></li>
-            <li><a href="dialog\modal.js.html">dialog\modal.js</a></li>
+            <li class="active"><a href="dialog\modal.js.html">dialog\modal.js</a></li>
             <li><a href="form_builder\Form.js.html">form_builder\Form.js</a></li>
             <li><a href="form_builder\formFragments.js.html">form_builder\formFragments.js</a></li>
             <li><a href="i18n.js.html">i18n.js</a></li>
             <li><a href="main.js.html">main.js</a></li>
             <li><a href="userDialogs.js.html">userDialogs.js</a></li>
-            <li class="active"><a href="utils.js.html">utils.js</a></li>
+            <li><a href="utils.js.html">utils.js</a></li>
             <li><a href="Widget.js.html">Widget.js</a></li>
             <li><a href="WidgetUi.js.html">WidgetUi.js</a></li>
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#toDOM"><i class="alert alert-info"></i><span>toDOM</span></a>
+              <li><a href="#html"><i class="alert alert-success"></i><span>html</span></a>
               </li>
-              <li><a href="#addEventListener"><i class="alert alert-info"></i><span>addEventListener</span></a>
+              <li><a href="#bodyEl"><i class="alert alert-success"></i><span>bodyEl</span></a>
               </li>
-              <li><a href="#removeEventListener"><i class="alert alert-info"></i><span>removeEventListener</span></a>
+              <li><a href="#events"><i class="alert alert-success"></i><span>events</span></a>
               </li>
-              <li><a href="#getComputedStyle"><i class="alert alert-info"></i><span>getComputedStyle</span></a>
+              <li><a href="#reposition"><i class="alert alert-info"></i><span>reposition</span></a>
               </li>
-              <li><a href="#windowSize"><i class="alert alert-info"></i><span>windowSize</span></a>
+              <li><a href="#enableResizeMonitoring"><i class="alert alert-info"></i><span>enableResizeMonitoring</span></a>
+              </li>
+              <li><a href="#disableResizeMonitoring"><i class="alert alert-info"></i><span>disableResizeMonitoring</span></a>
+              </li>
+              <li><a href="#open"><i class="alert alert-info"></i><span>open</span></a>
+              </li>
+              <li><a href="#close"><i class="alert alert-info"></i><span>close</span></a>
+              </li>
+              <li><a href="#on"><i class="alert alert-info"></i><span>on</span></a>
+              </li>
+              <li><a href="#off"><i class="alert alert-info"></i><span>off</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="toDOM">
-            <h1>toDOM</h1>
+          <section id="html">
+            <h1>html</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>exports.toDOM()</span> -><span>DOM</span>
+              <div class="label label-success radius ctx-type">declaration</div><span>html</span>
             </p>
           </section>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th style="width:20%">Option name</th>
-                <th style="width:20%">Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>htmlString</td>
-                <td>String</td>
-                <td>Plain HTML in a string format.</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="description"><p>Converts a plain HTML string into a DOM object.</p> </div>
-          <pre><code class="language-javascript">exports.toDOM = function (htmlString) {
-    &quot;use strict&quot;;
-
-    var d = document,
-        i,
-        a = d.createElement(&quot;div&quot;),
-        b = d.createDocumentFragment();
-
-    a.innerHTML = htmlString;
-
-    while (a.firstChild) {
-        i = a.firstChild;
-        b.appendChild(i);
-    }
-
-    return b;
-};</code></pre>
-          <section id="addEventListener">
-            <h1>addEventListener</h1>
+          <div class="description"><p>HTML of the modal background.</p> </div>
+          <pre><code class="language-javascript">var html = modalBgTemplate.render();</code></pre>
+          <section id="bodyEl">
+            <h1>bodyEl</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>exports.addEventListener()</span>
+              <div class="label label-success radius ctx-type">declaration</div><span>bodyEl</span>
             </p>
           </section>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th style="width:20%">Option name</th>
-                <th style="width:20%">Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>event</td>
-                <td>String</td>
-                <td>Type of the event (e.g. click)</td>
-              </tr>
-              <tr>
-                <td>elem</td>
-                <td>DOMObject</td>
-                <td>DOM object to which the handler will be attached.</td>
-              </tr>
-              <tr>
-                <td>handler</td>
-                <td>Function</td>
-                <td>Event handler function.</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="description"><p>Adds an event listener to a DOM object. Bubbling disabled.</p> </div>
-          <pre><code class="language-javascript">exports.addEventListener = function (event, elem, handler) {
+          <div class="description"><p>The body DOM object.</p> </div>
+          <pre><code class="language-javascript">var bodyEl = document.body || document.getElementsByTagName('body')[0];</code></pre>
+          <section id="events">
+            <h1>events</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">declaration</div><span>events</span>
+            </p>
+          </section>
+          <div class="description"><p>Event object on which events can be triggered and handlers can be attached.</p> </div>
+          <pre><code class="language-javascript">var events = new Events();</code></pre>
+          <div class="description"><p>Current HTML element created.</p> </div>
+          <pre><code class="language-javascript">var currentElement;</code></pre>
+          <section id="reposition">
+            <h1>reposition</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>reposition()</span>
+            </p>
+          </section>
+          <div class="description"><p>Recalculates the size of modal background in case of a browser resize.</p> </div>
+          <pre><code class="language-javascript">var reposition = function () {
     &quot;use strict&quot;;
 
-    if (elem.addEventListener) {
-        // W3C DOM
-        elem.addEventListener(event, handler, false);
-    } else if (elem.attachEvent) {
-        // IE DOM
-        elem.attachEvent(&quot;on&quot; + event, handler);
-    } else {
-        elem[event] = handler;
+    if (currentElement) {
+        currentElement.style.width = utils.windowSize().width + &quot;px&quot;;
+        currentElement.style.height = utils.windowSize().height + &quot;px&quot;;
     }
 };</code></pre>
-          <section id="removeEventListener">
-            <h1>removeEventListener</h1>
+          <section id="enableResizeMonitoring">
+            <h1>enableResizeMonitoring</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>exports.removeEventListener()</span>
+              <div class="label label-info radius ctx-type">function</div><span>enableResizeMonitoring()</span>
             </p>
           </section>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th style="width:20%">Option name</th>
-                <th style="width:20%">Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>event</td>
-                <td>String</td>
-                <td>Type of the event (e.g. click)</td>
-              </tr>
-              <tr>
-                <td>elem</td>
-                <td>DOMObject</td>
-                <td>DOM object from which the handler will be removed.</td>
-              </tr>
-              <tr>
-                <td>handler</td>
-                <td>Function</td>
-                <td>Event handler function that should be removed.</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="description"><p>Removes an event listener from a DOM object. Bubbling disabled.</p> </div>
-          <pre><code class="language-javascript">exports.removeEventListener = function (event, elem, handler) {
+          <div class="description"><p>Handles page resize. When page resize occurs,<br />recalculates viewport, and adjusts the modal background.</p> </div>
+          <pre><code class="language-javascript">function enableResizeMonitoring () {
     &quot;use strict&quot;;
 
-    if (elem.removeEventListener) {
-        elem.removeEventListener(event, handler, false);
-    } else if (elem.detachEvent) {
-        elem.detachEvent('on' + event, handler);
+    utils.addEventListener('resize', window, reposition);
+}</code></pre>
+          <section id="disableResizeMonitoring">
+            <h1>disableResizeMonitoring</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>disableResizeMonitoring()</span>
+            </p>
+          </section>
+          <div class="description"><p>Disables page resize monitoring.</p> </div>
+          <pre><code class="language-javascript">function disableResizeMonitoring () {
+    &quot;use strict&quot;;
+
+    utils.removeEventListener('resize', window, reposition);
+}</code></pre>
+          <section id="open">
+            <h1>open</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>exports.open()</span>
+            </p>
+          </section>
+          <div class="description"><p>Public methods.</p> </div>
+          <pre><code class="language-javascript">exports.open = function () {
+    &quot;use strict&quot;;
+
+    if (currentElement) {
+        return;
     }
+
+    bodyEl.appendChild(utils.toDOM(html));
+    currentElement = sizzle('.comments-dialog-modalBg', bodyEl)[0];
+
+    utils.addEventListener('click', currentElement, function () {
+        events.trigger('click');
+    });
+
+    reposition();
+    enableResizeMonitoring();
 };</code></pre>
-          <section id="getComputedStyle">
-            <h1>getComputedStyle</h1>
+          <section id="close">
+            <h1>close</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>exports.getComputedStyle()</span> -><span>Object</span>
+              <div class="label label-info radius ctx-type">method</div><span>exports.close()</span>
             </p>
           </section>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th style="width:20%">Option name</th>
-                <th style="width:20%">Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>el</td>
-                <td>DOMObject</td>
-                <td>DOM element of which style will be computed.</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="description"><p>getComputedStyle polyfill for IE. If native function is available, that one is used.</p> </div>
-          <pre><code class="language-javascript">exports.getComputedStyle = function (el) {
+          <div class="description"><p>Removes the modal bg from the DOM.</p> </div>
+          <pre><code class="language-javascript">exports.close = function () {
     &quot;use strict&quot;;
 
-    if (!window.getComputedStyle) {
-        return {
-            getPropertyValue: function (prop) {
-                var re = /(\-([a-zA-Z]){1})/g;
-                if (prop === 'float') {
-                    prop = 'styleFloat';
-                }
-
-                if (re.test(prop)) {
-                    prop = prop.replace(re, function () {
-                        return arguments[2].toUpperCase();
-                    });
-                }
-                return el.currentStyle[prop] ? el.currentStyle[prop] : null;
-            }
-        };
-    } else {
-        return window.getComputedStyle(el);
+    if (!currentElement) {
+        return;
     }
+
+    currentElement.parentNode.removeChild(currentElement);
+    currentElement = null;
+
+    disableResizeMonitoring();
 };</code></pre>
-          <section id="windowSize">
-            <h1>windowSize</h1>
+          <section id="on">
+            <h1>on</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>exports.windowSize()</span> -><span>Object</span>
+              <div class="label label-info radius ctx-type">method</div><span>exports.on()</span>
             </p>
           </section>
-          <div class="description"><p>Computes the window's size.</p> </div>
-          <pre><code class="language-javascript">exports.windowSize = function () {
+          <div class="description"><p>Handles events of this module.</p> </div>
+          <pre><code class="language-javascript">exports.on = function () {
     &quot;use strict&quot;;
 
-    var w = window,
-        d = document,
-        e = d.documentElement,
-        g = d.getElementsByTagName('body')[0],
-        x = w.innerWidth || e.clientWidth || g.clientWidth,
-        y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+    events.on.apply(events, arguments);
+};</code></pre>
+          <section id="off">
+            <h1>off</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>exports.off()</span>
+            </p>
+          </section>
+          <div class="description"><p>Removes event handlers.</p> </div>
+          <pre><code class="language-javascript">exports.off = function () {
+    &quot;use strict&quot;;
 
-    return {
-        width: x,
-        height: y
-    };
+    events.off.apply(events, arguments);
 };</code></pre>
         </div>
       </div>

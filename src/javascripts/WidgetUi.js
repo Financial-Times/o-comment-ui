@@ -1,9 +1,21 @@
 var i18n = require('./i18n.js'),
     templates = require('./templates.js');
 
+/**
+ * This class is responsible to handle the UI part of a commenting widget. An instance of this is created within an instance of the `Widget`.
+ * While this implementation has predefined methods, it can be extended with particular UI methods.
+ * @param {DOMObject} widgetContainer DOM Object of the container of the widget.
+ */
 function WidgetUi (widgetContainer) {
     "use strict";
 
+    /**
+     * Helper function to scrolls to a position on the page or within an HTML element.
+     * @param  {DOMObject}   withinElement Within which element to scroll (e.g. the whole page or only within a div)
+     * @param  {Integer}     to            Target scroll position on the page
+     * @param  {Integer}     duration      Duration in milliseconds to animate.
+     * @param  {Function}    callback      Callback which is called when finished with the scrolling.
+     */
     function scrollTo (withinElement, to, duration, callback) {
         if (duration < 0) {
             callback();
@@ -25,6 +37,13 @@ function WidgetUi (widgetContainer) {
         }, 10);
     }
 
+    /**
+     * Helper function which scrolls to an element of the whole page or within an element
+     * @param  {DOMObject}   withinElement Within which element to scroll (e.g. the whole page or only within a div)
+     * @param  {DOMObject}   toElement     DOM Object to which to scroll.
+     * @param  {Integer}     duration      Duration in milliseconds to animate.
+     * @param  {Function}    callback      Callback which is called when finished with the scrolling.\
+     */
     function scrollToElement (withinElement, toElement, duration, callback) {
         scrollTo(withinElement, toElement.offsetTop, duration, callback);
     }
@@ -50,7 +69,7 @@ function WidgetUi (widgetContainer) {
     };
 
     /**
-     * Inserts message when comments is not available, either because of SUDS or Livefyre.
+     * Inserts message when comments is not available, either because of the web services or Livefyre.
      */
     this.addNotAvailableMessage = function () {
         widgetContainer.innerHTML = templates.unavailableTemplate.render({
@@ -85,4 +104,8 @@ WidgetUi.__extend = function(child) {
     }
 };
 
+/**
+ * Export of WidgetUI.
+ * @type {Function}
+ */
 module.exports = WidgetUi;

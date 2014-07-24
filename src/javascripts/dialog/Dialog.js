@@ -10,11 +10,20 @@ var modal = require('./modal.js');
 var containerTemplate = hogan.compile(requireText('../../templates/dialog/container.ms'));
 var titleTemplate = hogan.compile(requireText('../../templates/dialog/title.ms'));
 
+/**
+ * Dialog built within the DOM with custom content. Can be opened either with modal background or without it.
+ * @param {String|Form} htmlOrForm  Content of the dialog. Plain HTML in string or instance of a Form.js
+ * @param {Object}      userOptions User defined options. Possible fields: modal (default is true), title (title of the dialog).
+ */
 function Dialog (htmlOrForm, userOptions) {
     "use strict";
 
     var myself = this;
 
+    /**
+     * Unique identifier of the dialog's DOM object.
+     * @type {String}
+     */
     var id = "dialog" + (Math.random() + 1).toString(36).substring(7);
 
     /**
@@ -41,7 +50,7 @@ function Dialog (htmlOrForm, userOptions) {
 
     /**
      * The global container of the elements.
-     * @type {DOM Object}
+     * @type {DOMObject}
      */
     var container;
 
@@ -52,7 +61,7 @@ function Dialog (htmlOrForm, userOptions) {
 
     /**
      * The body DOM object.
-     * @type {DOM Object}
+     * @type {DOMObject}
      */
     var bodyEl = document.body || document.getElementsByTagName('body')[0];
 
@@ -63,14 +72,18 @@ function Dialog (htmlOrForm, userOptions) {
     var events = new Events();
 
 
-
+    /**
+     * Initializes the options.
+     */
     function init() {
         merge(options, defaultOptions, (userOptions && typeof userOptions === 'object' ? userOptions : {}));
     }
     init.call(this);
 
 
-
+    /**
+     * Handles a page resize event and recalculates the center position of the dialog.
+     */
     var repositionToCenter = function() {
         if (container) {
             var containerWidthCalculated = utils.getComputedStyle(container).getPropertyValue('width');
@@ -97,13 +110,20 @@ function Dialog (htmlOrForm, userOptions) {
         }
     };
 
+    /**
+     * Handles the ESC button and closes the dialog.
+     * @param  {Object} e Event object
+     */
     var onKeyUp = function(e) {
         if (e.keyCode === 27) {
             myself.close();
         }
     };
 
-    var onCloseNeeded = function () {
+    /**
+     * Close action is initiated within another context (this would be not this instance).
+     */
+    var closeIt = function () {
         myself.close.call(myself);
     };
 
@@ -141,7 +161,7 @@ function Dialog (htmlOrForm, userOptions) {
 
     /**
      * Returns the current dialog container instance.
-     * @return {DOM Object}
+     * @return {DOMObject}
      */
     this.getContainer = function() {
         return container;
@@ -151,7 +171,6 @@ function Dialog (htmlOrForm, userOptions) {
      * Opens the dialog by adding the dialog container into the DOM and populating the container
      * with the HTML or Form content.
      * It also adds some event handlers for closing on a user action.
-     * @return {[type]} [description]
      */
     this.open = function() {
         if (!container) {
@@ -187,13 +206,13 @@ function Dialog (htmlOrForm, userOptions) {
         if (options.modal === true) {
             modal.open();
 
-            modal.on('click', onCloseNeeded);
+            modal.on('click', closeIt);
         }
 
 
         var closeButtons = sizzle('.closeButton', container);
         for (var i = 0; i < closeButtons.length; i++) {
-            utils.addEventListener('click', closeButtons[i], onCloseNeeded);
+            utils.addEventListener('click', closeButtons[i], closeIt);
         }
 
         utils.addEventListener('keyup', document, onKeyUp);
@@ -251,7 +270,10 @@ function Dialog (htmlOrForm, userOptions) {
         }
     };
 
-
+    /**
+     * Disable all buttons of a button collection.
+     * @param  {Array} buttons Array of buttons (DOM objects).
+     */
     var disableAllButtons = function (buttons) {
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].setAttribute('disabled', 'disabled');
@@ -272,7 +294,10 @@ function Dialog (htmlOrForm, userOptions) {
     };
 
 
-
+    /**
+     * Enable all buttons of a button collection.
+     * @param  {Array} buttons Array of buttons (DOM objects).
+     */
     var enableAllButtons = function (buttons) {
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].removeAttribute('disabled');
@@ -280,7 +305,8 @@ function Dialog (htmlOrForm, userOptions) {
     };
 
     /**
-     * Opposite to the "disableButtons" action, this enables the buttons again.
+     * Enables the buttons (useful when the buttons were disabled while an action was in progress
+     * and the user is given back the control).
      */
     this.enableButtons = function() {
         var buttons = sizzle('button', container);

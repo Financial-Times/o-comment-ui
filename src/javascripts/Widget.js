@@ -2,6 +2,25 @@ var Events = require('js-events'),
     callbackSync = require('js-callback-sync'),
     WidgetUi = require('./WidgetUi.js');
 
+/**
+ * Widget is responsible to coordinate getting initialization data, loading resources and initializing the Ui.
+ * While this class implements some of the basic functionality (handling errors, loading timeout),
+ * it should be extended by providing an implementation for getting the initialization data and loading the resources.
+ *
+ * #### Configuration
+ * ###### Mandatory fields:
+ * 
+ * - elId: ID of the HTML element in which the widget should be loaded
+ * - articleId: ID of the article, any string
+ * - url: canonical URL of the page
+ * - title: Title of the page
+ * 
+ * ###### Optional fields:
+ * 
+ *  - timeout: Period of time after a timeout is triggered. Default is 15000 ms (15 sec). Its value should be given in milliseconds (ms).
+ * 
+ * @param {Object} config Configuration object, as described in the class description.
+ */
 function Widget (config) {
     "use strict";
 
@@ -188,4 +207,8 @@ Widget.__extend = function(child) {
     }
 };
 
+/**
+ * Export of Widget.
+ * @type {Function}
+ */
 module.exports = Widget;

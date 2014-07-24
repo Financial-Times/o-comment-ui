@@ -72,6 +72,10 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li class="active"><a href="index.html">Main</a></li>
+            <li><a href="dialog\Dialog.js.html">dialog\Dialog.js</a></li>
+            <li><a href="dialog\modal.js.html">dialog\modal.js</a></li>
+            <li><a href="form_builder\Form.js.html">form_builder\Form.js</a></li>
+            <li><a href="form_builder\formFragments.js.html">form_builder\formFragments.js</a></li>
             <li><a href="i18n.js.html">i18n.js</a></li>
             <li><a href="main.js.html">main.js</a></li>
             <li><a href="userDialogs.js.html">userDialogs.js</a></li>
@@ -101,36 +105,43 @@
 <hr>
 <h2 id="logging">Logging</h2>
 <p>Logging can be enabled for debugging purposes. It logs using the global &#39;console&#39; if available (if not, nothing happens and it degrades gracefully).<br>By default logging is disabled.</p>
-<h3 id="enablelogging">enableLogging</h3>
+<h5 id="enablelogging">enableLogging</h5>
 <p>This method enables logging of the module.</p>
-<h3 id="disablelogging">disableLogging</h3>
+<h5 id="disablelogging">disableLogging</h5>
 <p>This method disables logging of the module.</p>
-<h3 id="setlogginglevel">setLoggingLevel</h3>
+<h5 id="setlogginglevel">setLoggingLevel</h5>
 <p>This method sets the logging level. This could be a number from 0 to 4 (where 0 is debug, 4 is error), or a string from the available methods of &#39;console&#39; (debug, log, info, warn, error).<br>Default is 3 (warn).</p>
 <hr>
 <h2 id="integrated-submodules">Integrated submodules</h2>
 <p>The submodules that are exposed are the following:</p>
 <h3 id="widget">Widget</h3>
 <p>Widget is responsible to coordinate getting initialization data, loading resources and initializing the Ui. While this class implements some of the basic functionality (handling errors, loading timeout), it should be extended by providing an implementation for getting the initialization data and loading the resources.</p>
-<h5 id="constructor">Constructor</h5>
+<h4 id="constructor">Constructor</h4>
 <pre><code class="lang-javascript">new commentsUi.Widget(config);</code></pre>
 <p>To create an instance, you need to provide a configuration object. This should have the following structure:</p>
-<h6 id="mandatory-fields-">Mandatory fields:</h6>
+<h5 id="mandatory-fields-">Mandatory fields:</h5>
 <ul>
 <li>elId: ID of the HTML element in which the widget should be loaded</li>
 <li>articleId: ID of the article, any string</li>
 <li>url: canonical URL of the page</li>
 <li>title: Title of the page</li>
 </ul>
-<h6 id="optional-fields-">Optional fields:</h6>
+<h5 id="optional-fields-">Optional fields:</h5>
 <ul>
 <li>timeout: Period of time after a timeout is triggered. Default is 15000 ms (15 sec). Its value should be given in milliseconds (ms).</li>
 </ul>
-<h5 id="final-methods">Final methods</h5>
+<h4 id="example">Example</h4>
+<pre><code class="lang-javascript">new commentsUi.Widget({
+    elId: &#39;container_id&#39;,
+    articleId: &#39;e113c91c-10d9-11e4-812b-00144feabdc0&#39;,
+    url: &#39;http://www.ft.com/cms/s/0/e113c91c-10d9-11e4-812b-00144feabdc0.html&#39;,
+    title: &#39;Rolls-Royce seeks to catch-up with rivals on margins - FT.com&#39;
+});</code></pre>
+<h4 id="final-methods">Final methods</h4>
 <h6 id="load">load</h6>
 <p>This method will initiate the process of loading the resources that are needed to render the widget and the rendering of the UI. This method uses hook methods which are not implemented in this module, but should be implemented in the module that extends it.<br>Load will handle errors of the process of loading the widget, also timeout if an error is not clearly available.</p>
 <p>This method can be called once (calling it multiple types will have no effect).</p>
-<h5 id="abstract-methods-not-implemented-in-this-module-">Abstract methods (not implemented in this module)</h5>
+<h4 id="abstract-methods-not-implemented-in-this-module-">Abstract methods (not implemented in this module)</h4>
 <h6 id="init">init</h6>
 <p>This method is responsible for gathering data that is needed to initialize the widget (e.g. metadata, site ID, comments, etc.).</p>
 <h6 id="loadresources">loadResources</h6>
@@ -138,7 +149,7 @@
 <h6 id="render">render</h6>
 <p>This method is responsible for rendering the UI of the widget on the page. Render is called when the initialization process is done and all resources are loaded.<br>This method is called using the data gathered during the init process:</p>
 <pre><code class="lang-javascript">render(initData);</code></pre>
-<h5 id="methods-that-can-be-overriden-they-have-default-implementation-">Methods that can be overriden (they have default implementation)</h5>
+<h4 id="methods-that-can-be-overriden-they-have-default-implementation-">Methods that can be overriden (they have default implementation)</h4>
 <h6 id="onerror">onError</h6>
 <p>This method is responsible to handle any error that appears during the initialization.</p>
 <pre><code class="lang-javascript">onError(errorObject);</code></pre>
@@ -146,17 +157,35 @@
 <h6 id="ontimeout">onTimeout</h6>
 <p>This method is responsible to handle the case when within a given time the loading isn&#39;t finished and no error appeared.</p>
 <p>The default implementation clears out the container of the widget and shows the unavailable message template (available using the template object).</p>
+<h4 id="extend">Extend</h4>
+<p>Extending of Widget can be done in the following way:</p>
+<pre><code class="lang-javascript">var WidgetExtend = function () {
+    commentsUi.Widget.apply(this, arguments);
+}
+commentsUi.Widget.extend(WidgetExtend);</code></pre>
 <hr>
 <h3 id="widgetui">WidgetUi</h3>
 <p>This class is responsible to handle the UI part of a commenting widget. An instance of this is created within an instance of the <code>Widget</code>.<br>While this implementation has predefined methods, it can be extended with particular UI methods.</p>
-<h5 id="constructor">Constructor</h5>
+<h4 id="constructor">Constructor</h4>
 <pre><code class="lang-javascript">new commentsUi.WidgetUi(widgetContainer);</code></pre>
 <p>Where <code>widgetContainer</code> should be a DOM element in which the widget is loaded.</p>
-<h5 id="methods">Methods</h5>
+<h4 id="methods">Methods</h4>
+<h6 id="scrolltowidget">scrollToWidget</h6>
+<p>Scrolls the page to the widget. A callback function is called when the scroll finished (optional).</p>
+<h6 id="addnotavailablemessage">addNotAvailableMessage</h6>
+<p>Inserts message when comments is not available, either because of the web services or Livefyre.</p>
+<h6 id="clearcontainer">clearContainer</h6>
+<p>Clears the container&#39;s content.</p>
+<h4 id="extend">Extend</h4>
+<p>Extending of Widget can be done in the following way:</p>
+<pre><code class="lang-javascript">var WidgetUiExtend = function () {
+    commentsUi.WidgetUi.apply(this, arguments);
+}
+commentsUi.WidgetUi.extend(WidgetUiExtend);</code></pre>
 <hr>
 <h3 id="userdialogs">userDialogs</h3>
 <p>Generic Ui functionality which is common across all istances of the comments. These are mostly dialogs which show on the page and are unrelated of the Widget&#39;s container or widget instance.</p>
-<h5 id="methods">Methods</h5>
+<h4 id="methods">Methods</h4>
 <h6 id="showsetpseudonymdialog">showSetPseudonymDialog</h6>
 <p>Shows a dialog for setting the initial pseudonym (shown when the user doesn&#39;t have a pseudonym set).</p>
 <pre><code class="lang-javascript">commentsUi.userDialogs.showSetPseudonymDialog(
@@ -209,9 +238,9 @@
         // called when the dialog is closed by a user action
     }
 });</code></pre>
-<h4 id="parameters">Parameters</h4>
+<h3 id="parameters">Parameters</h3>
 <p>All functions has the same parameters: </p>
-<h5 id="onsubmit">onSubmit</h5>
+<h6 id="onsubmit">onSubmit</h6>
 <p><strong>Required.</strong> Function that is called when the form is submitted. As parameters the form data is provided (serialized into an object of key-value pairs), and a callback which should be called with either an error message (if an error occurred) or without parameters if submission is successful.<br>Example:</p>
 <pre><code class="lang-javascript">onSubmit({
     formKey: &#39;formValue&#39;
@@ -224,12 +253,12 @@
     // success, close the dialog
 }
 });</code></pre>
-<h5 id="onclose">onClose</h5>
+<h6 id="onclose">onClose</h6>
 <p>Optional. Function that is called when the dialog is closed.</p>
 <hr>
 <h3 id="dialog-dialog">dialog.Dialog</h3>
-<p>Dialog injected into the DOM with custom content. Can be opened either with modal background or without it.</p>
-<h5 id="constructor">Constructor</h5>
+<p>Dialog built within the DOM with custom content. Can be opened either with modal background or without it.</p>
+<h4 id="constructor">Constructor</h4>
 <pre><code class="lang-javascript">new commentsUi.dialog.Dialog(htmlOrForm, userOptions)</code></pre>
 <p>Where:</p>
 <ul>
@@ -241,7 +270,7 @@
 </ul>
 </li>
 </ul>
-<h5 id="methods">Methods</h5>
+<h4 id="methods">Methods</h4>
 <h6 id="on">on</h6>
 <p>Listen to events. The only available event within the module is &#39;close&#39;.</p>
 <h6 id="off">off</h6>
@@ -263,17 +292,19 @@
 <hr>
 <h3 id="dialog-modal">dialog.modal</h3>
 <p>Creates a modal overlay background which masks the whole page.</p>
-<h5 id="methods">Methods</h5>
-<ul>
-<li>open: creates the HTML needed and inserts as the last element in the <body>.</li>
-<li>close: closes the modal and removes the HTML created.</li>
-<li>on: listen to events. The only available event is &#39;click&#39;.</li>
-<li>off: remove the listeners.</li>
-</ul>
+<h4 id="methods">Methods</h4>
+<h6 id="open">open</h6>
+<p>Creates the HTML needed and inserts as the last element in the <body>.</p>
+<h6 id="close">close</h6>
+<p>Closes the modal and removes the HTML created.</p>
+<h6 id="on">on</h6>
+<p>Listen to events. The only available event is &#39;click&#39;.</p>
+<h6 id="off">off</h6>
+<p>Remove the listeners.</p>
 <hr>
 <h3 id="formbuilder-form">formBuilder.Form</h3>
 <p>Form is a helper for creating a form. It handles constructing the form element, generating buttons, forwarding submit and cancel events.</p>
-<h5 id="constructor">Constructor</h5>
+<h4 id="constructor">Constructor</h4>
 <pre><code class="lang-javascript">new Form(config);</code></pre>
 <p>Where config should have the following structure:</p>
 <pre><code class="lang-javascript">{
@@ -294,46 +325,55 @@
         }
     ]
 }</code></pre>
-<h5 id="methods">Methods</h5>
-<ul>
-<li>on: listen on submit/cancel events</li>
-<li>off: remove listeners</li>
-<li>render: returns a jQuery built HTML form with the elements specified in the config</li>
-<li>serialize: returns the data of the form in a JSON format</li>
-<li>showError: shows an error within the form</li>
-<li>clearError: clears the error messages</li>
-</ul>
+<h4 id="methods">Methods</h4>
+<h6 id="on">on</h6>
+<p>Listen on submit/cancel events.</p>
+<h6 id="off">off</h6>
+<p>Remove listeners.</p>
+<h6 id="render">render</h6>
+<p>Returns an HTML fragment of the form built using the initialization parameters.<br>The response of this method can be used in the native <code>appendChild</code> function.</p>
+<h6 id="serialize">serialize</h6>
+<p>Returns the data of the form in a JSON format.</p>
+<h6 id="showerror">showError</h6>
+<p>Shows an error within the form.</p>
+<h6 id="clearerror">clearError</h6>
+<p>Clears the error messages.</p>
 <h3 id="formbuild-formfragments">formBuild.formFragments</h3>
-<p>formFragments contains predefined form fragments that can be used within a Form instance.</p>
-<h5 id="methods">Methods</h5>
-<ul>
-<li>initialPseudonym: form fragment for setting the initial pseudonym</li>
-<li>changePseudonym: form fragment for changing an existing pseudonym</li>
-<li>emailSettings: form fragment for changing the email preferences</li>
-<li>emailSettingsStandalone: form fragment for the email alert dialog where email settings is the only fragment that is shown</li>
-<li>followExplanation: explanation of the Follow functionality with images</li>
-<li>commentingSettingsExplanation: explanation of changing the settings with images</li>
-<li>sessionExpired: session expired fragment with sign in link.</li>
-</ul>
+<p>This helper module contains predefined form fragments that can be used within a Form instance.</p>
+<h4 id="methods">Methods</h4>
+<h6 id="initialpseudonym">initialPseudonym</h6>
+<p>Form fragment for setting the initial pseudonym.</p>
+<h6 id="changepseudonym">changePseudonym</h6>
+<p>Form fragment for changing an existing pseudonym.</p>
+<h6 id="emailsettings">emailSettings</h6>
+<p>Form fragment for changing the email preferences.</p>
+<h6 id="emailsettingsstandalone">emailSettingsStandalone</h6>
+<p>Form fragment for the email alert dialog where email settings is the only fragment that is shown.</p>
+<h6 id="followexplanation">followExplanation</h6>
+<p>Explanation of the Follow functionality with images.</p>
+<h6 id="commentingsettingsexplanation">commentingSettingsExplanation</h6>
+<p>Explanation of changing the settings with images.</p>
+<h6 id="sessionexpired">sessionExpired</h6>
+<p>Session expired fragment with sign in link.</p>
 <hr>
 <h3 id="templates">templates</h3>
 <p>This contains common Mustache templates which are compiled and can be rendered with custom data.</p>
 <p>Templates that are available:</p>
-<h4 id="unavailabletemplate">unavailableTemplate</h4>
+<h5 id="unavailabletemplate">unavailableTemplate</h5>
 <p>Message that appears when an error occured or loading the widget takes longer than the timeout period. It has a default style added.</p>
 <p>Parameters:</p>
 <ul>
 <li>message: message to show. By default i18n.unavailable is used to render within the WidgetUi.</li>
 </ul>
-<h4 id="termsandguidelinestemplate">termsAndGuidelinesTemplate</h4>
+<h5 id="termsandguidelinestemplate">termsAndGuidelinesTemplate</h5>
 <p>Terms and guidelines message with default style.<br>Requires no parameters to render.</p>
-<h4 id="commentingsettingslink">commentingSettingsLink</h4>
+<h5 id="commentingsettingslink">commentingSettingsLink</h5>
 <p>Link that is used for changing user settings.</p>
 <p>Parameters:</p>
 <ul>
 <li>label: Label of the link. i18n.commentingSettings can be used for it.</li>
 </ul>
-<h4 id="clearline">clearLine</h4>
+<h5 id="clearline">clearLine</h5>
 <p>Clearfix. Separates rows horizontally that have float.</p>
 <p>These templates can be overriden on a global level.</p>
 <hr>

@@ -72,6 +72,10 @@
         <div class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="index.html">Main</a></li>
+            <li><a href="dialog\Dialog.js.html">dialog\Dialog.js</a></li>
+            <li><a href="dialog\modal.js.html">dialog\modal.js</a></li>
+            <li><a href="form_builder\Form.js.html">form_builder\Form.js</a></li>
+            <li><a href="form_builder\formFragments.js.html">form_builder\formFragments.js</a></li>
             <li><a href="i18n.js.html">i18n.js</a></li>
             <li><a href="main.js.html">main.js</a></li>
             <li><a href="userDialogs.js.html">userDialogs.js</a></li>
@@ -81,16 +85,151 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#WidgetUi"><i class="alert alert-info"></i><span>WidgetUi</span></a>
+              </li>
+              <li><a href="#scrollTo"><i class="alert alert-info"></i><span>scrollTo</span></a>
+              </li>
+              <li><a href="#scrollToElement"><i class="alert alert-info"></i><span>scrollToElement</span></a>
+              </li>
               <li><a href="#scrollToWidget"><i class="alert alert-info"></i><span>scrollToWidget</span></a>
               </li>
               <li><a href="#addNotAvailableMessage"><i class="alert alert-info"></i><span>addNotAvailableMessage</span></a>
               </li>
               <li><a href="#clearContainer"><i class="alert alert-info"></i><span>clearContainer</span></a>
               </li>
+              <li><a href="#exports"><i class="alert alert-success"></i><span>exports</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
+          <section id="WidgetUi">
+            <h1>WidgetUi</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>WidgetUi()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>widgetContainer</td>
+                <td>DOMObject</td>
+                <td>DOM Object of the container of the widget.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>This class is responsible to handle the UI part of a commenting widget. An instance of this is created within an instance of the <code>Widget</code>.<br />While this implementation has predefined methods, it can be extended with particular UI methods.</p> </div>
+          <pre><code class="language-javascript">function WidgetUi (widgetContainer) {
+    &quot;use strict&quot;;</code></pre>
+          <section id="scrollTo">
+            <h1>scrollTo</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>scrollTo()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>withinElement</td>
+                <td>DOMObject</td>
+                <td>Within which element to scroll (e.g. the whole page or only within a div)</td>
+              </tr>
+              <tr>
+                <td>to</td>
+                <td>Integer</td>
+                <td>Target scroll position on the page</td>
+              </tr>
+              <tr>
+                <td>duration</td>
+                <td>Integer</td>
+                <td>Duration in milliseconds to animate.</td>
+              </tr>
+              <tr>
+                <td>callback</td>
+                <td>Function</td>
+                <td>Callback which is called when finished with the scrolling.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Helper function to scrolls to a position on the page or within an HTML element.</p> </div>
+          <pre><code class="language-javascript">function scrollTo (withinElement, to, duration, callback) {
+        if (duration &lt; 0) {
+            callback();
+            return;
+        }
+
+        var difference = to - withinElement.scrollTop;
+        var perTick = difference / duration * 10;
+
+        setTimeout(function() {
+            withinElement.scrollTop = withinElement.scrollTop + perTick;
+
+            if (withinElement.scrollTop === to) {
+                callback();
+                return;
+            }
+
+            scrollTo(withinElement, to, duration - 10, callback);
+        }, 10);
+    }</code></pre>
+          <section id="scrollToElement">
+            <h1>scrollToElement</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>scrollToElement()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>withinElement</td>
+                <td>DOMObject</td>
+                <td>Within which element to scroll (e.g. the whole page or only within a div)</td>
+              </tr>
+              <tr>
+                <td>toElement</td>
+                <td>DOMObject</td>
+                <td>DOM Object to which to scroll.</td>
+              </tr>
+              <tr>
+                <td>duration</td>
+                <td>Integer</td>
+                <td>Duration in milliseconds to animate.</td>
+              </tr>
+              <tr>
+                <td>callback</td>
+                <td>Function</td>
+                <td>Callback which is called when finished with the scrolling.\</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Helper function which scrolls to an element of the whole page or within an element</p> </div>
+          <pre><code class="language-javascript">function scrollToElement (withinElement, toElement, duration, callback) {
+        scrollTo(withinElement, toElement.offsetTop, duration, callback);
+    }</code></pre>
           <section id="scrollToWidget">
             <h1>scrollToWidget</h1>
             <h5 class="subheader"></h5>
@@ -137,7 +276,7 @@
               <div class="label label-info radius ctx-type">method</div><span>this.addNotAvailableMessage()</span>
             </p>
           </section>
-          <div class="description"><p>Inserts message when comments is not available, either because of SUDS or Livefyre.</p> </div>
+          <div class="description"><p>Inserts message when comments is not available, either because of the web services or Livefyre.</p> </div>
           <pre><code class="language-javascript">this.addNotAvailableMessage = function () {
         widgetContainer.innerHTML = templates.unavailableTemplate.render({
             message: i18n.texts.unavailable
@@ -173,9 +312,16 @@ WidgetUi.__extend = function(child) {
         child.prototype = new Tmp();
         child.prototype.constructor = child;
     }
-};
-
-module.exports = WidgetUi;</code></pre>
+};</code></pre>
+          <section id="exports">
+            <h1>exports</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-success radius ctx-type">property</div><span>module.exports</span>
+            </p>
+          </section>
+          <div class="description"><p>Export of WidgetUI.</p> </div>
+          <pre><code class="language-javascript">module.exports = WidgetUi;</code></pre>
         </div>
       </div>
     </div>
