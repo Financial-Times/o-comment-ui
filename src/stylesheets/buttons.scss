@@ -13,8 +13,8 @@
     zoom: 1;
 
     font-family: Arial,Helvetica,sans-serif;
-    color: #fff;
-    text-shadow: 0 0 0 #FFF;
+    color: oColorsGetPaletteColor('white');
+    text-shadow: 0 0 0 oColorsGetPaletteColor('white');
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;

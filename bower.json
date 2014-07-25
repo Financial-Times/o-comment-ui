@@ -11,7 +11,8 @@
     "js-events": "git+http://git.svc.ft.com:8080/scm/strat_p/js-events.git#^0.1.0",
     "js-merge": "git+http://git.svc.ft.com:8080/scm/strat_p/js-merge.git#^0.1.0",
     "sizzle": "https://github.com/jquery/sizzle.git",
-    "hogan": "git+https://github.com/twitter/hogan.js.git#3.0.0"
+    "hogan": "git+https://github.com/twitter/hogan.js.git#3.0.0",
+    "o-colors": "^2.3.17"
   },
   "ignore": [
     "node_modules",

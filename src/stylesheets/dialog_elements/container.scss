@@ -1,7 +1,7 @@
 .comments-dialog {
     background: rgba(211,210,203,0.2);
     font-family: BentonSans, Helvetica, Arial, sans-serif;
-    color: #505050;
+    color: oColorsGetPaletteColor('grey-tint4');
     font-size: 13px;
     text-align: left;
     line-height: 20px;
@@ -22,7 +22,7 @@
     }
 
     .comments-dialog-container {
-        background: #fff;
+        background: oColorsGetPaletteColor('white');
         margin: $commentsDialogSideMargin;
         padding: 20px $commentsDialogSidePadding 8px;
     }
@@ -49,7 +49,7 @@
     }
 
     .comments-errorMessage {
-        color: #c00;
+        color: oColorsGetPaletteColor('red');
         margin-bottom: 10px;
     }
 
@@ -86,7 +86,7 @@
 
         .comments-dialog-cancel-button {
             border: 0;
-            color: #2e6e9e;
+            color: oColorsGetPaletteColor('blue');
             background: none;
             font-size: 12px;
             margin-top: 5px;

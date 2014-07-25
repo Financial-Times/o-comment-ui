@@ -1,9 +1,9 @@
 var logger = require('js-logger');
 
 /**
- * Widget.js exposed.
- * @type {object}
+ * Exports of submodules
  */
+
 exports.Widget = require('./src/javascripts/Widget.js');
 exports.WidgetUi = require('./src/javascripts/WidgetUi.js');
 exports.userDialogs = require('./src/javascripts/userDialogs.js');

@@ -1,13 +1,15 @@
 $imagePath: '' !default;
 
-@import 'src/stylesheets/buttons.scss';
+@import 'o-colors/main';
+
+@import 'src/stylesheets/buttons';
 
 @import 'src/stylesheets/common';
 
-@import "src/stylesheets/termsAndGuidelines.scss";
-@import "src/stylesheets/unavailableMessage.scss";
+@import "src/stylesheets/termsAndGuidelines";
+@import "src/stylesheets/unavailableMessage";
 
-@import "src/stylesheets/dialog.scss";
-@import "src/stylesheets/modal.scss";
+@import "src/stylesheets/dialog";
+@import "src/stylesheets/modal";
 
-@import "src/stylesheets/commentingSettingsLink.scss";
+@import "src/stylesheets/commentingSettingsLink";

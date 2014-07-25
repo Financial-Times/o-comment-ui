@@ -1,11 +1,11 @@
 .comments-settings {
     display: inline-block;
     margin-left: 10px;
-    color: #cec6b9;
+    color: oColorsGetPaletteColor('pink-tint3');
 
     .comments-settings-text {
         padding-left: 10px;
-        color: #2e6e9e;
+        color: oColorsGetPaletteColor('blue');
         cursor: pointer;
         display: inline-block;
     }
