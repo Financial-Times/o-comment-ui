@@ -210,7 +210,7 @@ function Dialog (htmlOrForm, userOptions) {
         }
 
 
-        var closeButtons = sizzle('.closeButton', container);
+        var closeButtons = sizzle('.comments-closeButton', container);
         for (var i = 0; i < closeButtons.length; i++) {
             utils.addEventListener('click', closeButtons[i], closeIt);
         }

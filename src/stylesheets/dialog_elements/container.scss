@@ -36,24 +36,24 @@
         padding: 9px 0 32px;
     }
 
-    .message,
-    .hint {
+    .comments-message,
+    .comments-hint {
         line-height: 1.2em;
         clear: both;
         width: 100%;
         padding: 5px 0;
     }
 
-    .hint {
+    .comments-hint {
         padding: 0 0 10px;
     }
 
-    .errorMessage {
+    .comments-errorMessage {
         color: #c00;
         margin-bottom: 10px;
     }
 
-    .closeButton {
+    .comments-closeButton {
         display: block;
         position: absolute;
         top: 0;
@@ -65,12 +65,7 @@
         margin: 18px 18px 0 0;
     }
 
-    .clear {
-        clear: both;
-        height: 0;
-    }
-
-    .buttonContainer {
+    .comments-buttonContainer {
         padding: 26px 0 10px 0;
         float: right;
 
@@ -79,7 +74,7 @@
             display: inline-block;
         }
 
-        .dismiss {
+        .comments-dismiss {
             display: inline-block;
             padding-right: 10px;
         }
@@ -100,7 +95,4 @@
             padding: 0;
         }
     }
-
-    @import "form_elements";
-    @import "image_explanation";
 }

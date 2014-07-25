@@ -31,13 +31,13 @@ The module should be built using `browserify` (with `debowerify` and `textrequir
 Logging can be enabled for debugging purposes. It logs using the global 'console' if available (if not, nothing happens and it degrades gracefully).
 By default logging is disabled.
 
-##### enableLogging
+###### enableLogging
 This method enables logging of the module.
 
-##### disableLogging
+###### disableLogging
 This method disables logging of the module.
 
-##### setLoggingLevel
+###### setLoggingLevel
 This method sets the logging level. This could be a number from 0 to 4 (where 0 is debug, 4 is error), or a string from the available methods of 'console' (debug, log, info, warn, error).
 Default is 3 (warn).
 
@@ -413,25 +413,25 @@ This contains common Mustache templates which are compiled and can be rendered w
 
 Templates that are available:
 
-##### unavailableTemplate
+###### unavailableTemplate
 Message that appears when an error occured or loading the widget takes longer than the timeout period. It has a default style added.
 
 Parameters:
 
 - message: message to show. By default i18n.unavailable is used to render within the WidgetUi.
 
-##### termsAndGuidelinesTemplate
+###### termsAndGuidelinesTemplate
 Terms and guidelines message with default style.
 Requires no parameters to render.
 
-##### commentingSettingsLink
+###### commentingSettingsLink
 Link that is used for changing user settings.
 
 Parameters:
 
 - label: Label of the link. i18n.commentingSettings can be used for it.
 
-##### clearLine
+###### clearLine
 Clearfix. Separates rows horizontally that have float.
 
 These templates can be overriden on a global level.
@@ -442,7 +442,7 @@ These templates can be overriden on a global level.
 i18n is responsible to provide common messages/texts that are used within the commenting application.
 
 It exposes the following objects:
-##### texts
+###### texts
 Contains generic messages:
 
 - unavailable: Message that is shown when the widget is unavailable
@@ -450,5 +450,5 @@ Contains generic messages:
 - genericError: Generic error message.
 - commetingSettings: label of the commenting settings link "Commenting settings".
 
-##### serviceMessageOverrides
+###### serviceMessageOverrides
 Some error messages that come from the web services are not very user friendly. These messages are mapped to more user friendly versions that can be shown to the user.

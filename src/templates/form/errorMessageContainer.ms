@@ -1,1 +1,1 @@
-<div class="errorMessage"></div>
+<div class="comments-errorMessage"></div>

@@ -59,7 +59,7 @@ function Form (config) {
 
         if (config.buttons && config.buttons.length) {
             formObject.appendChild(utils.toDOM(buttonContainerTemplate.render()));
-            var buttonContainer = sizzle('.buttonContainer', formObject)[0];
+            var buttonContainer = sizzle('.comments-buttonContainer', formObject)[0];
 
             for (i = 0; i < config.buttons.length; i++) {
                 button = config.buttons[i];
@@ -184,7 +184,7 @@ function Form (config) {
      * @param  {String} errMessages The error message to show.
      */
     this.showError = function (errMessages) {
-        var errMessageContainer = sizzle('.errorMessage', formObject);
+        var errMessageContainer = sizzle('.comments-errorMessage', formObject);
 
         if (errMessageContainer.length) {
             errMessageContainer[0].innerHTML = errMessages;
@@ -195,7 +195,7 @@ function Form (config) {
      * Clears all the errors.
      */
     this.clearError = function () {
-        var errMessageContainer = sizzle('.errorMessage', formObject);
+        var errMessageContainer = sizzle('.comments-errorMessage', formObject);
 
         if (errMessageContainer.length) {
             errMessageContainer[0].innerHTML = "";

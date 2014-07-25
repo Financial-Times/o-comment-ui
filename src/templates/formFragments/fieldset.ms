@@ -2,4 +2,4 @@
     <legend>{{legend}}</legend>
     {{{content}}}
 </fieldset>
-<div class="clear"></div>
+<div class="comments-clear"></div>

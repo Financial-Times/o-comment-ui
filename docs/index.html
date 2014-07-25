@@ -105,11 +105,11 @@
 <hr>
 <h2 id="logging">Logging</h2>
 <p>Logging can be enabled for debugging purposes. It logs using the global &#39;console&#39; if available (if not, nothing happens and it degrades gracefully).<br>By default logging is disabled.</p>
-<h5 id="enablelogging">enableLogging</h5>
+<h6 id="enablelogging">enableLogging</h6>
 <p>This method enables logging of the module.</p>
-<h5 id="disablelogging">disableLogging</h5>
+<h6 id="disablelogging">disableLogging</h6>
 <p>This method disables logging of the module.</p>
-<h5 id="setlogginglevel">setLoggingLevel</h5>
+<h6 id="setlogginglevel">setLoggingLevel</h6>
 <p>This method sets the logging level. This could be a number from 0 to 4 (where 0 is debug, 4 is error), or a string from the available methods of &#39;console&#39; (debug, log, info, warn, error).<br>Default is 3 (warn).</p>
 <hr>
 <h2 id="integrated-submodules">Integrated submodules</h2>
@@ -359,28 +359,28 @@ commentsUi.WidgetUi.extend(WidgetUiExtend);</code></pre>
 <h3 id="templates">templates</h3>
 <p>This contains common Mustache templates which are compiled and can be rendered with custom data.</p>
 <p>Templates that are available:</p>
-<h5 id="unavailabletemplate">unavailableTemplate</h5>
+<h6 id="unavailabletemplate">unavailableTemplate</h6>
 <p>Message that appears when an error occured or loading the widget takes longer than the timeout period. It has a default style added.</p>
 <p>Parameters:</p>
 <ul>
 <li>message: message to show. By default i18n.unavailable is used to render within the WidgetUi.</li>
 </ul>
-<h5 id="termsandguidelinestemplate">termsAndGuidelinesTemplate</h5>
+<h6 id="termsandguidelinestemplate">termsAndGuidelinesTemplate</h6>
 <p>Terms and guidelines message with default style.<br>Requires no parameters to render.</p>
-<h5 id="commentingsettingslink">commentingSettingsLink</h5>
+<h6 id="commentingsettingslink">commentingSettingsLink</h6>
 <p>Link that is used for changing user settings.</p>
 <p>Parameters:</p>
 <ul>
 <li>label: Label of the link. i18n.commentingSettings can be used for it.</li>
 </ul>
-<h5 id="clearline">clearLine</h5>
+<h6 id="clearline">clearLine</h6>
 <p>Clearfix. Separates rows horizontally that have float.</p>
 <p>These templates can be overriden on a global level.</p>
 <hr>
 <h3 id="i18n">i18n</h3>
 <p>i18n is responsible to provide common messages/texts that are used within the commenting application.</p>
 <p>It exposes the following objects:</p>
-<h5 id="texts">texts</h5>
+<h6 id="texts">texts</h6>
 <p>Contains generic messages:</p>
 <ul>
 <li>unavailable: Message that is shown when the widget is unavailable</li>
@@ -388,7 +388,7 @@ commentsUi.WidgetUi.extend(WidgetUiExtend);</code></pre>
 <li>genericError: Generic error message.</li>
 <li>commetingSettings: label of the commenting settings link &quot;Commenting settings&quot;.</li>
 </ul>
-<h5 id="servicemessageoverrides">serviceMessageOverrides</h5>
+<h6 id="servicemessageoverrides">serviceMessageOverrides</h6>
 <p>Some error messages that come from the web services are not very user friendly. These messages are mapped to more user friendly versions that can be shown to the user.</p>
 </section>
         </div>

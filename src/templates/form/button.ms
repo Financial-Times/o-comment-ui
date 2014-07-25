@@ -1,3 +1,3 @@
-<button type="{{type}}" class="ft-button ft-button-medium">
+<button type="{{type}}" class="comments-button">
     {{label}}
 </button>
