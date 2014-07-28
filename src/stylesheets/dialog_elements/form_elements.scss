@@ -1,6 +1,6 @@
 .comments-dialog {
     form {
-        background-color: oColorsGetPaletteColor('white');
+        background-color: oColorsGetPaletteColor(white);
     }
 
     fieldset {
@@ -35,7 +35,7 @@
     select {
         display: block;
         margin-bottom: 6px;
-        border: 1px solid oColorsGetPaletteColor('pink-tint4');
+        border: 1px solid oColorsGetPaletteColor(pink-tint4);
         width: 390px;
         padding: 3px 6px;
     }

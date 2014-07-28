@@ -1,17 +1,17 @@
 .comments-settings {
     display: inline-block;
     margin-left: 10px;
-    color: oColorsGetPaletteColor('pink-tint3');
+    color: oColorsGetPaletteColor(pink-tint3);
 
     .comments-settings-text {
         padding-left: 10px;
-        color: oColorsGetPaletteColor('blue');
+        color: oColorsGetPaletteColor(blue);
         cursor: pointer;
         display: inline-block;
     }
 
     .comments-settings-icon {
-        background: url($imagePath + '/images/settings.png') no-repeat;
+        background: url(oAssetsResolve("/images/settings.png", comments-ui)) no-repeat;
         display: inline-block;
         width: 14px;
         height: 14px;

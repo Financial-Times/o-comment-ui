@@ -3,5 +3,5 @@ $commentsDialogSidePadding: 14px;
 $commentsDialogSideMargin: 9px;
 
 @import "dialog_elements/container.scss";
-@import "form_elements";
-@import "image_explanation";
+@import "dialog_elements/form_elements";
+@import "dialog_elements/image_explanation";
