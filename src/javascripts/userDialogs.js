@@ -80,7 +80,6 @@ exports.showSetPseudonymDialog = function (onSubmit, onClose) {
         var onCloseInternalHandler = function () {
             showSetPseudonymDialogShown = false;
             
-            //events.trigger('refusedPseudonym');
             if (typeof onClose === 'function') {
                 onClose();
             }
@@ -350,8 +349,7 @@ exports.showInactivityMessage = function (onSubmit, onClose) {
         
         form.on('submit', function (event) {
             onSubmit();
-            //window.location.href = 'https://registration.ft.com/registration/barrier/login?location='+ encodeURIComponent(document.location.href);
-
+            
             if (event.preventDefault) {
                 event.preventDefault();
             } else {

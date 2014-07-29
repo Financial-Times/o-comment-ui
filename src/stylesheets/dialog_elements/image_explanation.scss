@@ -47,11 +47,11 @@
                     }
 
                     .explanation-follow {
-                        background: url(oAssetsResolve("/images/magnifier_follow.png", comments-ui)) no-repeat;
+                        background: url(oAssetsResolve("src/images/magnifier_follow.png", comments-ui)) no-repeat;
                     }
 
                     .explanation-settings {
-                        background: url(oAssetsResolve("/images/magnifier_settings.png", comments-ui)) no-repeat;
+                        background: url(oAssetsResolve("src/images/magnifier_settings.png", comments-ui)) no-repeat;
                     }
                 }
             }
