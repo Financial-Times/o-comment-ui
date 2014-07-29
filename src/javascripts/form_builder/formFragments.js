@@ -29,7 +29,7 @@ exports.initialPseudonym = function () {
  * @param  {Object} config Configuration object. If a pseudonym exists, it should be set in config.currentPseudonym.
  * @return {Mustache compiled template}
  */
-exports.changePseudonym = function (currentPseudonym) {
+exports.changePseudonym = function (config) {
     "use strict";
 
     return fieldsetTemplate.render({
@@ -38,7 +38,7 @@ exports.changePseudonym = function (currentPseudonym) {
             name: 'pseudonym',
             label: 'This is displayed with your comments. If you change it, previous '+
                 'comments will also be attributed to the new pseudonym.',
-            currentPseudonym: currentPseudonym || ''
+            currentPseudonym: config.currentPseudonym || ''
         })
     });
 };

@@ -150,7 +150,7 @@
             </tbody>
           </table>
           <div class="description"><p>Form fragment that contains changing the initial pseudonym.</p> </div>
-          <pre><code class="language-javascript">exports.changePseudonym = function (currentPseudonym) {
+          <pre><code class="language-javascript">exports.changePseudonym = function (config) {
     &quot;use strict&quot;;
 
     return fieldsetTemplate.render({
@@ -159,7 +159,7 @@
             name: 'pseudonym',
             label: 'This is displayed with your comments. If you change it, previous '+
                 'comments will also be attributed to the new pseudonym.',
-            currentPseudonym: currentPseudonym || ''
+            currentPseudonym: config.currentPseudonym || ''
         })
     });
 };</code></pre>
