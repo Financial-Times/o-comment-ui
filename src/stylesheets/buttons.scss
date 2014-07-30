@@ -24,6 +24,17 @@
     font-size: 14px;
 
     border-radius: .3em;
+
+    &[disabled] {
+        cursor: default;
+        color: oColorsGetPaletteColor(white);
+
+        background: #acacac;
+        background: -webkit-gradient(linear,left top,left bottom,from(#b5b5b5),to(#a5a5a5));
+        background: -moz-linear-gradient(#b5b5b5,#a5a5a5);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b5b5b5,endColorstr=#a5a5a5);
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#b5b5b5, endColorstr=#a5a5a5)";
+    }
 }
 .comments-button {
     @include comments-button();
