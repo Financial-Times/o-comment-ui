@@ -9,7 +9,7 @@
     <div class="comments-explanation-image-wrapper">
         <div class="comments-explanation-image-container">
             <div class="comments-explanation-image-innerContainer">
-                <span class="comments-explanation-image explanation-{{type}}">&nbsp;</span>
+                <span class="comments-explanation-image comments-explanation-{{type}}">&nbsp;</span>
             </div>
         </div>
     </div>
