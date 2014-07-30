@@ -6,14 +6,19 @@ var Dialog = require('./dialog/Dialog.js'),
 var showSetPseudonymDialogShown = false;
 /**
  * Shows a dialog for setting the initial pseudonym (shown when the user doesn't have a pseudonym set).
- * @param  {Function} onSubmit Required. Function that is called when the form is submitted. 
- * @param  {Function} onClose  Optional. Function that is called when the dialog is closed.
+ * @param  {Object} callbacks Object with callback functions. Possible fields:
+ *                                - submit: Required. Function that is called when the form is submitted
+ *                                - close:  Optional. Function that is called when the dialog is closed.
  */
-exports.showSetPseudonymDialog = function (onSubmit, onClose) {
+exports.showSetPseudonymDialog = function (callbacks) {
     "use strict";
 
     if (showSetPseudonymDialogShown === false) {
-        if (typeof onSubmit !== 'function') {
+        if (typeof callbacks !== 'object' || !callbacks) {
+            throw new Error("Callbacks not provided.");
+        }
+
+        if (typeof callbacks.submit !== 'function') {
             throw new Error("Submit callback not provided.");
         }
 
@@ -51,7 +56,7 @@ exports.showSetPseudonymDialog = function (onSubmit, onClose) {
 
                 var formData = form.serialize();
 
-                onSubmit(formData, function (err) {
+                callbacks.submit(formData, function (err) {
                     if (err) {
                         form.showError(err);
 
@@ -80,8 +85,8 @@ exports.showSetPseudonymDialog = function (onSubmit, onClose) {
         var onCloseInternalHandler = function () {
             showSetPseudonymDialogShown = false;
             
-            if (typeof onClose === 'function') {
-                onClose();
+            if (typeof callbacks.close === 'function') {
+                callbacks.close();
             }
 
             if (!inProgress) {
@@ -100,15 +105,20 @@ exports.showSetPseudonymDialog = function (onSubmit, onClose) {
 var showSettingsDialogShown = false;
 /**
  * Settings dialog where the user can change its pseudonym or email preferences.
- * @param  {[type]} currentData Required. Function that is called when the form is submitted. 
- * @param  {Function} onSubmit Required. Function that is called when the form is submitted. 
- * @param  {Function} onClose  Optional. Function that is called when the dialog is closed.
+ * @param  {Object} currentData Required. Function that is called when the form is submitted. 
+ * @param  {Object} callbacks Object with callback functions. Possible fields:
+ *                                - submit: Required. Function that is called when the form is submitted
+ *                                - close:  Optional. Function that is called when the dialog is closed.
  */
-exports.showSettingsDialog = function (currentData, onSubmit, onClose) {
+exports.showSettingsDialog = function (currentData, callbacks) {
     "use strict";
 
     if (showSettingsDialogShown === false) {
-        if (typeof onSubmit !== 'function') {
+        if (typeof callbacks !== 'object' || !callbacks) {
+            throw new Error("Callbacks not provided.");
+        }
+
+        if (typeof callbacks.submit !== 'function') {
             throw new Error("Submit callback not provided.");
         }
 
@@ -163,7 +173,7 @@ exports.showSettingsDialog = function (currentData, onSubmit, onClose) {
                     formData.emailautofollow = 'off';
                 }
 
-                onSubmit(formData, function (err) {
+                callbacks.submit(formData, function (err) {
                     if (err) {
                         form.showError(err);
 
@@ -191,8 +201,8 @@ exports.showSettingsDialog = function (currentData, onSubmit, onClose) {
         var onCloseInternalHandler = function () {
             showSettingsDialogShown = false;
 
-            if (typeof onClose === 'function') {
-                onClose();
+            if (typeof callbacks.close === 'function') {
+                callbacks.close();
             }
         };
 
@@ -207,14 +217,19 @@ exports.showSettingsDialog = function (currentData, onSubmit, onClose) {
 var showEmailAlertDialogShown = false;
 /**
  * Shows a dialog which reminds the user to save its email preferences if he/she didn't do so.
- * @param  {Function} onSubmit Required. Function that is called when the form is submitted. 
- * @param  {Function} onClose  Optional. Function that is called when the dialog is closed.
+ * @param  {Object} callbacks Object with callback functions. Possible fields:
+ *                                - submit: Required. Function that is called when the form is submitted
+ *                                - close:  Optional. Function that is called when the dialog is closed.
  */
-exports.showEmailAlertDialog = function (onSubmit, onClose) {
+exports.showEmailAlertDialog = function (callbacks) {
     "use strict";
 
     if (showEmailAlertDialogShown === false) {
-        if (typeof onSubmit !== 'function') {
+        if (typeof callbacks !== 'object' || !callbacks) {
+            throw new Error("Callbacks not provided.");
+        }
+
+        if (typeof callbacks.submit !== 'function') {
             throw new Error("Submit callback not provided.");
         }
 
@@ -267,7 +282,7 @@ exports.showEmailAlertDialog = function (onSubmit, onClose) {
 
                 dialog.disableButtons();
 
-                onSubmit(formData, function (err) {
+                callbacks.submit(formData, function (err) {
                     if (err) {
                         form.showError(err);
 
@@ -293,8 +308,8 @@ exports.showEmailAlertDialog = function (onSubmit, onClose) {
         var onCloseInternalHandler = function () {
             showEmailAlertDialogShown = false;
 
-            if (typeof onClose === 'function') {
-                onClose();
+            if (typeof callbacks.close === 'function') {
+                callbacks.close();
             }
         };
 
@@ -309,14 +324,19 @@ exports.showEmailAlertDialog = function (onSubmit, onClose) {
 var showInactivityMessageDialogShown = false;
 /**
  * Shows a dialog with a sign in link to re-login after a session expire.
- * @param  {Function} onSubmit Required. Function that is called when the form is submitted. 
- * @param  {Function} onClose  Optional. Function that is called when the dialog is closed.
+ * @param  {Object} callbacks Object with callback functions. Possible fields:
+ *                                - submit: Required. Function that is called when the form is submitted
+ *                                - close:  Optional. Function that is called when the dialog is closed.
  */
-exports.showInactivityMessage = function (onSubmit, onClose) {
+exports.showInactivityMessage = function (callbacks) {
     "use strict";
 
     if (showInactivityMessageDialogShown === false) {
-        if (typeof onSubmit !== 'function') {
+        if (typeof callbacks !== 'object' || !callbacks) {
+            throw new Error("Callbacks not provided.");
+        }
+
+        if (typeof callbacks.submit !== 'function') {
             throw new Error("Submit callback not provided.");
         }
 
@@ -348,7 +368,7 @@ exports.showInactivityMessage = function (onSubmit, onClose) {
         });
         
         form.on('submit', function (event) {
-            onSubmit();
+            callbacks.submit();
             
             if (event.preventDefault) {
                 event.preventDefault();
@@ -362,8 +382,8 @@ exports.showInactivityMessage = function (onSubmit, onClose) {
         var onCloseInternalHandler = function () {
             showInactivityMessageDialogShown = false;
 
-            if (typeof onClose === 'function') {
-                onClose();
+            if (typeof callbacks.close === 'function') {
+                callbacks.close();
             }
         };
 

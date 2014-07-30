@@ -1,4 +1,4 @@
-# comments-ui
+# comment-ui
 
 JavaScript module which incorporates common UI elements of the FT commenting system like dialogs, forms, common parts of a commenting widget with DOM manipulation and a unified way to load it.
 
@@ -11,16 +11,16 @@ There are two ways of using this module:
 Run `grunt`, then insert the JS found in the dist folder:
 
 ```javascript
-<script src="dist/javascripts/commentsUi.min.js"></script>
+<script src="dist/javascripts/commentUi.min.js"></script>
 ```
 
-The module's API can be accessed using `commentsUi` in the global scope.
+The module's API can be accessed using `commentUi` in the global scope.
 
 ### Bower and browserify
 With bower, simply require the module:
 
 ```javascript
-var commentsUi = require('comments-ui');
+var commentUi = require('comment-ui');
 ```
 
 The module should be built using `browserify` (with `debowerify` and `textrequireify` transforms).
@@ -52,7 +52,7 @@ Widget is responsible to coordinate getting initialization data, loading resourc
 #### Constructor
 
 ```javascript
-new commentsUi.Widget(config);
+new commentUi.Widget(config);
 ```
 
 To create an instance, you need to provide a configuration object. This should have the following structure:
@@ -71,7 +71,7 @@ To create an instance, you need to provide a configuration object. This should h
 #### Example
 
 ```javascript
-new commentsUi.Widget({
+new commentUi.Widget({
     elId: 'container_id',
     articleId: 'e113c91c-10d9-11e4-812b-00144feabdc0',
     url: 'http://www.ft.com/cms/s/0/e113c91c-10d9-11e4-812b-00144feabdc0.html',
@@ -123,9 +123,9 @@ Extending of Widget can be done in the following way:
 
 ```javascript
 var WidgetExtend = function () {
-    commentsUi.Widget.apply(this, arguments);
+    commentUi.Widget.apply(this, arguments);
 }
-commentsUi.Widget.extend(WidgetExtend);
+commentUi.Widget.extend(WidgetExtend);
 ```
 
 ---
@@ -136,7 +136,7 @@ While this implementation has predefined methods, it can be extended with partic
 
 #### Constructor
 ```javascript
-new commentsUi.WidgetUi(widgetContainer);
+new commentUi.WidgetUi(widgetContainer);
 ```
 
 Where `widgetContainer` should be a DOM element in which the widget is loaded.
@@ -156,9 +156,9 @@ Extending of Widget can be done in the following way:
 
 ```javascript
 var WidgetUiExtend = function () {
-    commentsUi.WidgetUi.apply(this, arguments);
+    commentUi.WidgetUi.apply(this, arguments);
 }
-commentsUi.WidgetUi.extend(WidgetUiExtend);
+commentUi.WidgetUi.extend(WidgetUiExtend);
 ```
 
 ---
@@ -171,14 +171,11 @@ Generic Ui functionality which is common across all istances of the comments. Th
 Shows a dialog for setting the initial pseudonym (shown when the user doesn't have a pseudonym set).
 
 ```javascript
-commentsUi.userDialogs.showSetPseudonymDialog(
-    // onSubmit
-    function (formData, callback) {
+commentUi.userDialogs.showSetPseudonymDialog({
+    submit: function (formData, callback) {
         // called when the form is submitted
     },
-
-    // onClose
-    function () {
+    close: function () {
         // called when the dialog is closed by a user action
     }
 });
@@ -188,31 +185,31 @@ commentsUi.userDialogs.showSetPseudonymDialog(
 Settings dialog where the user can change its pseudonym or email preferences.
 
 ```javascript
-commentsUi.userDialogs.showSettingsDialog(
-    // onSubmit
-    function (formData, callback) {
-        // called when the form is submitted
+commentUi.userDialogs.showSettingsDialog({
+        displayName: 'currentPseudonym',
+        settings: {
+            emaillikes: 'never'
+        }
     },
-
-    // onClose
-    function () {
-        // called when the dialog is closed by a user action
-    }
-});
+    {
+        submit: function (formData, callback) {
+            // called when the form is submitted
+        },
+        close: function () {
+            // called when the dialog is closed by a user action
+        }
+    });
 ```
 
 ###### showEmailAlertDialog
 Shows a dialog which reminds the user to save its email preferences if he/she didn't do so.
 
 ```javascript
-commentsUi.userDialogs.showEmailAlertDialog(
-    // onSubmit
-    function (formData, callback) {
+commentUi.userDialogs.showEmailAlertDialog({
+    submit: function (formData, callback) {
         // called when the form is submitted
     },
-
-    // onClose
-    function () {
+    close: function () {
         // called when the dialog is closed by a user action
     }
 });
@@ -222,28 +219,25 @@ commentsUi.userDialogs.showEmailAlertDialog(
 Shows a dialog with a sign in link to re-login after a session expire.
 
 ```javascript
-commentsUi.userDialogs.showInactivityMessage(
-    // onSubmit
-    function (formData, callback) {
+commentUi.userDialogs.showInactivityMessage({
+    submit: function (formData, callback) {
         // called when the form is submitted
     },
-
-    // onClose
-    function () {
+    close: function () {
         // called when the dialog is closed by a user action
     }
 });
 ```
 
 ### Parameters
-All functions has the same parameters: 
+All functions has the same callback parameter structure, which should be an object with the following fields:
 
-###### onSubmit
+###### submit
 <strong>Required.</strong> Function that is called when the form is submitted. As parameters the form data is provided (serialized into an object of key-value pairs), and a callback which should be called with either an error message (if an error occurred) or without parameters if submission is successful.
 Example:
 
 ```javascript
-onSubmit({
+callbacks.submit({
     formKey: 'formValue'
 }, function (err) {
     if (err) {
@@ -255,7 +249,7 @@ onSubmit({
 }
 });
 ```
-###### onClose
+###### close
 Optional. Function that is called when the dialog is closed.
 
 ---
@@ -265,7 +259,7 @@ Dialog built within the DOM with custom content. Can be opened either with modal
 
 #### Constructor
 ```javascript
-new commentsUi.dialog.Dialog(htmlOrForm, userOptions)
+new commentUi.dialog.Dialog(htmlOrForm, userOptions)
 ```
 
 Where:

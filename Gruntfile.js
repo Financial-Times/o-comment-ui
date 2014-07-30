@@ -32,7 +32,7 @@ module.exports = function (grunt) {
 
     gruntModuleAggregator.addModule(gruntBower);
     gruntModuleAggregator.addModule(gruntJsDoc);
-    gruntModuleAggregator.addModule(gruntBrowserifyBuild, "commentsUi");
+    gruntModuleAggregator.addModule(gruntBrowserifyBuild, "commentUi");
     gruntModuleAggregator.addModule(gruntJsHint);
     gruntModuleAggregator.addModule(gruntQunit);
     gruntModuleAggregator.addModule(gruntSass);

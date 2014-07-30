@@ -114,23 +114,22 @@
             </thead>
             <tbody>
               <tr>
-                <td>onSubmit</td>
-                <td>Function</td>
-                <td>Required. Function that is called when the form is submitted. </td>
-              </tr>
-              <tr>
-                <td>onClose</td>
-                <td>Function</td>
-                <td>Optional. Function that is called when the dialog is closed.</td>
+                <td>callbacks</td>
+                <td>Object</td>
+                <td>Object with callback functions. Possible fields: - submit: Required. Function that is called when the form is submitted - close: Optional. Function that is called when the dialog is closed.</td>
               </tr>
             </tbody>
           </table>
           <div class="description"><p>Shows a dialog for setting the initial pseudonym (shown when the user doesn't have a pseudonym set).</p> </div>
-          <pre><code class="language-javascript">exports.showSetPseudonymDialog = function (onSubmit, onClose) {
+          <pre><code class="language-javascript">exports.showSetPseudonymDialog = function (callbacks) {
     &quot;use strict&quot;;
 
     if (showSetPseudonymDialogShown === false) {
-        if (typeof onSubmit !== 'function') {
+        if (typeof callbacks !== 'object' || !callbacks) {
+            throw new Error(&quot;Callbacks not provided.&quot;);
+        }
+
+        if (typeof callbacks.submit !== 'function') {
             throw new Error(&quot;Submit callback not provided.&quot;);
         }
 
@@ -168,7 +167,7 @@
 
                 var formData = form.serialize();
 
-                onSubmit(formData, function (err) {
+                callbacks.submit(formData, function (err) {
                     if (err) {
                         form.showError(err);
 
@@ -197,8 +196,8 @@
         var onCloseInternalHandler = function () {
             showSetPseudonymDialogShown = false;
             
-            if (typeof onClose === 'function') {
-                onClose();
+            if (typeof callbacks.close === 'function') {
+                callbacks.close();
             }
 
             if (!inProgress) {
@@ -233,27 +232,26 @@ var showSettingsDialogShown = false;</code></pre>
             <tbody>
               <tr>
                 <td>currentData</td>
-                <td>[type]</td>
+                <td>Object</td>
                 <td>Required. Function that is called when the form is submitted. </td>
               </tr>
               <tr>
-                <td>onSubmit</td>
-                <td>Function</td>
-                <td>Required. Function that is called when the form is submitted. </td>
-              </tr>
-              <tr>
-                <td>onClose</td>
-                <td>Function</td>
-                <td>Optional. Function that is called when the dialog is closed.</td>
+                <td>callbacks</td>
+                <td>Object</td>
+                <td>Object with callback functions. Possible fields: - submit: Required. Function that is called when the form is submitted - close: Optional. Function that is called when the dialog is closed.</td>
               </tr>
             </tbody>
           </table>
           <div class="description"><p>Settings dialog where the user can change its pseudonym or email preferences.</p> </div>
-          <pre><code class="language-javascript">exports.showSettingsDialog = function (currentData, onSubmit, onClose) {
+          <pre><code class="language-javascript">exports.showSettingsDialog = function (currentData, callbacks) {
     &quot;use strict&quot;;
 
     if (showSettingsDialogShown === false) {
-        if (typeof onSubmit !== 'function') {
+        if (typeof callbacks !== 'object' || !callbacks) {
+            throw new Error(&quot;Callbacks not provided.&quot;);
+        }
+
+        if (typeof callbacks.submit !== 'function') {
             throw new Error(&quot;Submit callback not provided.&quot;);
         }
 
@@ -308,7 +306,7 @@ var showSettingsDialogShown = false;</code></pre>
                     formData.emailautofollow = 'off';
                 }
 
-                onSubmit(formData, function (err) {
+                callbacks.submit(formData, function (err) {
                     if (err) {
                         form.showError(err);
 
@@ -336,8 +334,8 @@ var showSettingsDialogShown = false;</code></pre>
         var onCloseInternalHandler = function () {
             showSettingsDialogShown = false;
 
-            if (typeof onClose === 'function') {
-                onClose();
+            if (typeof callbacks.close === 'function') {
+                callbacks.close();
             }
         };
 
@@ -367,23 +365,22 @@ var showEmailAlertDialogShown = false;</code></pre>
             </thead>
             <tbody>
               <tr>
-                <td>onSubmit</td>
-                <td>Function</td>
-                <td>Required. Function that is called when the form is submitted. </td>
-              </tr>
-              <tr>
-                <td>onClose</td>
-                <td>Function</td>
-                <td>Optional. Function that is called when the dialog is closed.</td>
+                <td>callbacks</td>
+                <td>Object</td>
+                <td>Object with callback functions. Possible fields: - submit: Required. Function that is called when the form is submitted - close: Optional. Function that is called when the dialog is closed.</td>
               </tr>
             </tbody>
           </table>
           <div class="description"><p>Shows a dialog which reminds the user to save its email preferences if he/she didn't do so.</p> </div>
-          <pre><code class="language-javascript">exports.showEmailAlertDialog = function (onSubmit, onClose) {
+          <pre><code class="language-javascript">exports.showEmailAlertDialog = function (callbacks) {
     &quot;use strict&quot;;
 
     if (showEmailAlertDialogShown === false) {
-        if (typeof onSubmit !== 'function') {
+        if (typeof callbacks !== 'object' || !callbacks) {
+            throw new Error(&quot;Callbacks not provided.&quot;);
+        }
+
+        if (typeof callbacks.submit !== 'function') {
             throw new Error(&quot;Submit callback not provided.&quot;);
         }
 
@@ -436,7 +433,7 @@ var showEmailAlertDialogShown = false;</code></pre>
 
                 dialog.disableButtons();
 
-                onSubmit(formData, function (err) {
+                callbacks.submit(formData, function (err) {
                     if (err) {
                         form.showError(err);
 
@@ -462,8 +459,8 @@ var showEmailAlertDialogShown = false;</code></pre>
         var onCloseInternalHandler = function () {
             showEmailAlertDialogShown = false;
 
-            if (typeof onClose === 'function') {
-                onClose();
+            if (typeof callbacks.close === 'function') {
+                callbacks.close();
             }
         };
 
@@ -493,23 +490,22 @@ var showInactivityMessageDialogShown = false;</code></pre>
             </thead>
             <tbody>
               <tr>
-                <td>onSubmit</td>
-                <td>Function</td>
-                <td>Required. Function that is called when the form is submitted. </td>
-              </tr>
-              <tr>
-                <td>onClose</td>
-                <td>Function</td>
-                <td>Optional. Function that is called when the dialog is closed.</td>
+                <td>callbacks</td>
+                <td>Object</td>
+                <td>Object with callback functions. Possible fields: - submit: Required. Function that is called when the form is submitted - close: Optional. Function that is called when the dialog is closed.</td>
               </tr>
             </tbody>
           </table>
           <div class="description"><p>Shows a dialog with a sign in link to re-login after a session expire.</p> </div>
-          <pre><code class="language-javascript">exports.showInactivityMessage = function (onSubmit, onClose) {
+          <pre><code class="language-javascript">exports.showInactivityMessage = function (callbacks) {
     &quot;use strict&quot;;
 
     if (showInactivityMessageDialogShown === false) {
-        if (typeof onSubmit !== 'function') {
+        if (typeof callbacks !== 'object' || !callbacks) {
+            throw new Error(&quot;Callbacks not provided.&quot;);
+        }
+
+        if (typeof callbacks.submit !== 'function') {
             throw new Error(&quot;Submit callback not provided.&quot;);
         }
 
@@ -541,7 +537,7 @@ var showInactivityMessageDialogShown = false;</code></pre>
         });
         
         form.on('submit', function (event) {
-            onSubmit();
+            callbacks.submit();
             
             if (event.preventDefault) {
                 event.preventDefault();
@@ -555,8 +551,8 @@ var showInactivityMessageDialogShown = false;</code></pre>
         var onCloseInternalHandler = function () {
             showInactivityMessageDialogShown = false;
 
-            if (typeof onClose === 'function') {
-                onClose();
+            if (typeof callbacks.close === 'function') {
+                callbacks.close();
             }
         };
 
