@@ -6,23 +6,23 @@
         width: $commentsDialogWidth - 2*$commentsDialogSideMargin;
         height: 138px;
 
-        .explanation-text-container {
+        .comments-explanation-text-container {
             display: table-cell;
             text-align: center;
             vertical-align: middle;
             width: 100%;
 
-            .explanation-text-bg {
+            .comments-explanation-text-bg {
                 background: #F8F8F8;
 
-                .explanation-text {
+                .comments-explanation-text {
                     width: 220px;
                     padding: 10px 0 10px 25px;
                 }
             }
         }
 
-        .explanation-image-wrapper {
+        .comments-explanation-image-wrapper {
             display: table-cell;
             vertical-align: middle;
             position: absolute;
@@ -30,27 +30,27 @@
             top: 0;
             height: 100%;
 
-            .explanation-image-container {
+            .comments-explanation-image-container {
                 display: table;
                 vertical-align: middle;
                 height: 100%;
 
-                .explanation-image-innerContainer {
+                .comments-explanation-image-innerContainer {
                     display: table-cell;
                     vertical-align: middle;
 
-                    .explanation-image {
+                    .comments-explanation-image {
                         display: inline-block;
                         width: 138px;
                         height: 138px;
                         vertical-align: middle;
                     }
 
-                    .explanation-follow {
+                    .comments-explanation-follow {
                         background: url(oAssetsResolve("src/images/magnifier_follow.png", comments-ui)) no-repeat;
                     }
 
-                    .explanation-settings {
+                    .comments-explanation-settings {
                         background: url(oAssetsResolve("src/images/magnifier_settings.png", comments-ui)) no-repeat;
                     }
                 }
