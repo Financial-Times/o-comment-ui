@@ -1,14 +1,14 @@
 @import 'bower_components/o-colors/main';
 @import 'bower_components/o-assets/main';
 
-@import 'src/stylesheets/buttons';
+@import './src/stylesheets/buttons';
 
-@import 'src/stylesheets/common';
+@import './src/stylesheets/common';
 
-@import "src/stylesheets/termsAndGuidelines";
-@import "src/stylesheets/unavailableMessage";
+@import "./src/stylesheets/termsAndGuidelines";
+@import "./src/stylesheets/unavailableMessage";
 
-@import "src/stylesheets/dialog";
-@import "src/stylesheets/modal";
+@import "./src/stylesheets/dialog";
+@import "./src/stylesheets/modal";
 
-@import "src/stylesheets/commentingSettingsLink";
+@import "./src/stylesheets/commentingSettingsLink";
