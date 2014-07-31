@@ -1,6 +1,6 @@
 var Dialog = require('./dialog/Dialog.js'),
     Form = require('./form_builder/Form.js'),
-    logger = require('js-logger');
+    commentUtilities = require('comment-utilities');
 
 
 var showSetPseudonymDialogShown = false;
@@ -90,7 +90,7 @@ exports.showSetPseudonymDialog = function (callbacks) {
             }
 
             if (!inProgress) {
-                logger.log('pseudonym refused');
+                commentUtilities.logger.log('pseudonym refused');
             }
         };
 

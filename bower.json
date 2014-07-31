@@ -6,9 +6,7 @@
     "main.scss"
   ],
   "dependencies": {
-    "js-logger": "git+http://git.svc.ft.com:8080/scm/strat_p/js-logger.git#^1.0.0",
-    "js-callback-sync": "git+http://git.svc.ft.com:8080/scm/strat_p/js-callback-sync.git#^0.0.2",
-    "js-events": "git+http://git.svc.ft.com:8080/scm/strat_p/js-events.git#^0.1.0",
+    "comment-utilities": "git+http://git.svc.ft.com:8080/scm/strat_p/comment-utilities.git#^0.1.0",
     "js-merge": "git+http://git.svc.ft.com:8080/scm/strat_p/js-merge.git#^0.1.0",
     "sizzle": "https://github.com/jquery/sizzle.git",
     "hogan": "git+https://github.com/twitter/hogan.js.git#3.0.0",

@@ -1,4 +1,4 @@
-var logger = require('js-logger');
+var commentUtilities = require('comment-utilities');
 
 /**
  * Exports of submodules
@@ -27,7 +27,7 @@ exports.dialog = {
  */
 exports.enableLogging = function () {
     "use strict";
-    logger.enable.apply(this, arguments);
+    commentUtilities.logger.enable.apply(this, arguments);
 };
 
 /**
@@ -36,7 +36,7 @@ exports.enableLogging = function () {
  */
 exports.disableLogging = function () {
     "use strict";
-    logger.disable.apply(this, arguments);
+    commentUtilities.logger.disable.apply(this, arguments);
 };
 
 /**
@@ -45,5 +45,5 @@ exports.disableLogging = function () {
  */
 exports.setLoggingLevel = function () {
     "use strict";
-    logger.setLevel.apply(this, arguments);
+    commentUtilities.logger.setLevel.apply(this, arguments);
 };

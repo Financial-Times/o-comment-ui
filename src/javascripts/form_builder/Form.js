@@ -1,5 +1,5 @@
 var hogan = require('hogan');
-var Events = require('js-events');
+var commentUtilities = require('comment-utilities');
 var sizzle = require('sizzle');
 
 var templates = require('../templates.js');
@@ -29,7 +29,7 @@ function Form (config) {
     var myself = this;
     var formObject;
 
-    var events = new Events();
+    var events = new commentUtilities.Events();
 
     function init () {
         var item;

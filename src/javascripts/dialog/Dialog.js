@@ -1,5 +1,5 @@
 var hogan = require('hogan');
-var Events = require('js-events');
+var commentUtilities = require('comment-utilities');
 var merge = require('js-merge');
 var sizzle = require('sizzle');
 
@@ -69,7 +69,7 @@ function Dialog (htmlOrForm, userOptions) {
      * Event object on which events can be triggered and handlers can be attached.
      * @type {Object}
      */
-    var events = new Events();
+    var events = new commentUtilities.Events();
 
 
     /**

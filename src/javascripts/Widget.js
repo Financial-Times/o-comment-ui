@@ -1,5 +1,4 @@
-var Events = require('js-events'),
-    callbackSync = require('js-callback-sync'),
+var commentUtilities = require('comment-utilities'),
     WidgetUi = require('./WidgetUi.js');
 
 /**
@@ -56,7 +55,7 @@ function Widget (config) {
     }
 
     widgetEl = document.getElementById(config.elId);
-    event = new Events();
+    event = new commentUtilities.Events();
     
 
     config.stream_type = config.stream_type || "livecomments";
@@ -153,7 +152,7 @@ Widget.prototype.load = function () {
         }, this.config.timeout || 15000);
 
         
-        callbackSync({
+        commentUtilities.callbackSync({
             loadResources: this.loadResources,
             init: this.init
         }, function (err, data) {

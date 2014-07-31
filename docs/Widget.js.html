@@ -178,7 +178,7 @@
     }
 
     widgetEl = document.getElementById(config.elId);
-    event = new Events();
+    event = new commentUtilities.Events();
     
 
     config.stream_type = config.stream_type || &quot;livecomments&quot;;
@@ -344,7 +344,7 @@ Widget.prototype.load = function () {
         }, this.config.timeout || 15000);
 
         
-        callbackSync({
+        commentUtilities.callbackSync({
             loadResources: this.loadResources,
             init: this.init
         }, function (err, data) {

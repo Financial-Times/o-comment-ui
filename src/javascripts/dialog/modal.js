@@ -1,5 +1,5 @@
 var hogan = require('hogan');
-var Events = require('js-events');
+var commentUtilities = require('comment-utilities');
 var sizzle = require('sizzle');
 var utils = require('../utils.js');
 
@@ -22,7 +22,7 @@ var bodyEl = document.body || document.getElementsByTagName('body')[0];
  * Event object on which events can be triggered and handlers can be attached.
  * @type {Object}
  */
-var events = new Events();
+var events = new commentUtilities.Events();
 
 /**
  * Current HTML element created.
