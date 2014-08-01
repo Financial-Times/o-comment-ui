@@ -152,7 +152,7 @@ Widget.prototype.load = function () {
         }, this.config.timeout || 15000);
 
         
-        commentUtilities.functionSync({
+        commentUtilities.functionSync.parallel({
             loadResources: this.loadResources,
             init: this.init
         }, function (err, data) {
