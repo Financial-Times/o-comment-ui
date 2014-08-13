@@ -87,7 +87,7 @@
             <ul class="nav nav-list bs-docs-sidenav affix-top">
               <li><a href="#html"><i class="alert alert-success"></i><span>html</span></a>
               </li>
-              <li><a href="#bodyEl"><i class="alert alert-success"></i><span>bodyEl</span></a>
+              <li><a href="#getBodyEl"><i class="alert alert-info"></i><span>getBodyEl</span></a>
               </li>
               <li><a href="#events"><i class="alert alert-success"></i><span>events</span></a>
               </li>
@@ -118,15 +118,25 @@
           </section>
           <div class="description"><p>HTML of the modal background.</p> </div>
           <pre><code class="language-javascript">var html = modalBgTemplate.render();</code></pre>
-          <section id="bodyEl">
-            <h1>bodyEl</h1>
+          <div class="description"><p>The body DOM object.</p> </div>
+          <pre><code class="language-javascript">var bodyEl;</code></pre>
+          <section id="getBodyEl">
+            <h1>getBodyEl</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-success radius ctx-type">declaration</div><span>bodyEl</span>
+              <div class="label label-info radius ctx-type">function</div><span>getBodyEl()</span> -><span>DOMObject</span>
             </p>
           </section>
-          <div class="description"><p>The body DOM object.</p> </div>
-          <pre><code class="language-javascript">var bodyEl = document.body || document.getElementsByTagName('body')[0];</code></pre>
+          <div class="description"><p>Returns the body DOM element.</p> </div>
+          <pre><code class="language-javascript">var getBodyEl = function () {
+    &quot;use strict&quot;;
+
+    if (!bodyEl) {
+        bodyEl = document.body || document.getElementsByTagName('body')[0];
+    }
+
+    return bodyEl;
+};</code></pre>
           <section id="events">
             <h1>events</h1>
             <h5 class="subheader"></h5>
@@ -195,8 +205,8 @@
         return;
     }
 
-    bodyEl.appendChild(utils.toDOM(html));
-    currentElement = sizzle('.comments-dialog-modalBg', bodyEl)[0];
+    getBodyEl().appendChild(utils.toDOM(html));
+    currentElement = sizzle('.comments-dialog-modalBg', getBodyEl())[0];
 
     utils.addEventListener('click', currentElement, function () {
         events.trigger('click');

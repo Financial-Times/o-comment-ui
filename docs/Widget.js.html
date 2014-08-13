@@ -189,6 +189,9 @@
     }
 
     widgetEl.className += ' livefyre-comments comments-overrides comment-type-' + config.stream_type;
+    if (config.layout) {
+        widgetEl.className += ' comment-layout-' + config.layout;
+    }
 
 
     this.config = config;
@@ -344,7 +347,7 @@ Widget.prototype.load = function () {
         }, this.config.timeout || 15000);
 
         
-        commentUtilities.functionSync({
+        commentUtilities.functionSync.parallel({
             loadResources: this.loadResources,
             init: this.init
         }, function (err, data) {
