@@ -66,6 +66,9 @@ function Widget (config) {
     }
 
     widgetEl.className += ' livefyre-comments comments-overrides comment-type-' + config.stream_type;
+    if (config.layout) {
+        widgetEl.className += ' comment-layout-' + config.layout;
+    }
 
 
     this.config = config;
