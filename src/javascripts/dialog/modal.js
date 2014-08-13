@@ -16,7 +16,21 @@ var html = modalBgTemplate.render();
  * The body DOM object.
  * @type {DOMObject}
  */
-var bodyEl = document.body || document.getElementsByTagName('body')[0];
+var bodyEl;
+
+/**
+ * Returns the body DOM element.
+ * @return {DOMObject}
+ */
+var getBodyEl = function () {
+    "use strict";
+
+    if (!bodyEl) {
+        bodyEl = document.body || document.getElementsByTagName('body')[0];
+    }
+
+    return bodyEl;
+};
 
 /**
  * Event object on which events can be triggered and handlers can be attached.
@@ -74,8 +88,8 @@ exports.open = function () {
         return;
     }
 
-    bodyEl.appendChild(utils.toDOM(html));
-    currentElement = sizzle('.comments-dialog-modalBg', bodyEl)[0];
+    getBodyEl().appendChild(utils.toDOM(html));
+    currentElement = sizzle('.comments-dialog-modalBg', getBodyEl())[0];
 
     utils.addEventListener('click', currentElement, function () {
         events.trigger('click');
