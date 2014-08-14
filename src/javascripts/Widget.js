@@ -50,10 +50,6 @@ function Widget (config) {
         throw "Title is not specified.";
     }
 
-    if (!config.user) {
-        throw "User data not specified.";
-    }
-
     widgetEl = document.getElementById(config.elId);
     event = new commentUtilities.Events();
     
