@@ -1,6 +1,6 @@
 .comments-dialog {
     background: rgba(211,210,203,0.2);
-    font-family: BentonSans, Helvetica, Arial, sans-serif;
+    font-family: oFontsGetFontFamilyWithFallbacks(BentonSans);
     color: oColorsGetPaletteColor(grey-tint4);
     font-size: 13px;
     text-align: left;

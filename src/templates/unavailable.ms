@@ -1,3 +1,3 @@
-<div class="comments-unavailable-message" style="clear: both; font-style: italic; font-size: 14px;">
+<div class="comments-unavailable-message" style="clear: both; font-style: italic; font-size: 14px; font-family: BentonSans, Arial;">
     {{{message}}}
 </div>
