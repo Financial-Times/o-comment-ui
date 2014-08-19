@@ -1,1 +1,1 @@
-<div class="comments-dialog-modalBg"></div>
+<div class="comment-dialog-modalBg"></div>

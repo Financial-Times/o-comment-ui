@@ -173,15 +173,12 @@
         throw &quot;Title is not specified.&quot;;
     }
 
-    if (!config.user) {
-        throw &quot;User data not specified.&quot;;
-    }
-
     widgetEl = document.getElementById(config.elId);
     event = new commentUtilities.Events();
     
 
     config.stream_type = config.stream_type || &quot;livecomments&quot;;
+    config.timeout = config.timeout || 15;
 
 
     if (!widgetEl) {
@@ -340,12 +337,14 @@ Widget.prototype.load = function () {
     if (!this.loadCalled) {
         this.loadCalled = true;
 
-        var timeout = setTimeout(function () {
-            self.trigger('timeout.widget');
+        var timeout;
+        if (this.config.timeout &gt; 0) {
+            timeout = setTimeout(function () {
+                self.trigger('timeout.widget');
 
-            self.onTimeout();
-        }, this.config.timeout || 15000);
-
+                self.onTimeout();
+            }, this.config.timeout * 1000);
+        }
         
         commentUtilities.functionSync.parallel({
             loadResources: this.loadResources,

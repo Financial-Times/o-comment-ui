@@ -1,16 +1,16 @@
-.comments-settings {
+.comment-settings {
     display: inline-block;
     margin-left: 10px;
     color: oColorsGetPaletteColor(pink-tint3);
 
-    .comments-settings-text {
+    .comment-settings-text {
         padding-left: 10px;
         color: oColorsGetPaletteColor(blue);
         cursor: pointer;
         display: inline-block;
     }
 
-    .comments-settings-icon {
+    .comment-settings-icon {
         background: url(oAssetsResolve("src/images/comment_commenting_settings.png", comment-ui)) no-repeat;
         display: inline-block;
         width: 14px;

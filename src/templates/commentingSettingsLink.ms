@@ -1,4 +1,4 @@
-<div class="comments-settings">
-    |<div class="comments-settings-text">
-    <span class="comments-settings-icon">&nbsp;</span> {{label}}</div>
+<div class="comment-settings">
+    |<div class="comment-settings-text">
+    <span class="comment-settings-icon">&nbsp;</span> {{label}}{{^label}}Commenting settings{{/label}}</div>
 </div>

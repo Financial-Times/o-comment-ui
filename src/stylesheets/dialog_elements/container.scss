@@ -1,4 +1,4 @@
-.comments-dialog {
+.comment-dialog {
     background: rgba(211,210,203,0.2);
     font-family: oFontsGetFontFamilyWithFallbacks(BentonSans);
     color: oColorsGetPaletteColor(grey-tint4);
@@ -8,7 +8,7 @@
     position: fixed;
     vertical-align: middle;
     z-index: 2500;
-    width: $commentsDialogWidth;
+    width: $commentDialogWidth;
     border-radius: 9px;
     -moz-border-radius: 9px;
     -webkit-border-radius: 9px;
@@ -21,13 +21,13 @@
         padding: 0;
     }
 
-    .comments-dialog-container {
+    .comment-dialog-container {
         background: oColorsGetPaletteColor(white);
-        margin: $commentsDialogSideMargin;
-        padding: 20px $commentsDialogSidePadding 8px;
+        margin: $commentDialogSideMargin;
+        padding: 20px $commentDialogSidePadding 8px;
     }
 
-    .comments-dialog-title {
+    .comment-dialog-title {
         font-size: 14px;
         color: #666;
         font-weight: bold;
@@ -36,24 +36,24 @@
         padding: 9px 0 32px;
     }
 
-    .comments-message,
-    .comments-hint {
+    .comment-message,
+    .comment-hint {
         line-height: 1.2em;
         clear: both;
         width: 100%;
         padding: 5px 0;
     }
 
-    .comments-hint {
+    .comment-hint {
         padding: 0 0 10px;
     }
 
-    .comments-errorMessage {
+    .comment-errorMessage {
         color: oColorsGetPaletteColor(red);
         margin-bottom: 10px;
     }
 
-    .comments-closeButton {
+    .comment-closeButton {
         display: block;
         position: absolute;
         top: 0;
@@ -65,7 +65,7 @@
         margin: 18px 18px 0 0;
     }
 
-    .comments-buttonContainer {
+    .comment-buttonContainer {
         padding: 26px 0 10px 0;
         float: right;
 
@@ -74,17 +74,17 @@
             display: inline-block;
         }
 
-        .comments-dismiss {
+        .comment-dismiss {
             display: inline-block;
             padding-right: 10px;
         }
     }
 
-    .comments-dialog-cancel {
+    .comment-dialog-cancel {
         float: none;
         padding: 0 6px;
 
-        .comments-dialog-cancel-button {
+        .comment-dialog-cancel-button {
             border: 0;
             color: oColorsGetPaletteColor(blue);
             background: none;

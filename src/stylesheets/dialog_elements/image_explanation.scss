@@ -1,28 +1,28 @@
-.comments-dialog {
-    .comments-explanation {
+.comment-dialog {
+    .comment-explanation {
         display: table;
         position: relative;
-        margin: 10px 0 10px #{-$commentsDialogSidePadding};
-        width: $commentsDialogWidth - 2*$commentsDialogSideMargin;
+        margin: 10px 0 10px #{-$commentDialogSidePadding};
+        width: $commentDialogWidth - 2*$commentDialogSideMargin;
         height: 138px;
 
-        .comments-explanation-text-container {
+        .comment-explanation-text-container {
             display: table-cell;
             text-align: center;
             vertical-align: middle;
             width: 100%;
 
-            .comments-explanation-text-bg {
+            .comment-explanation-text-bg {
                 background: #F8F8F8;
 
-                .comments-explanation-text {
+                .comment-explanation-text {
                     width: 220px;
                     padding: 10px 0 10px 25px;
                 }
             }
         }
 
-        .comments-explanation-image-wrapper {
+        .comment-explanation-image-wrapper {
             display: table-cell;
             vertical-align: middle;
             position: absolute;
@@ -30,27 +30,27 @@
             top: 0;
             height: 100%;
 
-            .comments-explanation-image-container {
+            .comment-explanation-image-container {
                 display: table;
                 vertical-align: middle;
                 height: 100%;
 
-                .comments-explanation-image-innerContainer {
+                .comment-explanation-image-innerContainer {
                     display: table-cell;
                     vertical-align: middle;
 
-                    .comments-explanation-image {
+                    .comment-explanation-image {
                         display: inline-block;
                         width: 138px;
                         height: 138px;
                         vertical-align: middle;
                     }
 
-                    .comments-explanation-follow {
+                    .comment-explanation-follow {
                         background: url(oAssetsResolve("src/images/comment_magnifier_follow.png", comment-ui)) no-repeat;
                     }
 
-                    .comments-explanation-settings {
+                    .comment-explanation-settings {
                         background: url(oAssetsResolve("src/images/comment_magnifier_settings.png", comment-ui)) no-repeat;
                     }
                 }

@@ -1,1 +1,1 @@
-<div class="comments-clear"></div>
+<div class="comment-clear"></div>

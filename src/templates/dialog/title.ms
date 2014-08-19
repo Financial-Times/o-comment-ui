@@ -1,3 +1,3 @@
-<div class="comments-dialog-title">
+<div class="comment-dialog-title">
     {{title}}
 </div>

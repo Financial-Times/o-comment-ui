@@ -1,5 +1,5 @@
-<div id="{{id}}" class="comments-dialog">
-    <div class="comments-dialog-container">
-        <span class="comments-closeButton"></span>
+<div id="{{id}}" class="comment-dialog">
+    <div class="comment-dialog-container">
+        <span class="comment-closeButton"></span>
     </div>
 </div>

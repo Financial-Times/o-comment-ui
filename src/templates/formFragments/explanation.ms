@@ -1,17 +1,17 @@
-<div class="comments-explanation">
-    <div class="comments-explanation-text-container">
-        <div class="comments-explanation-text-bg">
-            <div class="comments-explanation-text">
+<div class="comment-explanation">
+    <div class="comment-explanation-text-container">
+        <div class="comment-explanation-text-bg">
+            <div class="comment-explanation-text">
                 {{text}}
             </div>
         </div>
     </div>
-    <div class="comments-explanation-image-wrapper">
-        <div class="comments-explanation-image-container">
-            <div class="comments-explanation-image-innerContainer">
-                <span class="comments-explanation-image comments-explanation-{{type}}">&nbsp;</span>
+    <div class="comment-explanation-image-wrapper">
+        <div class="comment-explanation-image-container">
+            <div class="comment-explanation-image-innerContainer">
+                <span class="comment-explanation-image comment-explanation-{{type}}">&nbsp;</span>
             </div>
         </div>
     </div>
 </div>
-<div class="comments-clear"></div>
+<div class="comment-clear"></div>

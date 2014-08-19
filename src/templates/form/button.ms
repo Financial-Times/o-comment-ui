@@ -1,3 +1,3 @@
-<button type="{{type}}" class="comments-button">
+<button type="{{type}}" class="comment-button">
     {{label}}
 </button>
