@@ -55,6 +55,7 @@ function Widget (config) {
     
 
     config.stream_type = config.stream_type || "livecomments";
+    config.timeout = config.timeout || 15;
 
 
     if (!widgetEl) {
@@ -144,12 +145,14 @@ Widget.prototype.load = function () {
     if (!this.loadCalled) {
         this.loadCalled = true;
 
-        var timeout = setTimeout(function () {
-            self.trigger('timeout.widget');
+        var timeout;
+        if (this.config.timeout > 0) {
+            timeout = setTimeout(function () {
+                self.trigger('timeout.widget');
 
-            self.onTimeout();
-        }, this.config.timeout || 15000);
-
+                self.onTimeout();
+            }, this.config.timeout * 1000);
+        }
         
         commentUtilities.functionSync.parallel({
             loadResources: this.loadResources,
