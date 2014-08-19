@@ -177,7 +177,7 @@ function Dialog (htmlOrForm, userOptions) {
             bodyEl.appendChild(utils.toDOM(html));
             container = document.getElementById(id);
 
-            contentContainer = sizzle('.comments-dialog-container', container)[0];
+            contentContainer = sizzle('.comment-dialog-container', container)[0];
             bodyEl.appendChild(container);
 
             if (typeof(options.title) !== 'undefined') {
@@ -210,7 +210,7 @@ function Dialog (htmlOrForm, userOptions) {
         }
 
 
-        var closeButtons = sizzle('.comments-closeButton', container);
+        var closeButtons = sizzle('.comment-closeButton', container);
         for (var i = 0; i < closeButtons.length; i++) {
             utils.addEventListener('click', closeButtons[i], closeIt);
         }

@@ -59,7 +59,7 @@ function Form (config) {
 
         if (config.buttons && config.buttons.length) {
             formObject.appendChild(utils.toDOM(buttonContainerTemplate.render()));
-            var buttonContainer = sizzle('.comments-buttonContainer', formObject)[0];
+            var buttonContainer = sizzle('.comment-buttonContainer', formObject)[0];
 
             for (i = 0; i < config.buttons.length; i++) {
                 button = config.buttons[i];
@@ -93,7 +93,7 @@ function Form (config) {
 
             formObject.appendChild(utils.toDOM(clearTemplate.render()));
 
-            var cancelButtons = sizzle('.comments-dialog-cancel-button', formObject);
+            var cancelButtons = sizzle('.comment-dialog-cancel-button', formObject);
             var triggerCancel = function () {
                 events.trigger('cancel');
             };
@@ -184,7 +184,7 @@ function Form (config) {
      * @param  {String} errMessages The error message to show.
      */
     this.showError = function (errMessages) {
-        var errMessageContainer = sizzle('.comments-errorMessage', formObject);
+        var errMessageContainer = sizzle('.comment-errorMessage', formObject);
 
         if (errMessageContainer.length) {
             errMessageContainer[0].innerHTML = errMessages;
@@ -195,7 +195,7 @@ function Form (config) {
      * Clears all the errors.
      */
     this.clearError = function () {
-        var errMessageContainer = sizzle('.comments-errorMessage', formObject);
+        var errMessageContainer = sizzle('.comment-errorMessage', formObject);
 
         if (errMessageContainer.length) {
             errMessageContainer[0].innerHTML = "";

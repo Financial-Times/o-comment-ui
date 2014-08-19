@@ -89,7 +89,7 @@ exports.open = function () {
     }
 
     getBodyEl().appendChild(utils.toDOM(html));
-    currentElement = sizzle('.comments-dialog-modalBg', getBodyEl())[0];
+    currentElement = sizzle('.comment-dialog-modalBg', getBodyEl())[0];
 
     utils.addEventListener('click', currentElement, function () {
         events.trigger('click');

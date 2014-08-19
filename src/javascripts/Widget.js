@@ -62,7 +62,7 @@ function Widget (config) {
         throw "Container does not exist.";
     }
 
-    widgetEl.className += ' livefyre-comments comments-overrides comment-type-' + config.stream_type;
+    widgetEl.className += ' livefyre-comments comment-overrides comment-type-' + config.stream_type;
     if (config.layout) {
         widgetEl.className += ' comment-layout-' + config.layout;
     }
