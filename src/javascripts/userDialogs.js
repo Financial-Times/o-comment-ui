@@ -105,7 +105,7 @@ exports.showSetPseudonymDialog = function (callbacks) {
 var showSettingsDialogShown = false;
 /**
  * Settings dialog where the user can change its pseudonym or email preferences.
- * @param  {Object} currentData Required. Function that is called when the form is submitted. 
+ * @param  {Object} currentData Required. Current settings of the user, which consists of displayName and email settings.
  * @param  {Object} callbacks Object with callback functions. Possible fields:
  *                                - submit: Required. Function that is called when the form is submitted
  *                                - close:  Optional. Function that is called when the dialog is closed.
@@ -123,7 +123,6 @@ exports.showSettingsDialog = function (currentData, callbacks) {
         }
 
         if (!currentData) {
-            exports.showInactivityMessage();
             return;
         }
 
@@ -200,6 +199,109 @@ exports.showSettingsDialog = function (currentData, callbacks) {
 
         var onCloseInternalHandler = function () {
             showSettingsDialogShown = false;
+
+            if (typeof callbacks.close === 'function') {
+                callbacks.close();
+            }
+        };
+
+        dialog.on('close', onCloseInternalHandler);
+        form.on('cancel', onCloseInternalHandler);
+
+        dialog.open();
+    }
+};
+
+
+
+
+var changePseudonymDialogShown = false;
+/**
+ * Settings dialog where the user can change its pseudonym or email preferences.
+ * @param  {Object} currentPseudonym Required. Current pseudonym of the user.
+ * @param  {Object} callbacks Object with callback functions. Possible fields:
+ *                                - submit: Required. Function that is called when the form is submitted
+ *                                - close:  Optional. Function that is called when the dialog is closed.
+ */
+exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
+    "use strict";
+
+    if (changePseudonymDialogShown === false) {
+        if (typeof callbacks !== 'object' || !callbacks) {
+            throw new Error("Callbacks not provided.");
+        }
+
+        if (typeof callbacks.submit !== 'function') {
+            throw new Error("Submit callback not provided.");
+        }
+
+        if (!currentPseudonym) {
+            return;
+        }
+
+        changePseudonymDialogShown = true;
+        var inProgress = false;
+
+        currentPseudonym = currentPseudonym || "";
+
+        var form = new Form({
+            method: 'GET',
+            action: "",
+            name: 'changepseudonym',
+            items: [
+                {
+                    type: 'changePseudonym',
+                    currentPseudonym: currentPseudonym
+                }
+            ],
+            buttons: [
+                {
+                    type: 'submitButton',
+                    label: 'Save'
+                },
+                {
+                    type: 'cancelButton'
+                }
+            ]
+        });
+        var dialog = new Dialog(form, {
+            title: "Commenting Settings"
+        });
+
+        form.on('submit', function (event) {
+            if (!inProgress) {
+                inProgress = true;
+                dialog.disableButtons();
+
+                var formData = form.serialize();
+
+                callbacks.submit(formData, function (err) {
+                    if (err) {
+                        form.showError(err);
+
+                        dialog.enableButtons();
+                        inProgress = false;
+
+                        return;
+                    }
+
+                    changePseudonymDialogShown = false;
+
+                    dialog.close(false);
+                });
+            }
+
+            if (event.preventDefault) {
+                event.preventDefault();
+            } else {
+                event.returnValue = false;
+            }
+
+            return false;
+        });
+
+        var onCloseInternalHandler = function () {
+            changePseudonymDialogShown = false;
 
             if (typeof callbacks.close === 'function') {
                 callbacks.close();
