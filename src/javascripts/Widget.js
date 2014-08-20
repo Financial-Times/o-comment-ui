@@ -54,7 +54,7 @@ function Widget (config) {
     event = new commentUtilities.Events();
     
 
-    config.stream_type = config.stream_type || "livecomments";
+    
     config.timeout = config.timeout || 15;
 
 
@@ -62,7 +62,6 @@ function Widget (config) {
         throw "Container does not exist.";
     }
 
-    widgetEl.className += ' livefyre-comments comment-overrides comment-type-' + config.stream_type;
     if (config.layout) {
         widgetEl.className += ' comment-layout-' + config.layout;
     }

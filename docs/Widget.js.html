@@ -177,15 +177,15 @@
     event = new commentUtilities.Events();
     
 
-    config.stream_type = config.stream_type || &quot;livecomments&quot;;
+    
     config.timeout = config.timeout || 15;
+    config.layout = config.layout || &quot;main&quot;;
 
 
     if (!widgetEl) {
         throw &quot;Container does not exist.&quot;;
     }
 
-    widgetEl.className += ' livefyre-comments comments-overrides comment-type-' + config.stream_type;
     if (config.layout) {
         widgetEl.className += ' comment-layout-' + config.layout;
     }

@@ -89,6 +89,8 @@
               </li>
               <li><a href="#showSettingsDialog"><i class="alert alert-info"></i><span>showSettingsDialog</span></a>
               </li>
+              <li><a href="#showChangePseudonymDialog"><i class="alert alert-info"></i><span>showChangePseudonymDialog</span></a>
+              </li>
               <li><a href="#showEmailAlertDialog"><i class="alert alert-info"></i><span>showEmailAlertDialog</span></a>
               </li>
               <li><a href="#showInactivityMessage"><i class="alert alert-info"></i><span>showInactivityMessage</span></a>
@@ -233,7 +235,7 @@ var showSettingsDialogShown = false;</code></pre>
               <tr>
                 <td>currentData</td>
                 <td>Object</td>
-                <td>Required. Function that is called when the form is submitted. </td>
+                <td>Required. Current settings of the user, which consists of displayName and email settings.</td>
               </tr>
               <tr>
                 <td>callbacks</td>
@@ -256,7 +258,6 @@ var showSettingsDialogShown = false;</code></pre>
         }
 
         if (!currentData) {
-            exports.showInactivityMessage();
             return;
         }
 
@@ -333,6 +334,131 @@ var showSettingsDialogShown = false;</code></pre>
 
         var onCloseInternalHandler = function () {
             showSettingsDialogShown = false;
+
+            if (typeof callbacks.close === 'function') {
+                callbacks.close();
+            }
+        };
+
+        dialog.on('close', onCloseInternalHandler);
+        form.on('cancel', onCloseInternalHandler);
+
+        dialog.open();
+    }
+};
+
+
+
+
+var changePseudonymDialogShown = false;</code></pre>
+          <section id="showChangePseudonymDialog">
+            <h1>showChangePseudonymDialog</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>exports.showChangePseudonymDialog()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>currentPseudonym</td>
+                <td>Object</td>
+                <td>Required. Current pseudonym of the user.</td>
+              </tr>
+              <tr>
+                <td>callbacks</td>
+                <td>Object</td>
+                <td>Object with callback functions. Possible fields: - submit: Required. Function that is called when the form is submitted - close: Optional. Function that is called when the dialog is closed.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Settings dialog where the user can change its pseudonym or email preferences.</p> </div>
+          <pre><code class="language-javascript">exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
+    &quot;use strict&quot;;
+
+    if (changePseudonymDialogShown === false) {
+        if (typeof callbacks !== 'object' || !callbacks) {
+            throw new Error(&quot;Callbacks not provided.&quot;);
+        }
+
+        if (typeof callbacks.submit !== 'function') {
+            throw new Error(&quot;Submit callback not provided.&quot;);
+        }
+
+        if (!currentPseudonym) {
+            return;
+        }
+
+        changePseudonymDialogShown = true;
+        var inProgress = false;
+
+        currentPseudonym = currentPseudonym || &quot;&quot;;
+
+        var form = new Form({
+            method: 'GET',
+            action: &quot;&quot;,
+            name: 'changepseudonym',
+            items: [
+                {
+                    type: 'changePseudonym',
+                    currentPseudonym: currentPseudonym
+                }
+            ],
+            buttons: [
+                {
+                    type: 'submitButton',
+                    label: 'Save'
+                },
+                {
+                    type: 'cancelButton'
+                }
+            ]
+        });
+        var dialog = new Dialog(form, {
+            title: &quot;Commenting Settings&quot;
+        });
+
+        form.on('submit', function (event) {
+            if (!inProgress) {
+                inProgress = true;
+                dialog.disableButtons();
+
+                var formData = form.serialize();
+
+                callbacks.submit(formData, function (err) {
+                    if (err) {
+                        form.showError(err);
+
+                        dialog.enableButtons();
+                        inProgress = false;
+
+                        return;
+                    }
+
+                    changePseudonymDialogShown = false;
+
+                    dialog.close(false);
+                });
+            }
+
+            if (event.preventDefault) {
+                event.preventDefault();
+            } else {
+                event.returnValue = false;
+            }
+
+            return false;
+        });
+
+        var onCloseInternalHandler = function () {
+            changePseudonymDialogShown = false;
 
             if (typeof callbacks.close === 'function') {
                 callbacks.close();
