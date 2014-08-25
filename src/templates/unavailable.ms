@@ -1,6 +1,6 @@
 <div class="comment-unavailable-message" style="clear: both; font-style: italic; font-size: 14px; font-family: BentonSans, Arial;">
     {{{message}}}
     {{^message}}
-        It seems we\'re having a problem loading comments for you. Apologies. Hopefully it\'s temporary, but if you continue to experience this difficulty, please contact <a href="mailto:help@ft.com">help@ft.com</a>.
+        It seems we're having a problem loading comments for you. Apologies. Hopefully it's temporary, but if you continue to experience this difficulty, please contact <a href="mailto:help@ft.com">help@ft.com</a>.
     {{/message}}
 </div>
