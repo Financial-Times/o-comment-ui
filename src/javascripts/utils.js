@@ -30,7 +30,7 @@ exports.toDOM = function (htmlString) {
 exports.addEventListener = function (event, elem, handler) {
     "use strict";
 
-    if (elem.length) {
+    if (elem instanceof Array) {
         for (var i = 0; i < elem.length; i++) {
             exports.addEventListener(event, elem[i], handler);
         }
@@ -58,7 +58,7 @@ exports.addEventListener = function (event, elem, handler) {
 exports.removeEventListener = function (event, elem, handler) {
     "use strict";
 
-    if (elem.length) {
+    if (elem instanceof Array) {
         for (var i = 0; i < elem.length; i++) {
             exports.removeEventListener(event, elem[i], handler);
         }
