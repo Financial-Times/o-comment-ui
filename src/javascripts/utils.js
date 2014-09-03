@@ -30,6 +30,14 @@ exports.toDOM = function (htmlString) {
 exports.addEventListener = function (event, elem, handler) {
     "use strict";
 
+    if (elem.length) {
+        for (var i = 0; i < elem.length; i++) {
+            exports.addEventListener(event, elem[i], handler);
+        }
+
+        return;
+    }
+
     if (elem.addEventListener) {
         // W3C DOM
         elem.addEventListener(event, handler, false);
@@ -49,6 +57,14 @@ exports.addEventListener = function (event, elem, handler) {
  */
 exports.removeEventListener = function (event, elem, handler) {
     "use strict";
+
+    if (elem.length) {
+        for (var i = 0; i < elem.length; i++) {
+            exports.removeEventListener(event, elem[i], handler);
+        }
+
+        return;
+    }
 
     if (elem.removeEventListener) {
         elem.removeEventListener(event, handler, false);
@@ -97,8 +113,8 @@ exports.windowSize = function () {
         d = document,
         e = d.documentElement,
         g = d.getElementsByTagName('body')[0],
-        x = w.innerWidth || e.clientWidth || g.clientWidth,
-        y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+        x = w.innerWidth || g.clientWidth || e.clientWidth,
+        y = w.innerHeight || g.clientHeight || e.clientHeight;
 
     return {
         width: x,
