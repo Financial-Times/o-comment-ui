@@ -17,5 +17,6 @@ exports.texts = {
  */
 exports.serviceMessageOverrides = {
     'User session is not valid.': 'You are not currently signed in to FT.com, please '+
-            '<a href="https://registration.ft.com/registration/barrier/login?location='+ encodeURIComponent(document.location.href) +'">sign in</a> to create a pseudonym'
+            '<a href="https://registration.ft.com/registration/barrier/login?location='+ encodeURIComponent(document.location.href) +'">sign in</a> to create a pseudonym',
+    'User profile (.*) does not have permission to access the desired action.': 'You do not have permission to perform this action.'
 };
