@@ -35,11 +35,19 @@ function Widget (config) {
     }
 
     if (!config.elId) {
-        throw "Container element is not specified.";
+        if (!config.elid) {
+            throw "Container element is not specified.";
+        } else {
+            config.elId = config.elid;
+        }
     }
 
     if (!config.articleId) {
-        throw "Article ID is not specified.";
+        if (!config.articleid) {
+            throw "Article ID is not specified.";
+        } else {
+            config.articleId = config.articleid;
+        }
     }
 
     if (!config.url) {
