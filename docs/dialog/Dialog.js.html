@@ -241,7 +241,7 @@
           </section>
           <div class="description"><p>Initializes the options.</p> </div>
           <pre><code class="language-javascript">function init() {
-        merge(options, defaultOptions, (userOptions &amp;&amp; typeof userOptions === 'object' ? userOptions : {}));
+        commentUtilities.merge(options, defaultOptions, (userOptions &amp;&amp; typeof userOptions === 'object' ? userOptions : {}));
     }
     init.call(this);</code></pre>
           <section id="repositionToCenter">

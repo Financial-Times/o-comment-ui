@@ -177,6 +177,14 @@
           <pre><code class="language-javascript">exports.addEventListener = function (event, elem, handler) {
     &quot;use strict&quot;;
 
+    if (elem instanceof Array) {
+        for (var i = 0; i &lt; elem.length; i++) {
+            exports.addEventListener(event, elem[i], handler);
+        }
+
+        return;
+    }
+
     if (elem.addEventListener) {
         // W3C DOM
         elem.addEventListener(event, handler, false);
@@ -223,6 +231,14 @@
           <div class="description"><p>Removes an event listener from a DOM object. Bubbling disabled.</p> </div>
           <pre><code class="language-javascript">exports.removeEventListener = function (event, elem, handler) {
     &quot;use strict&quot;;
+
+    if (elem instanceof Array) {
+        for (var i = 0; i &lt; elem.length; i++) {
+            exports.removeEventListener(event, elem[i], handler);
+        }
+
+        return;
+    }
 
     if (elem.removeEventListener) {
         elem.removeEventListener(event, handler, false);
@@ -292,8 +308,8 @@
         d = document,
         e = d.documentElement,
         g = d.getElementsByTagName('body')[0],
-        x = w.innerWidth || e.clientWidth || g.clientWidth,
-        y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+        x = w.innerWidth || g.clientWidth || e.clientWidth,
+        y = w.innerHeight || g.clientHeight || e.clientHeight;
 
     return {
         width: x,

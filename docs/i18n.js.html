@@ -118,7 +118,8 @@
           <div class="description"><p>Error messages coming from the web services could be not user friendly.<br />So some of the messages are mapped to a more user friendly message.</p> </div>
           <pre><code class="language-javascript">exports.serviceMessageOverrides = {
     'User session is not valid.': 'You are not currently signed in to FT.com, please '+
-            '&lt;a href=&quot;https://registration.ft.com/registration/barrier/login?location='+ encodeURIComponent(document.location.href) +'&quot;&gt;sign in&lt;/a&gt; to create a pseudonym'
+            '&lt;a href=&quot;https://registration.ft.com/registration/barrier/login?location='+ encodeURIComponent(document.location.href) +'&quot;&gt;sign in&lt;/a&gt; to create a pseudonym',
+    'User profile (.*) does not have permission to access the desired action.': 'You don\'t have permission to perform this action.'
 };</code></pre>
         </div>
       </div>

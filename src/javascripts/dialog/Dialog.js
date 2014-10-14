@@ -1,6 +1,5 @@
 var hogan = require('hogan');
 var commentUtilities = require('comment-utilities');
-var merge = require('js-merge');
 var sizzle = require('sizzle');
 
 var utils = require('../utils.js');
@@ -76,7 +75,7 @@ function Dialog (htmlOrForm, userOptions) {
      * Initializes the options.
      */
     function init() {
-        merge(options, defaultOptions, (userOptions && typeof userOptions === 'object' ? userOptions : {}));
+        commentUtilities.merge(options, defaultOptions, (userOptions && typeof userOptions === 'object' ? userOptions : {}));
     }
     init.call(this);
 

@@ -1,13 +1,12 @@
 {
   "name": "comment-ui",
-  "version": "0.2.29",
+  "version": "0.2.30",
   "main": [
     "main.js",
     "main.scss"
   ],
   "dependencies": {
     "comment-utilities": "git+http://git.svc.ft.com:8080/scm/strat_p/comment-utilities.git#^0.2.0",
-    "js-merge": "git+http://git.svc.ft.com:8080/scm/strat_p/js-merge.git#^0.1.0",
     "sizzle": "https://github.com/jquery/sizzle.git#^2.0.0",
     "hogan": "git+https://github.com/twitter/hogan.js.git#3.0.0",
     "o-colors": "^2.3.17",

@@ -158,11 +158,19 @@
     }
 
     if (!config.elId) {
-        throw &quot;Container element is not specified.&quot;;
+        if (!config.elid) {
+            throw &quot;Container element is not specified.&quot;;
+        } else {
+            config.elId = config.elid;
+        }
     }
 
     if (!config.articleId) {
-        throw &quot;Article ID is not specified.&quot;;
+        if (!config.articleid) {
+            throw &quot;Article ID is not specified.&quot;;
+        } else {
+            config.articleId = config.articleid;
+        }
     }
 
     if (!config.url) {
@@ -179,7 +187,6 @@
 
     
     config.timeout = config.timeout || 15;
-    config.layout = config.layout || &quot;main&quot;;
 
 
     if (!widgetEl) {
