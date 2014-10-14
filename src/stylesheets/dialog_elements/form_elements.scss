@@ -22,12 +22,15 @@
     }
 
     label.inline {
-        float: left;
+        display: inline-block;
+        vertical-align: middle;
         width: 30%;
         margin-bottom: 0;
     }
 
-    input {
+    input,
+    textarea,
+    select {
         vertical-align: middle;
     }
 
@@ -50,7 +53,7 @@
     input.password.inline,
     textarea.inline,
     select.inline {
-        float: left;
+        display: inline-block;
         width: 60%;
     }
 
