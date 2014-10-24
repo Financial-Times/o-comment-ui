@@ -1,3 +1,5 @@
+"use strict";
+
 var commentUtilities = require('comment-utilities');
 
 /**
@@ -26,7 +28,6 @@ exports.dialog = {
  * @type {function}
  */
 exports.enableLogging = function () {
-    "use strict";
     commentUtilities.logger.enable.apply(this, arguments);
 };
 
@@ -35,7 +36,6 @@ exports.enableLogging = function () {
  * @type {function}
  */
 exports.disableLogging = function () {
-    "use strict";
     commentUtilities.logger.disable.apply(this, arguments);
 };
 
@@ -44,6 +44,5 @@ exports.disableLogging = function () {
  * @type {number|string}
  */
 exports.setLoggingLevel = function () {
-    "use strict";
     commentUtilities.logger.setLevel.apply(this, arguments);
 };

@@ -1,1 +1,1 @@
-<div class="comment-buttonContainer"></div>
+<div class="comment-button-container"></div>

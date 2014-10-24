@@ -1,3 +1,5 @@
+"use strict";
+
 var hogan = require('hogan');
 
 var fieldsetTemplate = hogan.compile(requireText('../../templates/formFragments/fieldset.ms'));
@@ -11,8 +13,6 @@ var sessionExpiredTemplate = hogan.compile(requireText('../../templates/formFrag
  * @return {Mustache compiled template}
  */
 exports.initialPseudonym = function () {
-    "use strict";
-
     return fieldsetTemplate.render({
         legend: 'Pseudonym',
         content: pseudonymTemplate.render({
@@ -30,8 +30,6 @@ exports.initialPseudonym = function () {
  * @return {Mustache compiled template}
  */
 exports.changePseudonym = function (config) {
-    "use strict";
-
     return fieldsetTemplate.render({
         legend: 'Pseudonym',
         content: pseudonymTemplate.render({
@@ -49,8 +47,6 @@ exports.changePseudonym = function (config) {
  * @return {Mustache compiled template}
  */
 var emailSettingsForm = function (config) {
-    "use strict";
-
     if (!config || typeof config !== 'object') {
         config = {};
     }
@@ -141,8 +137,6 @@ var emailSettingsForm = function (config) {
  * @return {Mustache compiled template}
  */
 exports.emailSettings = function (config) {
-    "use strict";
-
     return fieldsetTemplate.render({
         legend: 'Email Settings',
         content: 'Receive alerts when:<br/>' + emailSettingsForm(config.currentSettings)
@@ -155,8 +149,6 @@ exports.emailSettings = function (config) {
  * @return {Mustache compiled template}
  */
 exports.emailSettingsStandalone = function (config) {
-    "use strict";
-
     return fieldsetTemplate.render({
         legend: 'Email Settings',
         content: emailSettingsForm(config.currentSettings)
@@ -168,8 +160,6 @@ exports.emailSettingsStandalone = function (config) {
  * @return {Mustache compiled template}
  */
 exports.followExplanation = function () {
-    "use strict";
-
     return explanationTemplate.render({
         text: 'To receive email alerts about conversations that you\'re interested in, '+
             'click the \'follow\' button that now appears on the comment box.',
@@ -182,8 +172,6 @@ exports.followExplanation = function () {
  * @return {Mustache compiled template}
  */
 exports.commentingSettingsExplanation = function () {
-    "use strict";
-
     return explanationTemplate.render({
         text: 'You can manage your settings in the Commenting settings panel above the comment box.',
         type: 'settings'
@@ -195,8 +183,6 @@ exports.commentingSettingsExplanation = function () {
  * @return {Mustache compiled template}
  */
 exports.sessionExpired = function () {
-    "use strict";
-
     return sessionExpiredTemplate.render({
         location: encodeURIComponent(document.location.href)
     });

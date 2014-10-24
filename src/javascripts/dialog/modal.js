@@ -1,3 +1,5 @@
+"use strict";
+
 var hogan = require('hogan');
 var commentUtilities = require('comment-utilities');
 var sizzle = require('sizzle');
@@ -23,8 +25,6 @@ var bodyEl;
  * @return {DOMObject}
  */
 var getBodyEl = function () {
-    "use strict";
-
     if (!bodyEl) {
         bodyEl = document.body || document.getElementsByTagName('body')[0];
     }
@@ -48,8 +48,6 @@ var currentElement;
  * Recalculates the size of modal background in case of a browser resize.
  */
 var reposition = function () {
-    "use strict";
-
     if (currentElement) {
         currentElement.style.width = utils.windowSize().width + "px";
         currentElement.style.height = utils.windowSize().height + "px";
@@ -61,8 +59,6 @@ var reposition = function () {
  * recalculates viewport, and adjusts the modal background.
  */
 function enableResizeMonitoring () {
-    "use strict";
-
     utils.addEventListener('resize', window, reposition);
 }
 
@@ -70,8 +66,6 @@ function enableResizeMonitoring () {
  * Disables page resize monitoring.
  */
 function disableResizeMonitoring () {
-    "use strict";
-
     utils.removeEventListener('resize', window, reposition);
 }
 
@@ -82,14 +76,12 @@ function disableResizeMonitoring () {
  */
 
 exports.open = function () {
-    "use strict";
-
     if (currentElement) {
         return;
     }
 
     getBodyEl().appendChild(utils.toDOM(html));
-    currentElement = sizzle('.comment-dialog-modalBg', getBodyEl())[0];
+    currentElement = sizzle('.comment-dialog-modalbg', getBodyEl())[0];
 
     utils.addEventListener('click', currentElement, function () {
         events.trigger('click');
@@ -103,8 +95,6 @@ exports.open = function () {
  * Removes the modal bg from the DOM.
  */
 exports.close = function () {
-    "use strict";
-
     if (!currentElement) {
         return;
     }
@@ -119,8 +109,6 @@ exports.close = function () {
  * Handles events of this module.
  */
 exports.on = function () {
-    "use strict";
-
     events.on.apply(events, arguments);
 };
 
@@ -128,7 +116,5 @@ exports.on = function () {
  * Removes event handlers.
  */
 exports.off = function () {
-    "use strict";
-
     events.off.apply(events, arguments);
 };

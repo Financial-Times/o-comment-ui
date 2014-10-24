@@ -1,3 +1,5 @@
+"use strict";
+
 var commentUtilities = require('comment-utilities'),
     WidgetUi = require('./WidgetUi.js');
 
@@ -21,8 +23,6 @@ var commentUtilities = require('comment-utilities'),
  * @param {Object} config Configuration object, as described in the class description.
  */
 function Widget (config) {
-    "use strict";
-
     var widgetEl, event, self;
 
     self = this;
@@ -145,8 +145,6 @@ function Widget (config) {
 Widget.prototype.loadCalled = false;
 
 Widget.prototype.load = function () {
-    "use strict";
-
     var self = this;
 
     if (!this.loadCalled) {
@@ -202,8 +200,6 @@ Widget.prototype.load = function () {
 };
 
 Widget.__extend = function(child) {
-    "use strict";
-
     if (typeof Object.create === 'function') {
         child.prototype = Object.create( Widget.prototype );
         child.prototype = Object.create(Widget.prototype);

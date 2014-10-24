@@ -1,0 +1,9 @@
+{
+    "description": "Basic UI elements of the Livefyre based commenting widget.",
+    "origamiType": "module",
+    "origamiVersion": 1,
+    "support": "hyperion@ft.com",
+    "supportStatus": "experimental",
+    "ci": {},
+    "browserFeatures": {}
+}

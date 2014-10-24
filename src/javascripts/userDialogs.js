@@ -1,3 +1,5 @@
+"use strict";
+
 var Dialog = require('./dialog/Dialog.js'),
     Form = require('./form_builder/Form.js'),
     commentUtilities = require('comment-utilities');
@@ -11,8 +13,6 @@ var showSetPseudonymDialogShown = false;
  *                                - close:  Optional. Function that is called when the dialog is closed.
  */
 exports.showSetPseudonymDialog = function (callbacks) {
-    "use strict";
-
     if (showSetPseudonymDialogShown === false) {
         if (typeof callbacks !== 'object' || !callbacks) {
             throw new Error("Callbacks not provided.");
@@ -111,8 +111,6 @@ var showSettingsDialogShown = false;
  *                                - close:  Optional. Function that is called when the dialog is closed.
  */
 exports.showSettingsDialog = function (currentData, callbacks) {
-    "use strict";
-
     if (showSettingsDialogShown === false) {
         if (typeof callbacks !== 'object' || !callbacks) {
             throw new Error("Callbacks not provided.");
@@ -224,8 +222,6 @@ var changePseudonymDialogShown = false;
  *                                - close:  Optional. Function that is called when the dialog is closed.
  */
 exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
-    "use strict";
-
     if (changePseudonymDialogShown === false) {
         if (typeof callbacks !== 'object' || !callbacks) {
             throw new Error("Callbacks not provided.");
@@ -324,8 +320,6 @@ var showEmailAlertDialogShown = false;
  *                                - close:  Optional. Function that is called when the dialog is closed.
  */
 exports.showEmailAlertDialog = function (callbacks) {
-    "use strict";
-
     if (showEmailAlertDialogShown === false) {
         if (typeof callbacks !== 'object' || !callbacks) {
             throw new Error("Callbacks not provided.");
@@ -431,8 +425,6 @@ var showInactivityMessageDialogShown = false;
  *                                - close:  Optional. Function that is called when the dialog is closed.
  */
 exports.showInactivityMessage = function (callbacks) {
-    "use strict";
-
     if (showInactivityMessageDialogShown === false) {
         if (typeof callbacks !== 'object' || !callbacks) {
             throw new Error("Callbacks not provided.");

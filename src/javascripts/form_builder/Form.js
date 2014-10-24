@@ -1,3 +1,5 @@
+"use strict";
+
 var hogan = require('hogan');
 var commentUtilities = require('comment-utilities');
 var sizzle = require('sizzle');
@@ -19,9 +21,6 @@ var clearTemplate = templates.clearLine;
  * @param {Object} config Configuration object which specifies the elements of the form (form fragments, buttons).
  */
 function Form (config) {
-    "use strict";
-
-
     if (!config || typeof config !== 'object') {
         throw "Configuration missing or invalid.";
     }
@@ -184,7 +183,7 @@ function Form (config) {
      * @param  {String} errMessages The error message to show.
      */
     this.showError = function (errMessages) {
-        var errMessageContainer = sizzle('.comment-errorMessage', formObject);
+        var errMessageContainer = sizzle('.comment-error-message', formObject);
 
         if (errMessageContainer.length) {
             errMessageContainer[0].innerHTML = errMessages;
@@ -195,7 +194,7 @@ function Form (config) {
      * Clears all the errors.
      */
     this.clearError = function () {
-        var errMessageContainer = sizzle('.comment-errorMessage', formObject);
+        var errMessageContainer = sizzle('.comment-error-message', formObject);
 
         if (errMessageContainer.length) {
             errMessageContainer[0].innerHTML = "";

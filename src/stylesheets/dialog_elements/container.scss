@@ -1,5 +1,5 @@
 .comment-dialog {
-    background: rgba(211,210,203,0.2);
+    background: rgba(211, 210, 203, 0.2);
     font-family: oFontsGetFontFamilyWithFallbacks(BentonSans);
     color: oColorsGetPaletteColor(grey-tint4);
     font-size: 13px;
@@ -29,7 +29,7 @@
 
     .comment-dialog-title {
         font-size: 14px;
-        color: #666;
+        color: #666666;
         font-weight: bold;
         text-transform: uppercase;
         margin: -20px 0;
@@ -48,12 +48,12 @@
         padding: 0 0 10px;
     }
 
-    .comment-errorMessage {
+    .comment-error-message {
         color: oColorsGetPaletteColor(red);
         margin-bottom: 10px;
     }
 
-    .comment-closeButton {
+    .comment-close-button {
         display: block;
         position: absolute;
         top: 0;
@@ -65,8 +65,8 @@
         margin: 18px 18px 0 0;
     }
 
-    .comment-buttonContainer {
-        padding: 26px 0 10px 0;
+    .comment-button-container {
+        padding: 26px 0 10px;
         float: right;
 
         label {

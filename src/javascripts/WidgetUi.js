@@ -1,3 +1,5 @@
+"use strict";
+
 var i18n = require('./i18n.js'),
     templates = require('./templates.js');
 
@@ -7,8 +9,6 @@ var i18n = require('./i18n.js'),
  * @param {DOMObject} widgetContainer DOM Object of the container of the widget.
  */
 function WidgetUi (widgetContainer) {
-    "use strict";
-
     /**
      * Helper function to scrolls to a position on the page or within an HTML element.
      * @param  {DOMObject}   withinElement Within which element to scroll (e.g. the whole page or only within a div)
@@ -91,8 +91,6 @@ function WidgetUi (widgetContainer) {
     this.addSettingsLink = undefined;
 }
 WidgetUi.__extend = function(child) {
-    "use strict";
-
     if (typeof Object.create === 'function') {
         child.prototype = Object.create(WidgetUi.prototype);
         child.prototype = Object.create(WidgetUi.prototype);

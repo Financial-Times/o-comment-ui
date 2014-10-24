@@ -1,11 +1,11 @@
+"use strict";
+
 /**
  * Converts a plain HTML string into a DOM object.
  * @param  {String} htmlString Plain HTML in a string format.
  * @return {DOM object}
  */
 exports.toDOM = function (htmlString) {
-    "use strict";
-
     var d = document,
         i,
         a = d.createElement("div"),
@@ -28,8 +28,6 @@ exports.toDOM = function (htmlString) {
  * @param {Function}   handler Event handler function.
  */
 exports.addEventListener = function (event, elem, handler) {
-    "use strict";
-
     if (elem instanceof Array) {
         for (var i = 0; i < elem.length; i++) {
             exports.addEventListener(event, elem[i], handler);
@@ -56,8 +54,6 @@ exports.addEventListener = function (event, elem, handler) {
  * @param {Function}   handler Event handler function that should be removed.
  */
 exports.removeEventListener = function (event, elem, handler) {
-    "use strict";
-
     if (elem instanceof Array) {
         for (var i = 0; i < elem.length; i++) {
             exports.removeEventListener(event, elem[i], handler);
@@ -79,8 +75,6 @@ exports.removeEventListener = function (event, elem, handler) {
  * @return {Object}            Object that has a getPropertyValue function which gets a property name as parameter.
  */
 exports.getComputedStyle = function (el) {
-    "use strict";
-
     if (!window.getComputedStyle) {
         return {
             getPropertyValue: function (prop) {
@@ -107,8 +101,6 @@ exports.getComputedStyle = function (el) {
  * @return {Object} {width: XX, height: YY}
  */
 exports.windowSize = function () {
-    "use strict";
-
     var w = window,
         d = document,
         e = d.documentElement,

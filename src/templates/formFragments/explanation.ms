@@ -8,7 +8,7 @@
     </div>
     <div class="comment-explanation-image-wrapper">
         <div class="comment-explanation-image-container">
-            <div class="comment-explanation-image-innerContainer">
+            <div class="comment-explanation-image-inner-container">
                 <span class="comment-explanation-image comment-explanation-{{type}}">&nbsp;</span>
             </div>
         </div>

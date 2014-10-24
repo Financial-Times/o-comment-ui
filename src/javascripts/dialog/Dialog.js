@@ -1,3 +1,5 @@
+"use strict";
+
 var hogan = require('hogan');
 var commentUtilities = require('comment-utilities');
 var sizzle = require('sizzle');
@@ -15,8 +17,6 @@ var titleTemplate = hogan.compile(requireText('../../templates/dialog/title.ms')
  * @param {Object}      userOptions User defined options. Possible fields: modal (default is true), title (title of the dialog).
  */
 function Dialog (htmlOrForm, userOptions) {
-    "use strict";
-
     var myself = this;
 
     /**
