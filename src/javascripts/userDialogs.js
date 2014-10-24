@@ -2,7 +2,7 @@
 
 var Dialog = require('./dialog/Dialog.js'),
     Form = require('./form_builder/Form.js'),
-    commentUtilities = require('comment-utilities');
+    oCommentUtilities = require('o-comment-utilities');
 
 
 var showSetPseudonymDialogShown = false;
@@ -90,7 +90,7 @@ exports.showSetPseudonymDialog = function (callbacks) {
             }
 
             if (!inProgress) {
-                commentUtilities.logger.log('pseudonym refused');
+                oCommentUtilities.logger.log('pseudonym refused');
             }
         };
 

@@ -1,6 +1,6 @@
 "use strict";
 
-var commentUtilities = require('comment-utilities');
+var oCommentUtilities = require('o-comment-utilities');
 
 /**
  * Exports of submodules
@@ -28,7 +28,7 @@ exports.dialog = {
  * @type {function}
  */
 exports.enableLogging = function () {
-    commentUtilities.logger.enable.apply(this, arguments);
+    oCommentUtilities.logger.enable.apply(this, arguments);
 };
 
 /**
@@ -36,7 +36,7 @@ exports.enableLogging = function () {
  * @type {function}
  */
 exports.disableLogging = function () {
-    commentUtilities.logger.disable.apply(this, arguments);
+    oCommentUtilities.logger.disable.apply(this, arguments);
 };
 
 /**
@@ -44,5 +44,5 @@ exports.disableLogging = function () {
  * @type {number|string}
  */
 exports.setLoggingLevel = function () {
-    commentUtilities.logger.setLevel.apply(this, arguments);
+    oCommentUtilities.logger.setLevel.apply(this, arguments);
 };

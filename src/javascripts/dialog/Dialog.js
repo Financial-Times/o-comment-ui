@@ -1,7 +1,7 @@
 "use strict";
 
 var hogan = require('hogan');
-var commentUtilities = require('comment-utilities');
+var oCommentUtilities = require('o-comment-utilities');
 var sizzle = require('sizzle');
 
 var utils = require('../utils.js');
@@ -68,14 +68,14 @@ function Dialog (htmlOrForm, userOptions) {
      * Event object on which events can be triggered and handlers can be attached.
      * @type {Object}
      */
-    var events = new commentUtilities.Events();
+    var events = new oCommentUtilities.Events();
 
 
     /**
      * Initializes the options.
      */
     function init() {
-        commentUtilities.merge(options, defaultOptions, (userOptions && typeof userOptions === 'object' ? userOptions : {}));
+        oCommentUtilities.merge(options, defaultOptions, (userOptions && typeof userOptions === 'object' ? userOptions : {}));
     }
     init.call(this);
 

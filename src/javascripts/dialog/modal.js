@@ -1,7 +1,7 @@
 "use strict";
 
 var hogan = require('hogan');
-var commentUtilities = require('comment-utilities');
+var oCommentUtilities = require('o-comment-utilities');
 var sizzle = require('sizzle');
 var utils = require('../utils.js');
 
@@ -36,7 +36,7 @@ var getBodyEl = function () {
  * Event object on which events can be triggered and handlers can be attached.
  * @type {Object}
  */
-var events = new commentUtilities.Events();
+var events = new oCommentUtilities.Events();
 
 /**
  * Current HTML element created.

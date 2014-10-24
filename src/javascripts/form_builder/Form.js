@@ -1,7 +1,7 @@
 "use strict";
 
 var hogan = require('hogan');
-var commentUtilities = require('comment-utilities');
+var oCommentUtilities = require('o-comment-utilities');
 var sizzle = require('sizzle');
 
 var templates = require('../templates.js');
@@ -28,7 +28,7 @@ function Form (config) {
     var myself = this;
     var formObject;
 
-    var events = new commentUtilities.Events();
+    var events = new oCommentUtilities.Events();
 
     function init () {
         var item;

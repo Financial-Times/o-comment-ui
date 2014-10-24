@@ -1,6 +1,6 @@
 "use strict";
 
-var commentUtilities = require('comment-utilities'),
+var oCommentUtilities = require('o-comment-utilities'),
     WidgetUi = require('./WidgetUi.js');
 
 /**
@@ -59,7 +59,7 @@ function Widget (config) {
     }
 
     widgetEl = document.getElementById(config.elId);
-    event = new commentUtilities.Events();
+    event = new oCommentUtilities.Events();
     
 
     
@@ -159,7 +159,7 @@ Widget.prototype.load = function () {
             }, this.config.timeout * 1000);
         }
         
-        commentUtilities.functionSync.parallel({
+        oCommentUtilities.functionSync.parallel({
             loadResources: this.loadResources,
             init: this.init
         }, function (err, data) {
