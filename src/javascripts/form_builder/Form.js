@@ -58,7 +58,7 @@ function Form (config) {
 
         if (config.buttons && config.buttons.length) {
             formObject.appendChild(utils.toDOM(buttonContainerTemplate.render()));
-            var buttonContainer = sizzle('.comment-buttonContainer', formObject)[0];
+            var buttonContainer = sizzle('.comment-button-container', formObject)[0];
 
             for (i = 0; i < config.buttons.length; i++) {
                 button = config.buttons[i];
