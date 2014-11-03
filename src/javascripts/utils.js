@@ -74,7 +74,7 @@ exports.removeEventListener = function (event, elem, handler) {
  * @param  {DOMObject} el     DOM element of which style will be computed.
  * @return {Object}            Object that has a getPropertyValue function which gets a property name as parameter.
  */
-exports.getComputedStyle = function (el) {
+exports.getComputedStyle = function (el, pseudoElement) {
     if (!window.getComputedStyle) {
         return {
             getPropertyValue: function (prop) {
@@ -92,7 +92,8 @@ exports.getComputedStyle = function (el) {
             }
         };
     } else {
-        return window.getComputedStyle(el);
+        pseudoElement = (typeof pseudoElement === 'boolean' ? pseudoElement : false);
+        return window.getComputedStyle(el, pseudoElement);
     }
 };
 
