@@ -58,27 +58,6 @@ var emailSettingsForm = function (config) {
     return emailSettingsTemplate.render({
         selects: [
             {
-                name: 'emailcomments',
-                label: 'Someone comments in a conversation I\'m following:',
-                options: [
-                    {
-                        val: 'never',
-                        label: 'Never',
-                        selected: config.emailcomments === 'never' ? true : false
-                    },
-                    {
-                        val: 'immediately',
-                        label: 'Immediately',
-                        selected: config.emailcomments === 'immediately' ? true : false
-                    },
-                    {
-                        val: 'hourly',
-                        label: 'Hourly',
-                        selected: config.emailcomments === 'hourly' ? true : false
-                    }
-                ]
-            },
-            {
                 name: 'emailreplies',
                 label: 'Someone replies to my comments:',
                 options: [
@@ -117,6 +96,27 @@ var emailSettingsForm = function (config) {
                         val: 'hourly',
                         label: 'Hourly',
                         selected: config.emaillikes === 'hourly' ? true : false
+                    }
+                ]
+            },
+            {
+                name: 'emailcomments',
+                label: 'Someone comments in a conversation I\'m following:',
+                options: [
+                    {
+                        val: 'never',
+                        label: 'Never',
+                        selected: config.emailcomments === 'never' ? true : false
+                    },
+                    {
+                        val: 'immediately',
+                        label: 'Immediately',
+                        selected: config.emailcomments === 'immediately' ? true : false
+                    },
+                    {
+                        val: 'hourly',
+                        label: 'Hourly',
+                        selected: config.emailcomments === 'hourly' ? true : false
                     }
                 ]
             }
