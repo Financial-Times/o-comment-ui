@@ -132,7 +132,7 @@ function Dialog (htmlOrForm, userOptions) {
      * adjusts the modal background.
      */
     function enableResizeMonitoring() {
-        utils.addEventListener('resize', window, repositionToCenter);
+        window.addEventListener('resize', repositionToCenter);
     }
 
     /**
@@ -140,7 +140,7 @@ function Dialog (htmlOrForm, userOptions) {
      * @return {[type]} [description]
      */
     function disableResizeMonitoring() {
-        utils.removeEventListener('resize', window, repositionToCenter);
+        window.removeEventListener('resize', repositionToCenter);
     }
 
 
@@ -191,7 +191,7 @@ function Dialog (htmlOrForm, userOptions) {
         if (htmlOrForm instanceof Form) {
             // form
 
-            htmlOrForm.addEventListener('oCommentUi.form.cancel', function() {
+            htmlOrForm.getDomElement().addEventListener('oCommentUi.form.cancel', function() {
                 myself.close(false);
             });
 
@@ -211,7 +211,7 @@ function Dialog (htmlOrForm, userOptions) {
 
         var closeButtons = sizzle('.comment-close-button', container);
         for (var i = 0; i < closeButtons.length; i++) {
-            utils.addEventListener('click', closeButtons[i], closeIt);
+            closeButtons[i].addEventListener('click', closeIt);
         }
 
         document.body.addEventListener('keyup', onKeyUp);
