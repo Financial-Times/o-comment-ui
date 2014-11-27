@@ -13,25 +13,6 @@ var modalBgTemplate = hogan.compile(requireText('../../templates/dialog/modalBg.
  */
 var html = modalBgTemplate.render();
 
-
-/**
- * The body DOM object.
- * @type {DOMObject}
- */
-var bodyEl;
-
-/**
- * Returns the body DOM element.
- * @return {DOMObject}
- */
-var getBodyEl = function () {
-    if (!bodyEl) {
-        bodyEl = document.body || document.getElementsByTagName('body')[0];
-    }
-
-    return bodyEl;
-};
-
 /**
  * Event object on which events can be triggered and handlers can be attached.
  * @type {Object}
@@ -59,14 +40,14 @@ var reposition = function () {
  * recalculates viewport, and adjusts the modal background.
  */
 function enableResizeMonitoring () {
-    utils.addEventListener('resize', window, reposition);
+    window.addEventListener('resize', reposition);
 }
 
 /**
  * Disables page resize monitoring.
  */
 function disableResizeMonitoring () {
-    utils.removeEventListener('resize', window, reposition);
+    window.removeEventListener('resize', reposition);
 }
 
 
@@ -80,10 +61,10 @@ exports.open = function () {
         return;
     }
 
-    getBodyEl().appendChild(utils.toDOM(html));
-    currentElement = sizzle('.comment-dialog-modalbg', getBodyEl())[0];
+    document.body.appendChild(utils.toDOM(html));
+    currentElement = sizzle('.comment-dialog-modalbg', document.body)[0];
 
-    utils.addEventListener('click', currentElement, function () {
+    currentElement.addEventListener('click', function () {
         events.trigger('click');
     });
 
