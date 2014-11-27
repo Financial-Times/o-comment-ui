@@ -191,7 +191,7 @@ function Dialog (htmlOrForm, userOptions) {
         if (htmlOrForm instanceof Form) {
             // form
 
-            htmlOrForm.on('cancel', function() {
+            htmlOrForm.addEventListener('oCommentUi.form.cancel', function() {
                 myself.close(false);
             });
 
@@ -214,7 +214,7 @@ function Dialog (htmlOrForm, userOptions) {
             utils.addEventListener('click', closeButtons[i], closeIt);
         }
 
-        utils.addEventListener('keyup', document, onKeyUp);
+        document.body.addEventListener('keyup', onKeyUp);
 
         repositionToCenter();
         enableResizeMonitoring();
