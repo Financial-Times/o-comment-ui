@@ -23,7 +23,7 @@ var oCommentUtilities = require('o-comment-utilities'),
  * @param {Object} config Configuration object, as described in the class description.
  */
 function Widget (config) {
-	var widgetEl, event, self;
+	var widgetEl, self;
 
 	self = this;
 
@@ -59,7 +59,6 @@ function Widget (config) {
 	}
 
 	widgetEl = document.getElementById(config.elId);
-	event = new oCommentUtilities.Events();
 
 
 
@@ -117,6 +116,9 @@ function Widget (config) {
 	 * @param {object} data Optional. Data to be passed to the handler.
 	 */
 	this.trigger = function (eventName, data) {
+		data.widget = this;
+		data.id = config.elId;
+
 		widgetEl.dispatchEvent(new CustomEvent(self.eventNamespace + '.' + eventName, {
 			detail: data,
 			bubbles: true
@@ -162,7 +164,7 @@ Widget.prototype.load = function () {
 		var timeout;
 		if (this.config.timeout > 0) {
 			timeout = setTimeout(function () {
-				self.trigger('timeout.widget');
+				self.trigger('widget.timeout');
 
 				self.onTimeout();
 			}, this.config.timeout * 1000);
@@ -189,7 +191,7 @@ Widget.prototype.load = function () {
 			}
 
 			if (data.init) {
-				self.trigger('loaded.init', data.init);
+				self.trigger('data.init', data.init);
 
 				self.render(data.init, function (err) {
 					if (err) {
