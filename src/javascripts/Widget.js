@@ -116,6 +116,10 @@ function Widget (config) {
 	 * @param {object} data Optional. Data to be passed to the handler.
 	 */
 	this.trigger = function (eventName, data) {
+		if (!data || data !== 'object') {
+			data = {};
+		}
+
 		data.widget = this;
 		data.id = config.elId;
 
