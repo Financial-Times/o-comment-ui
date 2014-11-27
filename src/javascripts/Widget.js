@@ -207,6 +207,7 @@ Widget.prototype.load = function () {
 		});
 	}
 };
+Widget.prototype.eventNamespace = 'oCommentUi';
 
 Widget.__extend = function(child, eventNamespace) {
 	if (typeof Object.create === 'function') {
