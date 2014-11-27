@@ -1,7 +1,7 @@
 "use strict";
 
 var oCommentUtilities = require('o-comment-utilities'),
-    WidgetUi = require('./WidgetUi.js');
+	WidgetUi = require('./WidgetUi.js');
 
 /**
  * Widget is responsible to coordinate getting initialization data, loading resources and initializing the Ui.
@@ -10,205 +10,217 @@ var oCommentUtilities = require('o-comment-utilities'),
  *
  * #### Configuration
  * ###### Mandatory fields:
- * 
+ *
  * - elId: ID of the HTML element in which the widget should be loaded
  * - articleId: ID of the article, any string
  * - url: canonical URL of the page
  * - title: Title of the page
- * 
+ *
  * ###### Optional fields:
- * 
+ *
  *  - timeout: Period of time after a timeout is triggered. Default is 15000 ms (15 sec). Its value should be given in milliseconds (ms).
- * 
+ *
  * @param {Object} config Configuration object, as described in the class description.
  */
 function Widget (config) {
-    var widgetEl, event, self;
+	var widgetEl, event, self;
 
-    self = this;
+	self = this;
 
-    /**
-     * Validation of the initial configuration object.
-     */
-    if (!config) {
-        throw "Config not specified.";
-    }
+	/**
+	 * Validation of the initial configuration object.
+	 */
+	if (!config) {
+		throw "Config not specified.";
+	}
 
-    if (!config.elId) {
-        if (!config.elid) {
-            throw "Container element is not specified.";
-        } else {
-            config.elId = config.elid;
-        }
-    }
+	if (!config.elId) {
+		if (!config.elid) {
+			throw "Container element is not specified.";
+		} else {
+			config.elId = config.elid;
+		}
+	}
 
-    if (!config.articleId) {
-        if (!config.articleid) {
-            throw "Article ID is not specified.";
-        } else {
-            config.articleId = config.articleid;
-        }
-    }
+	if (!config.articleId) {
+		if (!config.articleid) {
+			throw "Article ID is not specified.";
+		} else {
+			config.articleId = config.articleid;
+		}
+	}
 
-    if (!config.url) {
-        throw "URL is not speficied.";
-    }
+	if (!config.url) {
+		throw "URL is not speficied.";
+	}
 
-    if (!config.title) {
-        throw "Title is not specified.";
-    }
+	if (!config.title) {
+		throw "Title is not specified.";
+	}
 
-    widgetEl = document.getElementById(config.elId);
-    event = new oCommentUtilities.Events();
-    
-
-    
-    config.timeout = config.timeout || 15;
+	widgetEl = document.getElementById(config.elId);
+	event = new oCommentUtilities.Events();
 
 
-    if (!widgetEl) {
-        throw "Container does not exist.";
-    }
 
-    if (config.layout) {
-        widgetEl.className += ' comment-layout-' + config.layout;
-    }
+	config.timeout = config.timeout || 15;
 
 
-    this.config = config;
+	if (!widgetEl) {
+		throw "Container does not exist.";
+	}
+
+	if (config.layout) {
+		widgetEl.className += ' comment-layout-' + config.layout;
+	}
 
 
-    this.ui = new WidgetUi(widgetEl);
-
-    /**
-     * Returns the widget container DOM element
-     * @return {native DOM object}
-     */
-    this.getWidgetEl = function () {
-        return widgetEl;
-    };
-
-    /**
-     * Attach new event handlers.
-     * @type {function}
-     * @param {string} eventName Name of the event to which to attach the handler.
-     * @param {function} handler Handler Function which will be called when the event is triggered.
-     */
-    this.on = event.on;
-
-    /**
-     * Removes the event handler(s).
-     * @type {function}
-     * @param {string} eventName Optional. Specifies the event from which all handlers should be removed.
-     *  If omitted, all event handlers are removed from all events.
-     * @param {function} handler Optional. The event name should be specified as well if this is specified.
-     *  Specifies the handler which should be removed from the event specified.
-     */
-    this.off = event.off;
-
-    /**
-     * Triggers an event.
-     * @type {function}
-     * @param {string} eventName Name of the event which will be triggered.
-     * @param {object} data Optional. Data to be passed to the handler.
-     */
-    this.trigger = event.trigger;
-
-    /**
-     * ! 'this' could not have the value of the instance.
-     * To be sure you use the correct instance value, you should
-     * save it in the constructor in a variable (var self = this)
-     * and use that variable.
-     */
-    this.loadResources = undefined;
-
-    /**
-     * ! 'this' could not have the value of the instance.
-     * To be sure you use the correct instance value, you should
-     * save it in the constructor in a variable (var self = this)
-     * and use that variable.
-     */
-    this.init = undefined;
+	this.config = config;
 
 
-    this.onTimeout = function () {
-        self.ui.clearContainer();
-        self.ui.addNotAvailableMessage();
-    };
+	this.ui = new WidgetUi(widgetEl);
 
-    this.onError = function () {
-        self.ui.clearContainer();
-        self.ui.addNotAvailableMessage();
-    };
+	/**
+	 * Returns the widget container DOM element
+	 * @return {native DOM object}
+	 */
+	this.getWidgetEl = function () {
+		return widgetEl;
+	};
+
+	/**
+	 * Attach new event handlers.
+	 * @type {function}
+	 * @param {string} eventName Required. Name of the event to which to attach the handler.
+	 * @param {function} handler Required. Handler Function which will be called when the event is triggered.
+	 */
+	this.on = function (eventName, eventHandler) {
+		widgetEl.addEventListener(self.eventNamespace + '.' + eventName, eventHandler);
+	};
+
+	/**
+	 * Removes the event handler(s).
+	 * @type {function}
+	 * @param {string} eventName Required. Specifies the event from which all handlers should be removed.
+	 *  If omitted, all event handlers are removed from all events.
+	 * @param {function} handler Required. The event name should be specified as well if this is specified.
+	 *  Specifies the handler which should be removed from the event specified.
+	 */
+	this.off = function (eventName, eventHandler) {
+		widgetEl.removeEventListener(self.eventNamespace + '.' + eventName, eventHandler);
+	};
+
+	/**
+	 * Triggers an event.
+	 * @type {function}
+	 * @param {string} eventName Required. Name of the event which will be triggered.
+	 * @param {object} data Optional. Data to be passed to the handler.
+	 */
+	this.trigger = function (eventName, data) {
+		widgetEl.dispatchEvent(new CustomEvent(self.eventNamespace + '.' + eventName, {
+			detail: data,
+			bubbles: true
+		}));
+	};
+
+	/**
+	 * ! 'this' could not have the value of the instance.
+	 * To be sure you use the correct instance value, you should
+	 * save it in the constructor in a variable (var self = this)
+	 * and use that variable.
+	 */
+	this.loadResources = undefined;
+
+	/**
+	 * ! 'this' could not have the value of the instance.
+	 * To be sure you use the correct instance value, you should
+	 * save it in the constructor in a variable (var self = this)
+	 * and use that variable.
+	 */
+	this.init = undefined;
+
+
+	this.onTimeout = function () {
+		self.ui.clearContainer();
+		self.ui.addNotAvailableMessage();
+	};
+
+	this.onError = function () {
+		self.ui.clearContainer();
+		self.ui.addNotAvailableMessage();
+	};
 }
 
 Widget.prototype.loadCalled = false;
 
 Widget.prototype.load = function () {
-    var self = this;
+	var self = this;
 
-    if (!this.loadCalled) {
-        this.loadCalled = true;
+	if (!this.loadCalled) {
+		this.loadCalled = true;
 
-        var timeout;
-        if (this.config.timeout > 0) {
-            timeout = setTimeout(function () {
-                self.trigger('timeout.widget');
+		var timeout;
+		if (this.config.timeout > 0) {
+			timeout = setTimeout(function () {
+				self.trigger('timeout.widget');
 
-                self.onTimeout();
-            }, this.config.timeout * 1000);
-        }
-        
-        oCommentUtilities.functionSync.parallel({
-            loadResources: this.loadResources,
-            init: this.init
-        }, function (err, data) {
-            if (err) {
-                if (err.key === 'loadResources') {
-                    self.trigger('error.resources', err.error);
-                }
+				self.onTimeout();
+			}, this.config.timeout * 1000);
+		}
 
-                if (err.key === 'init') {
-                    self.trigger('error.init', err.error);
-                }
+		oCommentUtilities.functionSync.parallel({
+			loadResources: this.loadResources,
+			init: this.init
+		}, function (err, data) {
+			if (err) {
+				if (err.key === 'loadResources') {
+					self.trigger('error.resources', err.error);
+				}
 
-                self.trigger('error.widget', err.error);
-                self.onError(err);
-                
-                clearTimeout(timeout);
-                return;
-            }
+				if (err.key === 'init') {
+					self.trigger('error.init', err.error);
+				}
 
-            if (data.init) {
-                self.trigger('loaded.init', data.init);
+				self.trigger('error.widget', err.error);
+				self.onError(err);
 
-                self.render(data.init, function (err) {
-                    if (err) {
-                        self.trigger('error.widget', err);
-                        self.onError(err);
+				clearTimeout(timeout);
+				return;
+			}
 
-                        clearTimeout(timeout);
+			if (data.init) {
+				self.trigger('loaded.init', data.init);
 
-                        return;
-                    }
+				self.render(data.init, function (err) {
+					if (err) {
+						self.trigger('error.widget', err);
+						self.onError(err);
 
-                    clearTimeout(timeout);
-                });
-            }
-        });
-    }
+						clearTimeout(timeout);
+
+						return;
+					}
+
+					clearTimeout(timeout);
+				});
+			}
+		});
+	}
 };
 
-Widget.__extend = function(child) {
-    if (typeof Object.create === 'function') {
-        child.prototype = Object.create( Widget.prototype );
-        child.prototype = Object.create(Widget.prototype);
-    } else {
-        var Tmp = function () {};
-        Tmp.prototype = Widget.prototype;
-        child.prototype = new Tmp();
-        child.prototype.constructor = child;
-    }
+Widget.__extend = function(child, eventNamespace) {
+	if (typeof Object.create === 'function') {
+		child.prototype = Object.create(Widget.prototype);
+	} else {
+		var Tmp = function () {};
+		Tmp.prototype = Widget.prototype;
+		child.prototype = new Tmp();
+		child.prototype.constructor = child;
+	}
+
+	if (eventNamespace) {
+		child.prototype.eventNamespace = eventNamespace;
+	}
 };
 
 /**

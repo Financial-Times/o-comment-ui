@@ -1,8 +1,8 @@
 "use strict";
 
 var Dialog = require('./dialog/Dialog.js'),
-    Form = require('./form_builder/Form.js'),
-    oCommentUtilities = require('o-comment-utilities');
+	Form = require('./form_builder/Form.js'),
+	oCommentUtilities = require('o-comment-utilities');
 
 
 var showSetPseudonymDialogShown = false;
@@ -13,92 +13,92 @@ var showSetPseudonymDialogShown = false;
  *                                - close:  Optional. Function that is called when the dialog is closed.
  */
 exports.showSetPseudonymDialog = function (callbacks) {
-    if (showSetPseudonymDialogShown === false) {
-        if (typeof callbacks !== 'object' || !callbacks) {
-            throw new Error("Callbacks not provided.");
-        }
+	if (showSetPseudonymDialogShown === false) {
+		if (typeof callbacks !== 'object' || !callbacks) {
+			throw new Error("Callbacks not provided.");
+		}
 
-        if (typeof callbacks.submit !== 'function') {
-            throw new Error("Submit callback not provided.");
-        }
-
-
-        showSetPseudonymDialogShown = true;
-        var inProgress = false;
-
-        var form = new Form({
-            method: 'GET',
-            action: "",
-            name: 'setpseudonym',
-            items: [
-                {
-                    type: 'initialPseudonym'
-                }
-            ],
-            buttons: [
-                {
-                    type: 'submitButton',
-                    label: 'Save'
-                },
-                {
-                    type: 'cancelButton'
-                }
-            ]
-        });
-        var dialog = new Dialog(form, {
-            title: "Commenting Settings"
-        });
-
-        form.on('submit', function (event) {
-            if (!inProgress) {
-                inProgress = true;
-                dialog.disableButtons();
-
-                var formData = form.serialize();
-
-                callbacks.submit(formData, function (err) {
-                    if (err) {
-                        form.showError(err);
-
-                        dialog.enableButtons();
-                        inProgress = false;
-
-                        return;
-                    }
-
-                    showSetPseudonymDialogShown = false;
-
-                    dialog.close(false);
-                });
-            }
-
-            if (event.preventDefault) {
-                event.preventDefault();
-            } else {
-                event.returnValue = false;
-            }
-
-            return false;
-        });
+		if (typeof callbacks.submit !== 'function') {
+			throw new Error("Submit callback not provided.");
+		}
 
 
-        var onCloseInternalHandler = function () {
-            showSetPseudonymDialogShown = false;
-            
-            if (typeof callbacks.close === 'function') {
-                callbacks.close();
-            }
+		showSetPseudonymDialogShown = true;
+		var inProgress = false;
 
-            if (!inProgress) {
-                oCommentUtilities.logger.log('pseudonym refused');
-            }
-        };
+		var form = new Form({
+			method: 'GET',
+			action: "",
+			name: 'setpseudonym',
+			items: [
+				{
+					type: 'initialPseudonym'
+				}
+			],
+			buttons: [
+				{
+					type: 'submitButton',
+					label: 'Save'
+				},
+				{
+					type: 'cancelButton'
+				}
+			]
+		});
+		var dialog = new Dialog(form, {
+			title: "Commenting Settings"
+		});
 
-        form.on('cancel', onCloseInternalHandler);
-        dialog.on('close', onCloseInternalHandler);
+		form.getDomElement().addEventListener('submit', function (evt) {
+			if (!inProgress) {
+				inProgress = true;
+				dialog.disableButtons();
 
-        dialog.open();
-    }
+				var formData = form.serialize();
+
+				callbacks.submit(formData, function (err) {
+					if (err) {
+						form.showError(err);
+
+						dialog.enableButtons();
+						inProgress = false;
+
+						return;
+					}
+
+					showSetPseudonymDialogShown = false;
+
+					dialog.close(false);
+				});
+			}
+
+			if (evt.preventDefault) {
+				evt.preventDefault();
+			} else {
+				evt.returnValue = false;
+			}
+
+			return false;
+		});
+
+
+		var onCloseInternalHandler = function () {
+			showSetPseudonymDialogShown = false;
+
+			if (typeof callbacks.close === 'function') {
+				callbacks.close();
+			}
+
+			if (!inProgress) {
+				oCommentUtilities.logger.log('pseudonym refused');
+			}
+		};
+
+		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
+		dialog.on('close', onCloseInternalHandler);
+
+		dialog.open();
+	}
 };
 
 
@@ -111,103 +111,103 @@ var showSettingsDialogShown = false;
  *                                - close:  Optional. Function that is called when the dialog is closed.
  */
 exports.showSettingsDialog = function (currentData, callbacks) {
-    if (showSettingsDialogShown === false) {
-        if (typeof callbacks !== 'object' || !callbacks) {
-            throw new Error("Callbacks not provided.");
-        }
+	if (showSettingsDialogShown === false) {
+		if (typeof callbacks !== 'object' || !callbacks) {
+			throw new Error("Callbacks not provided.");
+		}
 
-        if (typeof callbacks.submit !== 'function') {
-            throw new Error("Submit callback not provided.");
-        }
+		if (typeof callbacks.submit !== 'function') {
+			throw new Error("Submit callback not provided.");
+		}
 
-        if (!currentData) {
-            return;
-        }
+		if (!currentData) {
+			return;
+		}
 
-        showSettingsDialogShown = true;
-        var inProgress = false;
+		showSettingsDialogShown = true;
+		var inProgress = false;
 
 
-        var currentSettings = (currentData && typeof currentData === 'object' && currentData.settings) ? currentData.settings : {};
-        var currentPseudonym = (currentData && typeof currentData === 'object' && currentData.displayName) ? currentData.displayName : "";
+		var currentSettings = (currentData && typeof currentData === 'object' && currentData.settings) ? currentData.settings : {};
+		var currentPseudonym = (currentData && typeof currentData === 'object' && currentData.displayName) ? currentData.displayName : "";
 
-        var form = new Form({
-            method: 'GET',
-            action: "",
-            name: 'changepseudonym',
-            items: [
-                {
-                    type: 'changePseudonym',
-                    currentPseudonym: currentPseudonym
-                },
-                {
-                    type: 'emailSettings',
-                    currentSettings: currentSettings
-                }
-            ],
-            buttons: [
-                {
-                    type: 'submitButton',
-                    label: 'Save'
-                },
-                {
-                    type: 'cancelButton'
-                }
-            ]
-        });
-        var dialog = new Dialog(form, {
-            title: "Commenting Settings"
-        });
+		var form = new Form({
+			method: 'GET',
+			action: "",
+			name: 'changepseudonym',
+			items: [
+				{
+					type: 'changePseudonym',
+					currentPseudonym: currentPseudonym
+				},
+				{
+					type: 'emailSettings',
+					currentSettings: currentSettings
+				}
+			],
+			buttons: [
+				{
+					type: 'submitButton',
+					label: 'Save'
+				},
+				{
+					type: 'cancelButton'
+				}
+			]
+		});
+		var dialog = new Dialog(form, {
+			title: "Commenting Settings"
+		});
 
-        form.on('submit', function (event) {
-            if (!inProgress) {
-                inProgress = true;
-                dialog.disableButtons();
+		form.getDomElement().addEventListener('submit', function (evt) {
+			if (!inProgress) {
+				inProgress = true;
+				dialog.disableButtons();
 
-                var formData = form.serialize();
+				var formData = form.serialize();
 
-                if (formData.emailautofollow !== 'on') {
-                    formData.emailautofollow = 'off';
-                }
+				if (formData.emailautofollow !== 'on') {
+					formData.emailautofollow = 'off';
+				}
 
-                callbacks.submit(formData, function (err) {
-                    if (err) {
-                        form.showError(err);
+				callbacks.submit(formData, function (err) {
+					if (err) {
+						form.showError(err);
 
-                        dialog.enableButtons();
-                        inProgress = false;
+						dialog.enableButtons();
+						inProgress = false;
 
-                        return;
-                    }
+						return;
+					}
 
-                    showSettingsDialogShown = false;
+					showSettingsDialogShown = false;
 
-                    dialog.close(false);
-                });
-            }
+					dialog.close(false);
+				});
+			}
 
-            if (event.preventDefault) {
-                event.preventDefault();
-            } else {
-                event.returnValue = false;
-            }
+			if (evt.preventDefault) {
+				evt.preventDefault();
+			} else {
+				evt.returnValue = false;
+			}
 
-            return false;
-        });
+			return false;
+		});
 
-        var onCloseInternalHandler = function () {
-            showSettingsDialogShown = false;
+		var onCloseInternalHandler = function () {
+			showSettingsDialogShown = false;
 
-            if (typeof callbacks.close === 'function') {
-                callbacks.close();
-            }
-        };
+			if (typeof callbacks.close === 'function') {
+				callbacks.close();
+			}
+		};
 
-        dialog.on('close', onCloseInternalHandler);
-        form.on('cancel', onCloseInternalHandler);
+		dialog.on('close', onCloseInternalHandler);
+		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
 
-        dialog.open();
-    }
+		dialog.open();
+	}
 };
 
 
@@ -222,93 +222,93 @@ var changePseudonymDialogShown = false;
  *                                - close:  Optional. Function that is called when the dialog is closed.
  */
 exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
-    if (changePseudonymDialogShown === false) {
-        if (typeof callbacks !== 'object' || !callbacks) {
-            throw new Error("Callbacks not provided.");
-        }
+	if (changePseudonymDialogShown === false) {
+		if (typeof callbacks !== 'object' || !callbacks) {
+			throw new Error("Callbacks not provided.");
+		}
 
-        if (typeof callbacks.submit !== 'function') {
-            throw new Error("Submit callback not provided.");
-        }
+		if (typeof callbacks.submit !== 'function') {
+			throw new Error("Submit callback not provided.");
+		}
 
-        if (!currentPseudonym) {
-            return;
-        }
+		if (!currentPseudonym) {
+			return;
+		}
 
-        changePseudonymDialogShown = true;
-        var inProgress = false;
+		changePseudonymDialogShown = true;
+		var inProgress = false;
 
-        currentPseudonym = currentPseudonym || "";
+		currentPseudonym = currentPseudonym || "";
 
-        var form = new Form({
-            method: 'GET',
-            action: "",
-            name: 'changepseudonym',
-            items: [
-                {
-                    type: 'changePseudonym',
-                    currentPseudonym: currentPseudonym
-                }
-            ],
-            buttons: [
-                {
-                    type: 'submitButton',
-                    label: 'Save'
-                },
-                {
-                    type: 'cancelButton'
-                }
-            ]
-        });
-        var dialog = new Dialog(form, {
-            title: "Commenting Settings"
-        });
+		var form = new Form({
+			method: 'GET',
+			action: "",
+			name: 'changepseudonym',
+			items: [
+				{
+					type: 'changePseudonym',
+					currentPseudonym: currentPseudonym
+				}
+			],
+			buttons: [
+				{
+					type: 'submitButton',
+					label: 'Save'
+				},
+				{
+					type: 'cancelButton'
+				}
+			]
+		});
+		var dialog = new Dialog(form, {
+			title: "Commenting Settings"
+		});
 
-        form.on('submit', function (event) {
-            if (!inProgress) {
-                inProgress = true;
-                dialog.disableButtons();
+		form.getDomElement().addEventListener('submit', function (evt) {
+			if (!inProgress) {
+				inProgress = true;
+				dialog.disableButtons();
 
-                var formData = form.serialize();
+				var formData = form.serialize();
 
-                callbacks.submit(formData, function (err) {
-                    if (err) {
-                        form.showError(err);
+				callbacks.submit(formData, function (err) {
+					if (err) {
+						form.showError(err);
 
-                        dialog.enableButtons();
-                        inProgress = false;
+						dialog.enableButtons();
+						inProgress = false;
 
-                        return;
-                    }
+						return;
+					}
 
-                    changePseudonymDialogShown = false;
+					changePseudonymDialogShown = false;
 
-                    dialog.close(false);
-                });
-            }
+					dialog.close(false);
+				});
+			}
 
-            if (event.preventDefault) {
-                event.preventDefault();
-            } else {
-                event.returnValue = false;
-            }
+			if (evt.preventDefault) {
+				evt.preventDefault();
+			} else {
+				evt.returnValue = false;
+			}
 
-            return false;
-        });
+			return false;
+		});
 
-        var onCloseInternalHandler = function () {
-            changePseudonymDialogShown = false;
+		var onCloseInternalHandler = function () {
+			changePseudonymDialogShown = false;
 
-            if (typeof callbacks.close === 'function') {
-                callbacks.close();
-            }
-        };
+			if (typeof callbacks.close === 'function') {
+				callbacks.close();
+			}
+		};
 
-        dialog.on('close', onCloseInternalHandler);
-        form.on('cancel', onCloseInternalHandler);
+		dialog.on('close', onCloseInternalHandler);
+		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
 
-        dialog.open();
-    }
+		dialog.open();
+	}
 };
 
 
@@ -320,100 +320,100 @@ var showEmailAlertDialogShown = false;
  *                                - close:  Optional. Function that is called when the dialog is closed.
  */
 exports.showEmailAlertDialog = function (callbacks) {
-    if (showEmailAlertDialogShown === false) {
-        if (typeof callbacks !== 'object' || !callbacks) {
-            throw new Error("Callbacks not provided.");
-        }
+	if (showEmailAlertDialogShown === false) {
+		if (typeof callbacks !== 'object' || !callbacks) {
+			throw new Error("Callbacks not provided.");
+		}
 
-        if (typeof callbacks.submit !== 'function') {
-            throw new Error("Submit callback not provided.");
-        }
+		if (typeof callbacks.submit !== 'function') {
+			throw new Error("Submit callback not provided.");
+		}
 
 
-        showEmailAlertDialogShown = true;
-        var inProgress = false;
-    
-        var form = new Form({
-            method: 'GET',
-            action: "",
-            name: 'changepseudonym',
-            items: [
-                '<strong>Your comment has been submitted.</strong>',
-                {
-                    type: 'followExplanation'
-                },
-                {
-                    type: 'emailSettingsStandalone'
-                },
-                {
-                    type: 'commentingSettingsExplanation'
-                }
-            ],
-            buttons: [
-                {
-                    type: 'dismiss',
-                    label: 'Don\'t show me this message again:'
-                },
-                {
-                    type: 'submitButton',
-                    label: 'Save'
-                }
-            ]
-        });
-        var dialog = new Dialog(form, {
-            title: "Commenting Settings"
-        });
+		showEmailAlertDialogShown = true;
+		var inProgress = false;
 
-        form.on('submit', function (event) {
-            if (!inProgress) {
-                inProgress = true;
+		var form = new Form({
+			method: 'GET',
+			action: "",
+			name: 'changepseudonym',
+			items: [
+				'<strong>Your comment has been submitted.</strong>',
+				{
+					type: 'followExplanation'
+				},
+				{
+					type: 'emailSettingsStandalone'
+				},
+				{
+					type: 'commentingSettingsExplanation'
+				}
+			],
+			buttons: [
+				{
+					type: 'dismiss',
+					label: 'Don\'t show me this message again:'
+				},
+				{
+					type: 'submitButton',
+					label: 'Save'
+				}
+			]
+		});
+		var dialog = new Dialog(form, {
+			title: "Commenting Settings"
+		});
 
-                var formData = form.serialize();
+		form.getDomElement().addEventListener('submit', function (evt) {
+			if (!inProgress) {
+				inProgress = true;
 
-                if (formData.emailautofollow !== 'on') {
-                    formData.emailautofollow = 'off';
-                }
+				var formData = form.serialize();
 
-                delete formData.dismiss;
+				if (formData.emailautofollow !== 'on') {
+					formData.emailautofollow = 'off';
+				}
 
-                dialog.disableButtons();
+				delete formData.dismiss;
 
-                callbacks.submit(formData, function (err) {
-                    if (err) {
-                        form.showError(err);
+				dialog.disableButtons();
 
-                        inProgress = false;
-                        dialog.enableButtons();
+				callbacks.submit(formData, function (err) {
+					if (err) {
+						form.showError(err);
 
-                        return;
-                    }
+						inProgress = false;
+						dialog.enableButtons();
 
-                    dialog.close(false);
-                });
-            }
+						return;
+					}
 
-            if (event.preventDefault) {
-                event.preventDefault();
-            } else {
-                event.returnValue = false;
-            }
+					dialog.close(false);
+				});
+			}
 
-            return false;
-        });
+			if (evt.preventDefault) {
+				evt.preventDefault();
+			} else {
+				evt.returnValue = false;
+			}
 
-        var onCloseInternalHandler = function () {
-            showEmailAlertDialogShown = false;
+			return false;
+		});
 
-            if (typeof callbacks.close === 'function') {
-                callbacks.close();
-            }
-        };
+		var onCloseInternalHandler = function () {
+			showEmailAlertDialogShown = false;
 
-        dialog.on('close', onCloseInternalHandler);
-        form.on('cancel', onCloseInternalHandler);
+			if (typeof callbacks.close === 'function') {
+				callbacks.close();
+			}
+		};
 
-        dialog.open();
-    }
+		dialog.on('close', onCloseInternalHandler);
+		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
+
+		dialog.open();
+	}
 };
 
 
@@ -425,65 +425,65 @@ var showInactivityMessageDialogShown = false;
  *                                - close:  Optional. Function that is called when the dialog is closed.
  */
 exports.showInactivityMessage = function (callbacks) {
-    if (showInactivityMessageDialogShown === false) {
-        if (typeof callbacks !== 'object' || !callbacks) {
-            throw new Error("Callbacks not provided.");
-        }
+	if (showInactivityMessageDialogShown === false) {
+		if (typeof callbacks !== 'object' || !callbacks) {
+			throw new Error("Callbacks not provided.");
+		}
 
-        if (typeof callbacks.submit !== 'function') {
-            throw new Error("Submit callback not provided.");
-        }
+		if (typeof callbacks.submit !== 'function') {
+			throw new Error("Submit callback not provided.");
+		}
 
-        showInactivityMessageDialogShown = true;
+		showInactivityMessageDialogShown = true;
 
-        var form = new Form(
-            {
-                method: 'GET',
-                action: '',
-                name: 'sessionexpired',
-                items: [
-                    {
-                        type: 'sessionExpired'
-                    }
-                ],
-                buttons: [
-                    {
-                        type: 'submitButton',
-                        label: 'Sign in'
-                    },
-                    {
-                        type: 'cancelButton'
-                    }
-                ]
-            }
-        );
-        var dialog = new Dialog(form, {
-            title: "Session expired"
-        });
-        
-        form.on('submit', function (event) {
-            callbacks.submit();
-            
-            if (event.preventDefault) {
-                event.preventDefault();
-            } else {
-                event.returnValue = false;
-            }
+		var form = new Form(
+			{
+				method: 'GET',
+				action: '',
+				name: 'sessionexpired',
+				items: [
+					{
+						type: 'sessionExpired'
+					}
+				],
+				buttons: [
+					{
+						type: 'submitButton',
+						label: 'Sign in'
+					},
+					{
+						type: 'cancelButton'
+					}
+				]
+			}
+		);
+		var dialog = new Dialog(form, {
+			title: "Session expired"
+		});
 
-            return false;
-        });
+		form.getDomElement().addEventListener('submit', function (evt) {
+			callbacks.submit();
 
-        var onCloseInternalHandler = function () {
-            showInactivityMessageDialogShown = false;
+			if (evt.preventDefault) {
+				evt.preventDefault();
+			} else {
+				evt.returnValue = false;
+			}
 
-            if (typeof callbacks.close === 'function') {
-                callbacks.close();
-            }
-        };
+			return false;
+		});
 
-        dialog.on('close', onCloseInternalHandler);
-        form.on('cancel', onCloseInternalHandler);
+		var onCloseInternalHandler = function () {
+			showInactivityMessageDialogShown = false;
 
-        dialog.open();
-    }
+			if (typeof callbacks.close === 'function') {
+				callbacks.close();
+			}
+		};
+
+		dialog.on('close', onCloseInternalHandler);
+		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
+
+		dialog.open();
+	}
 };
