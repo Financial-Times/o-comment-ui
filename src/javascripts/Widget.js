@@ -156,7 +156,7 @@ function Widget (config) {
 	};
 
 	this.destroy = function () {
-		config = null;
+		self.config = null;
 
 		self.ui.destroy();
 		self.ui = null;
