@@ -64,7 +64,7 @@ function WidgetUi (widgetContainer) {
             }
         };
 
-        scrollToElement(document.getElementsByTagName('body')[0], widgetContainer, 500, done);
+        scrollToElement(document.body, widgetContainer, 500, done);
         scrollToElement(document.getElementsByTagName('head')[0], widgetContainer, 500, done);
     };
 
@@ -89,6 +89,13 @@ function WidgetUi (widgetContainer) {
     this.hideSignInLink = undefined;
     this.addAuthNotAvailableMessage = undefined;
     this.addSettingsLink = undefined;
+
+    this.destroy = function () {
+		if (widgetContainer) {
+			widgetContainer.parentNode.removeChild(widgetContainer);
+			widgetContainer = null;
+		}
+    };
 }
 WidgetUi.__extend = function(child) {
     if (typeof Object.create === 'function') {

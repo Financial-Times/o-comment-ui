@@ -182,6 +182,11 @@ function Form (config) {
 			errMessageContainer[0].innerHTML = "";
 		}
 	};
+
+	this.destroy = function () {
+		formObject = null;
+		myself = null;
+	};
 }
 
 /**

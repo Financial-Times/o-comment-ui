@@ -154,6 +154,17 @@ function Widget (config) {
 		self.ui.clearContainer();
 		self.ui.addNotAvailableMessage();
 	};
+
+	this.destroy = function () {
+		config = null;
+
+		self.ui.destroy();
+		self.ui = null;
+
+		widgetEl = null;
+
+		self = null;
+	};
 }
 
 Widget.prototype.loadCalled = false;
