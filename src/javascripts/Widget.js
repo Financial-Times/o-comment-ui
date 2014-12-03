@@ -3,6 +3,8 @@
 var oCommentUtilities = require('o-comment-utilities'),
 	WidgetUi = require('./WidgetUi.js');
 
+var sizzle = require('sizzle');
+
 /**
  * Widget is responsible to coordinate getting initialization data, loading resources and initializing the Ui.
  * While this class implements some of the basic functionality (handling errors, loading timeout),
@@ -34,14 +36,6 @@ function Widget (config) {
 		throw "Config not specified.";
 	}
 
-	if (!config.elId) {
-		if (!config.elid) {
-			throw "Container element is not specified.";
-		} else {
-			config.elId = config.elid;
-		}
-	}
-
 	if (!config.articleId) {
 		if (!config.articleid) {
 			throw "Article ID is not specified.";
@@ -58,7 +52,37 @@ function Widget (config) {
 		throw "Title is not specified.";
 	}
 
-	widgetEl = document.getElementById(config.elId);
+	try {
+		if (!config.container) {
+			if (!config.elId) {
+				if (!config.elid) {
+					throw "Container element is not specified.";
+				} else {
+					config.elId = config.elid;
+				}
+			}
+
+			widgetEl = document.getElementById(config.elId);
+		} else {
+			if (typeof config.container === "string") {
+				var widgetElSelected = sizzle(config.container);
+				if (widgetElSelected.length) {
+					widgetEl = widgetElSelected[0];
+				} else {
+					throw "Selector not valid or does not exists.";
+				}
+			} else if (config.container instanceof HTMLElement) {
+				widgetEl = config.container;
+			}
+		}
+	} catch (e) {
+		widgetEl = config.container;
+	}
+
+	if (!widgetEl.id) {
+		widgetEl.id = self.eventNamespace + '-' + Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+		config.elId = widgetEl.id;
+	}
 
 
 

@@ -3,12 +3,33 @@
 var i18n = require('./i18n.js'),
     templates = require('./templates.js');
 
+var sizzle = require('sizzle');
+
 /**
  * This class is responsible to handle the UI part of a commenting widget. An instance of this is created within an instance of the `Widget`.
  * While this implementation has predefined methods, it can be extended with particular UI methods.
- * @param {DOMObject} widgetContainer DOM Object of the container of the widget.
+ * @param {DOMObject} widgetContainer DOM Object or selector of the container of the widget.
  */
 function WidgetUi (widgetContainer) {
+	var self = this;
+
+	this.widgetContainer = undefined;
+
+	try {
+		if (typeof widgetContainer === "string") {
+			var widgetElSelect = sizzle(widgetContainer);
+			if (widgetElSelect.length) {
+				this.widgetContainer = widgetContainer;
+			} else {
+				throw "Selector not valid or does not exists.";
+			}
+		} else if (widgetContainer instanceof HTMLElement) {
+			this.widgetContainer = widgetContainer;
+		}
+	} catch (e) {
+		this.widgetContainer = document.body;
+	}
+
     /**
      * Helper function to scrolls to a position on the page or within an HTML element.
      * @param  {DOMObject}   withinElement Within which element to scroll (e.g. the whole page or only within a div)
@@ -64,15 +85,15 @@ function WidgetUi (widgetContainer) {
             }
         };
 
-        scrollToElement(document.body, widgetContainer, 500, done);
-        scrollToElement(document.getElementsByTagName('head')[0], widgetContainer, 500, done);
+        scrollToElement(document.body, self.widgetContainer, 500, done);
+        scrollToElement(document.getElementsByTagName('head')[0], self.widgetContainer, 500, done);
     };
 
     /**
      * Inserts message when comments is not available, either because of the web services or Livefyre.
      */
     this.addNotAvailableMessage = function () {
-        widgetContainer.innerHTML = templates.unavailableTemplate.render({
+        self.widgetContainer.innerHTML = templates.unavailableTemplate.render({
             message: i18n.texts.unavailable
         });
     };
@@ -81,7 +102,7 @@ function WidgetUi (widgetContainer) {
      * Clears the container's content.
      */
     this.clearContainer = function () {
-        widgetContainer.innerHTML = "";
+        self.widgetContainer.innerHTML = "";
     };
 
     this.addTermsAndGuidelineMessage = undefined;
@@ -91,9 +112,9 @@ function WidgetUi (widgetContainer) {
     this.addSettingsLink = undefined;
 
     this.destroy = function () {
-		if (widgetContainer) {
-			widgetContainer.parentNode.removeChild(widgetContainer);
-			widgetContainer = null;
+		if (self.widgetContainer) {
+			self.widgetContainer.parentNode.removeChild(self.widgetContainer);
+			self.widgetContainer = null;
 		}
     };
 }
