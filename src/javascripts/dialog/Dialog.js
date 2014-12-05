@@ -179,6 +179,8 @@ function Dialog (htmlOrForm, userOptions) {
             contentContainer = sizzle('.comment-dialog-container', container)[0];
             bodyEl.appendChild(container);
 
+            container.focus();
+
             if (typeof(options.title) !== 'undefined') {
                 contentContainer.appendChild(utils.toDOM(titleTemplate.render({
                     title: options.title
@@ -218,6 +220,8 @@ function Dialog (htmlOrForm, userOptions) {
 
         repositionToCenter();
         enableResizeMonitoring();
+
+        container.focus();
     };
 
     /**
