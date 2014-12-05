@@ -2,6 +2,9 @@
 @import 'o-assets/main';
 @import "o-fonts/main";
 
+$o-ft-icons-is-silent: false;
+@import "o-ft-icons/main";
+
 @include oFontsInclude(BentonSans, normal);
 @include oFontsInclude(BentonSans, bold);
 
