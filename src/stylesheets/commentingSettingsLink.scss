@@ -9,12 +9,4 @@
         cursor: pointer;
         display: inline-block;
     }
-
-    .comment-settings-icon {
-        background: url(oAssetsResolve("src/images/comment_commenting_settings.png", o-comment-ui)) no-repeat;
-        display: inline-block;
-        width: 14px;
-        height: 14px;
-        vertical-align: text-top;
-    }
 }
