@@ -36,7 +36,8 @@ exports.changePseudonym = function (config) {
             name: 'pseudonym',
             label: 'This is displayed with your comments. If you change it, previous '+
                 'comments will also be attributed to the new pseudonym.',
-            currentPseudonym: config.currentPseudonym || ''
+            currentPseudonym: config.currentPseudonym || '',
+            autofocus: true
         })
     });
 };
