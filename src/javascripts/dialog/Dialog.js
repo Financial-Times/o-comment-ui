@@ -218,8 +218,6 @@ function Dialog (htmlOrForm, userOptions) {
 
         repositionToCenter();
         enableResizeMonitoring();
-
-        contentContainer.focus();
     };
 
     /**
