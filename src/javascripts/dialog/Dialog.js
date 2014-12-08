@@ -219,7 +219,7 @@ function Dialog (htmlOrForm, userOptions) {
         repositionToCenter();
         enableResizeMonitoring();
 
-        container.focus();
+        contentContainer.focus();
     };
 
     /**
