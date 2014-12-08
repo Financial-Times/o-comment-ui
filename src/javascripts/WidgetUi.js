@@ -1,7 +1,7 @@
 "use strict";
 
 var i18n = require('./i18n.js'),
-    templates = require('./templates.js');
+	templates = require('./templates.js');
 
 var sizzle = require('sizzle');
 
@@ -30,104 +30,65 @@ function WidgetUi (widgetContainer) {
 		this.widgetContainer = document.body;
 	}
 
-    /**
-     * Helper function to scrolls to a position on the page or within an HTML element.
-     * @param  {DOMObject}   withinElement Within which element to scroll (e.g. the whole page or only within a div)
-     * @param  {Integer}     to            Target scroll position on the page
-     * @param  {Integer}     duration      Duration in milliseconds to animate.
-     * @param  {Function}    callback      Callback which is called when finished with the scrolling.
-     */
-    function scrollTo (withinElement, to, duration, callback) {
-        if (duration < 0) {
-            callback();
-            return;
-        }
+	/**
+	 * Scrolls the page to the widget.
+	 * @param  {Function} callback Called when the scroll animation is finished.
+	 */
+	this.scrollToWidget = function (callback) {
+		var callbackCalled = false;
+		var done = function () {
+			if (!callbackCalled) {
+				callbackCalled = true;
 
-        var difference = to - withinElement.scrollTop;
-        var perTick = difference / duration * 10;
+				if (typeof callback === 'function') {
+					callback();
+				}
+			}
+		};
 
-        setTimeout(function() {
-            withinElement.scrollTop = withinElement.scrollTop + perTick;
+		window.scrollTo(0, self.widgetContainer.offsetTop);
+		done();
+	};
 
-            if (withinElement.scrollTop === to) {
-                callback();
-                return;
-            }
+	/**
+	 * Inserts message when comments is not available, either because of the web services or Livefyre.
+	 */
+	this.addNotAvailableMessage = function () {
+		self.widgetContainer.innerHTML = templates.unavailableTemplate.render({
+			message: i18n.texts.unavailable
+		});
+	};
 
-            scrollTo(withinElement, to, duration - 10, callback);
-        }, 10);
-    }
+	/**
+	 * Clears the container's content.
+	 */
+	this.clearContainer = function () {
+		self.widgetContainer.innerHTML = "";
+	};
 
-    /**
-     * Helper function which scrolls to an element of the whole page or within an element
-     * @param  {DOMObject}   withinElement Within which element to scroll (e.g. the whole page or only within a div)
-     * @param  {DOMObject}   toElement     DOM Object to which to scroll.
-     * @param  {Integer}     duration      Duration in milliseconds to animate.
-     * @param  {Function}    callback      Callback which is called when finished with the scrolling.\
-     */
-    function scrollToElement (withinElement, toElement, duration, callback) {
-        scrollTo(withinElement, toElement.offsetTop, duration, callback);
-    }
+	this.addTermsAndGuidelineMessage = undefined;
+	this.makeReadOnly = undefined;
+	this.hideSignInLink = undefined;
+	this.addAuthNotAvailableMessage = undefined;
+	this.addSettingsLink = undefined;
 
-    /**
-     * Scrolls the page to the widget.
-     * @param  {Function} callback Called when the scroll animation is finished.
-     */
-    this.scrollToWidget = function (callback) {
-        var callbackCalled = false;
-        var done = function () {
-            if (!callbackCalled) {
-                callbackCalled = true;
-
-                if (typeof callback === 'function') {
-                    callback();
-                }
-            }
-        };
-
-        scrollToElement(document.body, self.widgetContainer, 500, done);
-        scrollToElement(document.getElementsByTagName('head')[0], self.widgetContainer, 500, done);
-    };
-
-    /**
-     * Inserts message when comments is not available, either because of the web services or Livefyre.
-     */
-    this.addNotAvailableMessage = function () {
-        self.widgetContainer.innerHTML = templates.unavailableTemplate.render({
-            message: i18n.texts.unavailable
-        });
-    };
-
-    /**
-     * Clears the container's content.
-     */
-    this.clearContainer = function () {
-        self.widgetContainer.innerHTML = "";
-    };
-
-    this.addTermsAndGuidelineMessage = undefined;
-    this.makeReadOnly = undefined;
-    this.hideSignInLink = undefined;
-    this.addAuthNotAvailableMessage = undefined;
-    this.addSettingsLink = undefined;
-
-    this.destroy = function () {
+	this.destroy = function () {
 		if (self.widgetContainer) {
 			self.widgetContainer.parentNode.removeChild(self.widgetContainer);
 			self.widgetContainer = null;
 		}
-    };
+	};
 }
 WidgetUi.__extend = function(child) {
-    if (typeof Object.create === 'function') {
-        child.prototype = Object.create(WidgetUi.prototype);
-        child.prototype = Object.create(WidgetUi.prototype);
-    } else {
-        var Tmp = function () {};
-        Tmp.prototype = WidgetUi.prototype;
-        child.prototype = new Tmp();
-        child.prototype.constructor = child;
-    }
+	if (typeof Object.create === 'function') {
+		child.prototype = Object.create(WidgetUi.prototype);
+		child.prototype = Object.create(WidgetUi.prototype);
+	} else {
+		var Tmp = function () {};
+		Tmp.prototype = WidgetUi.prototype;
+		child.prototype = new Tmp();
+		child.prototype.constructor = child;
+	}
 };
 
 /**
