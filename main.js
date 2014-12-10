@@ -18,10 +18,6 @@ exports.form = {
     Form: require('./src/javascripts/form_builder/Form.js'),
     formFragments: require('./src/javascripts/form_builder/formFragments.js')
 };
-exports.dialog = {
-    Dialog: require('./src/javascripts/dialog/Dialog.js'),
-    modal: require('./src/javascripts/dialog/modal.js')
-};
 
 /**
  * Enables logging.

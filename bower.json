@@ -1,6 +1,6 @@
 {
   "name": "o-comment-ui",
-  "version": "0.3.10",
+  "version": "0.4.0",
   "main": [
     "main.js",
     "main.scss"
@@ -11,6 +11,7 @@
     "o-colors": "^2.3.17",
     "o-assets": "^0.4.2",
     "o-fonts": "^1.4.1",
+    "o-overlay": "^1.1.2",
     "sizzle": "git+https://github.com/jquery/sizzle.git#^2.0.0",
     "hogan": "git+https://github.com/twitter/hogan.js.git#3.0.0"
   },

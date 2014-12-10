@@ -183,6 +183,55 @@ function Form (config) {
 		}
 	};
 
+
+	/**
+     * Disable all buttons of a button collection.
+     * @param  {Array} buttons Array of buttons (DOM objects).
+     */
+    var disableAllButtons = function (buttons) {
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].setAttribute('disabled', 'disabled');
+        }
+    };
+
+    /**
+     * Disables the buttons (useful when an action is already in progress).
+     */
+    this.disableButtons = function() {
+        var buttons = sizzle('button', formObject);
+        var buttonInputs = sizzle('input[type=button]', formObject);
+        var submitInputs = sizzle('input[type=submit]', formObject);
+
+        disableAllButtons(buttons);
+        disableAllButtons(buttonInputs);
+        disableAllButtons(submitInputs);
+    };
+
+
+    /**
+     * Enable all buttons of a button collection.
+     * @param  {Array} buttons Array of buttons (DOM objects).
+     */
+    var enableAllButtons = function (buttons) {
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].removeAttribute('disabled');
+        }
+    };
+
+    /**
+     * Enables the buttons (useful when the buttons were disabled while an action was in progress
+     * and the user is given back the control).
+     */
+    this.enableButtons = function() {
+        var buttons = sizzle('button', formObject);
+        var buttonInputs = sizzle('input[type=button]', formObject);
+        var submitInputs = sizzle('input[type=submit]', formObject);
+
+        enableAllButtons(buttons);
+        enableAllButtons(buttonInputs);
+        enableAllButtons(submitInputs);
+    };
+
 	this.destroy = function () {
 		formObject = null;
 		myself = null;

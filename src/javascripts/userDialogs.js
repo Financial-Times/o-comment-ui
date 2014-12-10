@@ -1,6 +1,6 @@
 "use strict";
 
-var Dialog = require('./dialog/Dialog.js'),
+var Overlay = require('o-overlay'),
 	Form = require('./form_builder/Form.js'),
 	oCommentUtilities = require('o-comment-utilities');
 
@@ -45,14 +45,22 @@ exports.showSetPseudonymDialog = function (callbacks) {
 				}
 			]
 		});
-		var dialog = new Dialog(form, {
-			title: "Commenting Settings"
+
+		var idOfTheOverlay = "oCommentUi_showSetPseudonymDialog";
+		var overlay = new Overlay(idOfTheOverlay, {
+			html: form.render(),
+			heading: {
+				title: "Commenting Settings"
+			},
+			modal: true
 		});
+
+		var ignoreCloseEvent = false;
 
 		form.getDomElement().addEventListener('submit', function (evt) {
 			if (!inProgress) {
 				inProgress = true;
-				dialog.disableButtons();
+				form.disableButtons();
 
 				var formData = form.serialize();
 
@@ -60,7 +68,7 @@ exports.showSetPseudonymDialog = function (callbacks) {
 					if (err) {
 						form.showError(err);
 
-						dialog.enableButtons();
+						form.enableButtons();
 						inProgress = false;
 
 						return;
@@ -68,7 +76,8 @@ exports.showSetPseudonymDialog = function (callbacks) {
 
 					showSetPseudonymDialogShown = false;
 
-					dialog.close(false);
+					ignoreCloseEvent = true;
+					overlay.close();
 				});
 			}
 
@@ -83,21 +92,23 @@ exports.showSetPseudonymDialog = function (callbacks) {
 
 
 		var onCloseInternalHandler = function () {
-			showSetPseudonymDialogShown = false;
+			if (!ignoreCloseEvent) {
+				showSetPseudonymDialogShown = false;
 
-			if (typeof callbacks.close === 'function') {
-				callbacks.close();
-			}
+				if (typeof callbacks.close === 'function') {
+					callbacks.close();
+				}
 
-			if (!inProgress) {
-				oCommentUtilities.logger.log('pseudonym refused');
+				if (!inProgress) {
+					oCommentUtilities.logger.log('pseudonym refused');
+				}
 			}
 		};
 
 		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
-		dialog.on('close', onCloseInternalHandler);
+		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
 
-		dialog.open();
+		overlay.open();
 	}
 };
 
@@ -155,14 +166,22 @@ exports.showSettingsDialog = function (currentData, callbacks) {
 				}
 			]
 		});
-		var dialog = new Dialog(form, {
-			title: "Commenting Settings"
+
+		var idOfTheOverlay = "oCommentUi_showSettingsDialog";
+		var overlay = new Overlay(idOfTheOverlay, {
+			html: form.render(),
+			heading: {
+				title: "Commenting Settings"
+			},
+			modal: true
 		});
+
+		var ignoreCloseEvent = false;
 
 		form.getDomElement().addEventListener('submit', function (evt) {
 			if (!inProgress) {
 				inProgress = true;
-				dialog.disableButtons();
+				form.disableButtons();
 
 				var formData = form.serialize();
 
@@ -174,7 +193,7 @@ exports.showSettingsDialog = function (currentData, callbacks) {
 					if (err) {
 						form.showError(err);
 
-						dialog.enableButtons();
+						form.enableButtons();
 						inProgress = false;
 
 						return;
@@ -182,7 +201,8 @@ exports.showSettingsDialog = function (currentData, callbacks) {
 
 					showSettingsDialogShown = false;
 
-					dialog.close(false);
+					ignoreCloseEvent = true;
+					overlay.close();
 				});
 			}
 
@@ -196,17 +216,19 @@ exports.showSettingsDialog = function (currentData, callbacks) {
 		});
 
 		var onCloseInternalHandler = function () {
-			showSettingsDialogShown = false;
+			if (!ignoreCloseEvent) {
+				showSettingsDialogShown = false;
 
-			if (typeof callbacks.close === 'function') {
-				callbacks.close();
+				if (typeof callbacks.close === 'function') {
+					callbacks.close();
+				}
 			}
 		};
 
-		dialog.on('close', onCloseInternalHandler);
 		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
+		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
 
-		dialog.open();
+		overlay.open();
 	}
 };
 
@@ -260,14 +282,22 @@ exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
 				}
 			]
 		});
-		var dialog = new Dialog(form, {
-			title: "Commenting Settings"
+
+		var idOfTheOverlay = "oCommentUi_showChangePseudonymDialog";
+		var overlay = new Overlay(idOfTheOverlay, {
+			html: form.render(),
+			heading: {
+				title: "Commenting Settings"
+			},
+			modal: true
 		});
+
+		var ignoreCloseEvent = false;
 
 		form.getDomElement().addEventListener('submit', function (evt) {
 			if (!inProgress) {
 				inProgress = true;
-				dialog.disableButtons();
+				form.disableButtons();
 
 				var formData = form.serialize();
 
@@ -275,7 +305,7 @@ exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
 					if (err) {
 						form.showError(err);
 
-						dialog.enableButtons();
+						form.enableButtons();
 						inProgress = false;
 
 						return;
@@ -283,7 +313,8 @@ exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
 
 					changePseudonymDialogShown = false;
 
-					dialog.close(false);
+					ignoreCloseEvent = true;
+					overlay.close();
 				});
 			}
 
@@ -297,17 +328,19 @@ exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
 		});
 
 		var onCloseInternalHandler = function () {
-			changePseudonymDialogShown = false;
+			if (!ignoreCloseEvent) {
+				changePseudonymDialogShown = false;
 
-			if (typeof callbacks.close === 'function') {
-				callbacks.close();
+				if (typeof callbacks.close === 'function') {
+					callbacks.close();
+				}
 			}
 		};
 
-		dialog.on('close', onCloseInternalHandler);
 		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
+		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
 
-		dialog.open();
+		overlay.open();
 	}
 };
 
@@ -360,9 +393,17 @@ exports.showEmailAlertDialog = function (callbacks) {
 				}
 			]
 		});
-		var dialog = new Dialog(form, {
-			title: "Commenting Settings"
+
+		var idOfTheOverlay = "oCommentUi_showEmailAlertDialog";
+		var overlay = new Overlay(idOfTheOverlay, {
+			html: form.render(),
+			heading: {
+				title: "Commenting Settings"
+			},
+			modal: true
 		});
+
+		var ignoreCloseEvent = false;
 
 		form.getDomElement().addEventListener('submit', function (evt) {
 			if (!inProgress) {
@@ -376,19 +417,20 @@ exports.showEmailAlertDialog = function (callbacks) {
 
 				delete formData.dismiss;
 
-				dialog.disableButtons();
+				form.disableButtons();
 
 				callbacks.submit(formData, function (err) {
 					if (err) {
 						form.showError(err);
 
 						inProgress = false;
-						dialog.enableButtons();
+						form.enableButtons();
 
 						return;
 					}
 
-					dialog.close(false);
+					ignoreCloseEvent = true;
+					overlay.close();
 				});
 			}
 
@@ -402,17 +444,19 @@ exports.showEmailAlertDialog = function (callbacks) {
 		});
 
 		var onCloseInternalHandler = function () {
-			showEmailAlertDialogShown = false;
+			if (!ignoreCloseEvent) {
+				showEmailAlertDialogShown = false;
 
-			if (typeof callbacks.close === 'function') {
-				callbacks.close();
+				if (typeof callbacks.close === 'function') {
+					callbacks.close();
+				}
 			}
 		};
 
-		dialog.on('close', onCloseInternalHandler);
 		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
+		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
 
-		dialog.open();
+		overlay.open();
 	}
 };
 
@@ -457,8 +501,14 @@ exports.showInactivityMessage = function (callbacks) {
 				]
 			}
 		);
-		var dialog = new Dialog(form, {
-			title: "Session expired"
+
+		var idOfTheOverlay = "oCommentUi_showInactivityMessage";
+		var overlay = new Overlay(idOfTheOverlay, {
+			html: form.render(),
+			heading: {
+				title: "Session expired"
+			},
+			modal: true
 		});
 
 		form.getDomElement().addEventListener('submit', function (evt) {
@@ -481,9 +531,9 @@ exports.showInactivityMessage = function (callbacks) {
 			}
 		};
 
-		dialog.on('close', onCloseInternalHandler);
 		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
+		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
 
-		dialog.open();
+		overlay.open();
 	}
 };
