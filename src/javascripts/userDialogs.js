@@ -105,10 +105,10 @@ exports.showSetPseudonymDialog = function (callbacks) {
 			}
 		};
 
+		overlay.open();
+
 		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
 		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
-
-		overlay.open();
 	}
 };
 
@@ -225,10 +225,10 @@ exports.showSettingsDialog = function (currentData, callbacks) {
 			}
 		};
 
+		overlay.open();
+
 		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
 		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
-
-		overlay.open();
 	}
 };
 
@@ -337,10 +337,10 @@ exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
 			}
 		};
 
+		overlay.open();
+
 		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
 		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
-
-		overlay.open();
 	}
 };
 
@@ -453,10 +453,10 @@ exports.showEmailAlertDialog = function (callbacks) {
 			}
 		};
 
+		overlay.open();
+
 		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
 		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
-
-		overlay.open();
 	}
 };
 
@@ -531,9 +531,9 @@ exports.showInactivityMessage = function (callbacks) {
 			}
 		};
 
+		overlay.open();
+
 		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
 		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
-
-		overlay.open();
 	}
 };
