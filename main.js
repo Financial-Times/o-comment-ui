@@ -14,9 +14,9 @@ exports.i18n = require('./src/javascripts/i18n.js');
 exports.templates = require('./src/javascripts/templates.js');
 exports.utils = require('./src/javascripts/utils.js');
 
-exports.form = {
-    Form: require('./src/javascripts/form_builder/Form.js'),
-    formFragments: require('./src/javascripts/form_builder/formFragments.js')
+exports.overlayContentBuilder = {
+    OverlayFormContent: require('./src/javascripts/overlay_content_builder/OverlayFormContent.js'),
+    formFragments: require('./src/javascripts/overlay_content_builder/formFragments.js')
 };
 
 /**

@@ -1,4 +1,4 @@
-.comment-dialog {
+.o-comment-ui-overlay {
     background: rgba(211, 210, 203, 0.2);
     font-family: oFontsGetFontFamilyWithFallbacks(BentonSans);
     color: oColorsGetPaletteColor(grey-tint4);
@@ -21,51 +21,30 @@
         padding: 0;
     }
 
-    .comment-dialog-container {
+    .o-comment-ui-overlay-container {
         background: oColorsGetPaletteColor(white);
         margin: $commentDialogSideMargin;
         padding: 20px $commentDialogSidePadding 8px;
     }
 
-    .comment-dialog-title {
-        font-size: 14px;
-        color: #666666;
-        font-weight: bold;
-        text-transform: uppercase;
-        margin: -20px 0;
-        padding: 9px 0 32px;
-    }
-
-    .comment-message,
-    .comment-hint {
+    .o-comment-ui-overlay-message,
+    .o-comment-ui-overlay-hint {
         line-height: 1.2em;
         clear: both;
         width: 100%;
         padding: 5px 0;
     }
 
-    .comment-hint {
+    .o-comment-ui-overlay-hint {
         padding: 0 0 10px;
     }
 
-    .comment-error-message {
+    .o-comment-ui-overlay-error-message {
         color: oColorsGetPaletteColor(red);
         margin-bottom: 10px;
     }
 
-    .comment-close-button {
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 20px;
-        width: 20px;
-        background: url(oAssetsResolve("src/images/comment_dialog_close.gif", o-comment-ui)) no-repeat;
-        cursor: pointer;
-        margin: 18px 18px 0 0;
-    }
-
-    .comment-button-container {
+    .o-comment-ui-overlay-button-container {
         padding: 26px 0 10px;
         float: right;
 
@@ -74,17 +53,17 @@
             display: inline-block;
         }
 
-        .comment-dismiss {
+        .o-comment-ui-overlay-dismiss {
             display: inline-block;
             padding-right: 10px;
         }
     }
 
-    .comment-dialog-cancel {
+    .o-comment-ui-overlay-cancel {
         float: none;
         padding: 0 6px;
 
-        .comment-dialog-cancel-button {
+        .o-comment-ui-overlay-cancel-button {
             border: 0;
             color: oColorsGetPaletteColor(blue);
             background: none;

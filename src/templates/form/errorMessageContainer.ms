@@ -1,1 +1,1 @@
-<div class="comment-error-message"></div>
+<div class="o-comment-ui-overlay-error-message"></div>

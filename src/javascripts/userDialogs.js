@@ -1,7 +1,7 @@
 "use strict";
 
 var Overlay = require('o-overlay'),
-	Form = require('./form_builder/Form.js'),
+	OverlayFormContent = require('./overlay_content_builder/OverlayFormContent.js'),
 	oCommentUtilities = require('o-comment-utilities');
 
 
@@ -26,7 +26,7 @@ exports.showSetPseudonymDialog = function (callbacks) {
 		showSetPseudonymDialogShown = true;
 		var inProgress = false;
 
-		var form = new Form({
+		var form = new OverlayFormContent({
 			method: 'GET',
 			action: "",
 			name: 'setpseudonym',
@@ -48,7 +48,7 @@ exports.showSetPseudonymDialog = function (callbacks) {
 
 		var idOfTheOverlay = "oCommentUi_showSetPseudonymDialog";
 		var overlay = new Overlay(idOfTheOverlay, {
-			html: form.render(),
+			html: form.getDomElement(),
 			heading: {
 				title: "Commenting Settings"
 			},
@@ -142,7 +142,7 @@ exports.showSettingsDialog = function (currentData, callbacks) {
 		var currentSettings = (currentData && typeof currentData === 'object' && currentData.settings) ? currentData.settings : {};
 		var currentPseudonym = (currentData && typeof currentData === 'object' && currentData.displayName) ? currentData.displayName : "";
 
-		var form = new Form({
+		var form = new OverlayFormContent({
 			method: 'GET',
 			action: "",
 			name: 'changepseudonym',
@@ -169,7 +169,7 @@ exports.showSettingsDialog = function (currentData, callbacks) {
 
 		var idOfTheOverlay = "oCommentUi_showSettingsDialog";
 		var overlay = new Overlay(idOfTheOverlay, {
-			html: form.render(),
+			html: form.getDomElement(),
 			heading: {
 				title: "Commenting Settings"
 			},
@@ -262,7 +262,7 @@ exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
 
 		currentPseudonym = currentPseudonym || "";
 
-		var form = new Form({
+		var form = new OverlayFormContent({
 			method: 'GET',
 			action: "",
 			name: 'changepseudonym',
@@ -285,7 +285,7 @@ exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
 
 		var idOfTheOverlay = "oCommentUi_showChangePseudonymDialog";
 		var overlay = new Overlay(idOfTheOverlay, {
-			html: form.render(),
+			html: form.getDomElement(),
 			heading: {
 				title: "Commenting Settings"
 			},
@@ -366,7 +366,7 @@ exports.showEmailAlertDialog = function (callbacks) {
 		showEmailAlertDialogShown = true;
 		var inProgress = false;
 
-		var form = new Form({
+		var form = new OverlayFormContent({
 			method: 'GET',
 			action: "",
 			name: 'changepseudonym',
@@ -396,7 +396,7 @@ exports.showEmailAlertDialog = function (callbacks) {
 
 		var idOfTheOverlay = "oCommentUi_showEmailAlertDialog";
 		var overlay = new Overlay(idOfTheOverlay, {
-			html: form.render(),
+			html: form.getDomElement(),
 			heading: {
 				title: "Commenting Settings"
 			},
@@ -480,7 +480,7 @@ exports.showInactivityMessage = function (callbacks) {
 
 		showInactivityMessageDialogShown = true;
 
-		var form = new Form(
+		var form = new OverlayFormContent(
 			{
 				method: 'GET',
 				action: '',
@@ -504,7 +504,7 @@ exports.showInactivityMessage = function (callbacks) {
 
 		var idOfTheOverlay = "oCommentUi_showInactivityMessage";
 		var overlay = new Overlay(idOfTheOverlay, {
-			html: form.render(),
+			html: form.getDomElement(),
 			heading: {
 				title: "Session expired"
 			},

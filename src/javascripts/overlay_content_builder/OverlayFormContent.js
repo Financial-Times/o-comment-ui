@@ -19,24 +19,30 @@ var clearTemplate = templates.clearLine;
  * Form is a helper for creating a form. It handles constructing the form element, generating buttons, forwarding submit and cancel events.
  * @param {Object} config Configuration object which specifies the elements of the form (form fragments, buttons).
  */
-function Form (config) {
+function OverlayFormContent (config) {
 	if (!config || typeof config !== 'object') {
 		throw "Configuration missing or invalid.";
 	}
 
 	var myself = this;
 	var formObject;
+	var container;
 
 	function init () {
 		var item;
 		var button;
 		var i;
 
-		formObject = document.createElement('form');
 
+		container = document.createElement('div');
+		container.className = "o-comment-ui-overlay";
+
+		formObject = document.createElement('form');
 		formObject.setAttribute('name', config.name || "");
 		formObject.setAttribute('method', config.method || "");
 		formObject.setAttribute('action', config.action || "");
+
+		container.appendChild(formObject);
 
 		formObject.appendChild(utils.toDOM(errorMessageContainerTemplate.render()));
 
@@ -55,7 +61,7 @@ function Form (config) {
 
 		if (config.buttons && config.buttons.length) {
 			formObject.appendChild(utils.toDOM(buttonContainerTemplate.render()));
-			var buttonContainer = sizzle('.comment-button-container', formObject)[0];
+			var buttonContainer = sizzle('.o-comment-ui-overlay-button-container', formObject)[0];
 
 			for (i = 0; i < config.buttons.length; i++) {
 				button = config.buttons[i];
@@ -89,7 +95,7 @@ function Form (config) {
 
 			formObject.appendChild(utils.toDOM(clearTemplate.render()));
 
-			var cancelButtons = sizzle('.comment-dialog-cancel-button', formObject);
+			var cancelButtons = sizzle('.o-comment-ui-overlay-cancel-button', formObject);
 			var triggerCancel = function () {
 				formObject.dispatchEvent(new Event('oCommentUi.form.cancel', {
 					bubbles: true
@@ -103,17 +109,9 @@ function Form (config) {
 	}
 	init.call(this);
 
-	/**
-	 * Return the rendered HTML fragment.
-	 * @return {DocumentFragment}
-	 */
-	this.render = function () {
-		return formObject;
-	};
-
 
 	this.getDomElement = function () {
-		return formObject;
+		return container;
 	};
 
 
@@ -165,7 +163,7 @@ function Form (config) {
 	 * @param  {String} errMessages The error message to show.
 	 */
 	this.showError = function (errMessages) {
-		var errMessageContainer = sizzle('.comment-error-message', formObject);
+		var errMessageContainer = sizzle('.o-comment-ui-overlay-error-message', formObject);
 
 		if (errMessageContainer.length) {
 			errMessageContainer[0].innerHTML = errMessages;
@@ -176,7 +174,7 @@ function Form (config) {
 	 * Clears all the errors.
 	 */
 	this.clearError = function () {
-		var errMessageContainer = sizzle('.comment-error-message', formObject);
+		var errMessageContainer = sizzle('.o-comment-ui-overlay-error-message', formObject);
 
 		if (errMessageContainer.length) {
 			errMessageContainer[0].innerHTML = "";
@@ -242,4 +240,4 @@ function Form (config) {
  * Export the Form class.
  * @type {Form}
  */
-module.exports = Form;
+module.exports = OverlayFormContent;

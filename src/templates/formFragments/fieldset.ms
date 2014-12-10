@@ -2,4 +2,4 @@
     <legend>{{legend}}</legend>
     {{{content}}}
 </fieldset>
-<div class="comment-clear"></div>
+<div class="o-comment-ui-clear"></div>
