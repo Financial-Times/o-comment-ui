@@ -5,26 +5,16 @@
     font-size: 13px;
     text-align: left;
     line-height: 20px;
-    position: fixed;
     vertical-align: middle;
-    z-index: 2500;
     width: $commentDialogWidth;
     border-radius: 9px;
     -moz-border-radius: 9px;
     -webkit-border-radius: 9px;
     margin: 0;
-    top: 0;
-    left: 0;
 
 
     a {
         padding: 0;
-    }
-
-    .o-comment-ui-overlay-container {
-        background: oColorsGetPaletteColor(white);
-        margin: $commentDialogSideMargin;
-        padding: 20px $commentDialogSidePadding 8px;
     }
 
     .o-comment-ui-overlay-message,

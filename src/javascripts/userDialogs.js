@@ -107,7 +107,10 @@ exports.showSetPseudonymDialog = function (callbacks) {
 
 		overlay.open();
 
-		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
+		form.getDomElement().addEventListener('oCommentUi.form.cancel', function () {
+			overlay.close();
+			onCloseInternalHandler();
+		});
 		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
 	}
 };
@@ -227,7 +230,10 @@ exports.showSettingsDialog = function (currentData, callbacks) {
 
 		overlay.open();
 
-		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
+		form.getDomElement().addEventListener('oCommentUi.form.cancel', function () {
+			overlay.close();
+			onCloseInternalHandler();
+		});
 		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
 	}
 };
@@ -339,7 +345,10 @@ exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
 
 		overlay.open();
 
-		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
+		form.getDomElement().addEventListener('oCommentUi.form.cancel', function () {
+			overlay.close();
+			onCloseInternalHandler();
+		});
 		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
 	}
 };
@@ -455,7 +464,10 @@ exports.showEmailAlertDialog = function (callbacks) {
 
 		overlay.open();
 
-		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
+		form.getDomElement().addEventListener('oCommentUi.form.cancel', function () {
+			overlay.close();
+			onCloseInternalHandler();
+		});
 		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
 	}
 };
@@ -533,7 +545,10 @@ exports.showInactivityMessage = function (callbacks) {
 
 		overlay.open();
 
-		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCloseInternalHandler);
+		form.getDomElement().addEventListener('oCommentUi.form.cancel', function () {
+			overlay.close();
+			onCloseInternalHandler();
+		});
 		overlay.wrapper.addEventListener('oOverlay.destroy', onCloseInternalHandler);
 	}
 };
