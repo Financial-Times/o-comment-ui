@@ -2,8 +2,8 @@
     .o-comment-ui--overlay-explanation {
         display: table;
         position: relative;
-        margin: 10px 0 10px #{-$commentDialogSidePadding};
-        width: $commentDialogWidth - 2*$commentDialogSideMargin;
+        margin: 10px 0 10px 0;
+        max-width: $commentDialogWidth;
         height: 138px;
 
         .o-comment-ui--overlay-explanation-text-container {
