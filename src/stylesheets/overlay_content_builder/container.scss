@@ -1,4 +1,4 @@
-.o-comment-ui-overlay {
+.o-comment-ui--overlay-content {
     background: rgba(211, 210, 203, 0.2);
     font-family: oFontsGetFontFamilyWithFallbacks(BentonSans);
     color: oColorsGetPaletteColor(grey-tint4);
@@ -17,24 +17,24 @@
         padding: 0;
     }
 
-    .o-comment-ui-overlay-message,
-    .o-comment-ui-overlay-hint {
+    .o-comment-ui--overlay-message,
+    .o-comment-ui--overlay-hint {
         line-height: 1.2em;
         clear: both;
         width: 100%;
         padding: 5px 0;
     }
 
-    .o-comment-ui-overlay-hint {
+    .o-comment-ui--overlay-hint {
         padding: 0 0 10px;
     }
 
-    .o-comment-ui-overlay-error-message {
+    .o-comment-ui--overlay-error-message {
         color: oColorsGetPaletteColor(red);
         margin-bottom: 10px;
     }
 
-    .o-comment-ui-overlay-button-container {
+    .o-comment-ui--overlay-button-container {
         padding: 26px 0 10px;
         float: right;
 
@@ -43,17 +43,17 @@
             display: inline-block;
         }
 
-        .o-comment-ui-overlay-dismiss {
+        .o-comment-ui--overlay-dismiss {
             display: inline-block;
             padding-right: 10px;
         }
     }
 
-    .o-comment-ui-overlay-cancel {
+    .o-comment-ui--overlay-cancel {
         float: none;
         padding: 0 6px;
 
-        .o-comment-ui-overlay-cancel-button {
+        .o-comment-ui--overlay-cancel-button {
             border: 0;
             color: oColorsGetPaletteColor(blue);
             background: none;

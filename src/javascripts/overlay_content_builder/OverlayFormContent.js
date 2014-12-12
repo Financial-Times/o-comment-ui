@@ -35,7 +35,7 @@ function OverlayFormContent (config) {
 
 
 		container = document.createElement('div');
-		container.className = "o-comment-ui-overlay";
+		container.className = "o-comment-ui--overlay-content";
 
 		formObject = document.createElement('form');
 		formObject.setAttribute('name', config.name || "");
@@ -61,7 +61,7 @@ function OverlayFormContent (config) {
 
 		if (config.buttons && config.buttons.length) {
 			formObject.appendChild(utils.toDOM(buttonContainerTemplate.render()));
-			var buttonContainer = sizzle('.o-comment-ui-overlay-button-container', formObject)[0];
+			var buttonContainer = sizzle('.o-comment-ui--overlay-button-container', formObject)[0];
 
 			for (i = 0; i < config.buttons.length; i++) {
 				button = config.buttons[i];
@@ -95,7 +95,7 @@ function OverlayFormContent (config) {
 
 			formObject.appendChild(utils.toDOM(clearTemplate.render()));
 
-			var cancelButtons = sizzle('.o-comment-ui-overlay-cancel-button', formObject);
+			var cancelButtons = sizzle('.o-comment-ui--overlay-cancel-button', formObject);
 			var triggerCancel = function () {
 				formObject.dispatchEvent(new Event('oCommentUi.form.cancel', {
 					bubbles: true
@@ -163,7 +163,7 @@ function OverlayFormContent (config) {
 	 * @param  {String} errMessages The error message to show.
 	 */
 	this.showError = function (errMessages) {
-		var errMessageContainer = sizzle('.o-comment-ui-overlay-error-message', formObject);
+		var errMessageContainer = sizzle('.o-comment-ui--overlay-error-message', formObject);
 
 		if (errMessageContainer.length) {
 			errMessageContainer[0].innerHTML = errMessages;
@@ -174,7 +174,7 @@ function OverlayFormContent (config) {
 	 * Clears all the errors.
 	 */
 	this.clearError = function () {
-		var errMessageContainer = sizzle('.o-comment-ui-overlay-error-message', formObject);
+		var errMessageContainer = sizzle('.o-comment-ui--overlay-error-message', formObject);
 
 		if (errMessageContainer.length) {
 			errMessageContainer[0].innerHTML = "";

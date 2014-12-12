@@ -1,1 +1,1 @@
-<div class="o-comment-ui-clear"></div>
+<div class="o-comment-ui--clear"></div>

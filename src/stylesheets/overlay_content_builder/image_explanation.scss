@@ -1,28 +1,28 @@
-.o-comment-ui-overlay {
-    .o-comment-ui-overlay-explanation {
+.o-comment-ui--overlay-content {
+    .o-comment-ui--overlay-explanation {
         display: table;
         position: relative;
         margin: 10px 0 10px #{-$commentDialogSidePadding};
         width: $commentDialogWidth - 2*$commentDialogSideMargin;
         height: 138px;
 
-        .o-comment-ui-overlay-explanation-text-container {
+        .o-comment-ui--overlay-explanation-text-container {
             display: table-cell;
             text-align: center;
             vertical-align: middle;
             width: 100%;
         }
 
-        .o-comment-ui-overlay-explanation-text-bg {
+        .o-comment-ui--overlay-explanation-text-bg {
             background: #f8f8f8;
         }
 
-        .o-comment-ui-overlay-explanation-text {
+        .o-comment-ui--overlay-explanation-text {
             width: 220px;
             padding: 10px 0 10px 25px;
         }
 
-        .o-comment-ui-overlay-explanation-image-wrapper {
+        .o-comment-ui--overlay-explanation-image-wrapper {
             display: table-cell;
             vertical-align: middle;
             position: absolute;
@@ -31,29 +31,29 @@
             height: 100%;
         }
 
-        .o-comment-ui-overlay-explanation-image-container {
+        .o-comment-ui--overlay-explanation-image-container {
             display: table;
             vertical-align: middle;
             height: 100%;
         }
 
-        .o-comment-ui-overlay-explanation-image-inner-container {
+        .o-comment-ui--overlay-explanation-image-inner-container {
             display: table-cell;
             vertical-align: middle;
         }
 
-        .o-comment-ui-overlay-explanation-image {
+        .o-comment-ui--overlay-explanation-image {
             display: inline-block;
             width: 138px;
             height: 138px;
             vertical-align: middle;
         }
 
-        .o-comment-ui-overlay-explanation-follow {
+        .o-comment-ui--overlay-explanation-follow {
             background: url(oAssetsResolve("src/images/comment_magnifier_follow.png", o-comment-ui)) no-repeat;
         }
 
-	    .o-comment-ui-overlay-explanation-settings {
+	    .o-comment-ui--overlay-explanation-settings {
 	        background: url(oAssetsResolve("src/images/comment_magnifier_settings.png", o-comment-ui)) no-repeat;
 	    }
     }
