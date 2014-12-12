@@ -95,9 +95,9 @@ function OverlayFormContent (config) {
 
 			formObject.appendChild(utils.toDOM(clearTemplate.render()));
 
-			var cancelButtons = sizzle('.o-comment-ui--overlay-cancel-button', formObject);
+			var cancelButtons = sizzle('.o-comment-ui--cancel-button', formObject);
 			var triggerCancel = function () {
-				formObject.dispatchEvent(new Event('oCommentUi.form.cancel', {
+				container.dispatchEvent(new Event('oCommentUi.form.cancel', {
 					bubbles: true
 				}));
 			};
