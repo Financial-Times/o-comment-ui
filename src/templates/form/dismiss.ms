@@ -1,5 +1,5 @@
-<span class="o-comment-ui--overlay-dismiss">
-    <label for="o-comment-ui--overlay-dismiss">
+<span class="o-comment-ui--dismiss">
+    <label for="o-comment-ui--dismiss">
         {{label}}
     </label>
     <input name="dismiss" id="dismiss" type="checkbox" />

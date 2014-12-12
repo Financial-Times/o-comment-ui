@@ -1,4 +1,4 @@
-@mixin o-comment-ui--overlay-button() {
+@mixin o-comment-ui--button() {
     display: inline-block;
     margin: 0;
     padding: 0 8px;
@@ -37,6 +37,6 @@
         -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#b5b5b5, endColorstr=#a5a5a5)";
     }
 }
-.o-comment-ui--overlay-button {
-    @include o-comment-ui--overlay-button();
+.o-comment-ui--button {
+    @include o-comment-ui--button();
 }
