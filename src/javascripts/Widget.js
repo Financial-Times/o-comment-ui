@@ -71,7 +71,7 @@ function Widget (config) {
 				} else {
 					throw "Selector not valid or does not exists.";
 				}
-			} else if (config.container instanceof HTMLElement) {
+			} else if ((window.HTMLElement && config.container instanceof window.HTMLElement) || (window.Element && config.container instanceof window.Element)) {
 				widgetEl = config.container;
 			}
 		}
