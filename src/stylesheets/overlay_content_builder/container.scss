@@ -7,6 +7,7 @@
     line-height: 20px;
     vertical-align: middle;
     max-width: $commentDialogWidth;
+    width: $commentDialogWidth + \9; /*IE <9 only*/
     border-radius: 9px;
     -moz-border-radius: 9px;
     -webkit-border-radius: 9px;
