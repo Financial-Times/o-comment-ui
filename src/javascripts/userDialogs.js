@@ -48,7 +48,7 @@ exports.showSetPseudonymDialog = function (callbacks) {
 
 		var idOfTheOverlay = "oCommentUi_showSetPseudonymDialog";
 		var overlay = new Overlay(idOfTheOverlay, {
-			html: form.getDomElement(),
+			html: form.getContainerDomElement(),
 			heading: {
 				title: "Commenting Settings"
 			},
@@ -57,7 +57,7 @@ exports.showSetPseudonymDialog = function (callbacks) {
 
 		var ignoreCloseEvent = false;
 
-		form.getDomElement().addEventListener('submit', function (evt) {
+		form.getFormDomElement().addEventListener('submit', function (evt) {
 			if (!inProgress) {
 				inProgress = true;
 				form.disableButtons();
@@ -107,7 +107,7 @@ exports.showSetPseudonymDialog = function (callbacks) {
 
 		overlay.open();
 
-		form.getDomElement().addEventListener('oCommentUi.form.cancel', function () {
+		form.getContainerDomElement().addEventListener('oCommentUi.form.cancel', function () {
 			overlay.close();
 			onCloseInternalHandler();
 		});
@@ -172,7 +172,7 @@ exports.showSettingsDialog = function (currentData, callbacks) {
 
 		var idOfTheOverlay = "oCommentUi_showSettingsDialog";
 		var overlay = new Overlay(idOfTheOverlay, {
-			html: form.getDomElement(),
+			html: form.getContainerDomElement(),
 			heading: {
 				title: "Commenting Settings"
 			},
@@ -181,7 +181,7 @@ exports.showSettingsDialog = function (currentData, callbacks) {
 
 		var ignoreCloseEvent = false;
 
-		form.getDomElement().addEventListener('submit', function (evt) {
+		form.getFormDomElement().addEventListener('submit', function (evt) {
 			if (!inProgress) {
 				inProgress = true;
 				form.disableButtons();
@@ -230,7 +230,7 @@ exports.showSettingsDialog = function (currentData, callbacks) {
 
 		overlay.open();
 
-		form.getDomElement().addEventListener('oCommentUi.form.cancel', function () {
+		form.getContainerDomElement().addEventListener('oCommentUi.form.cancel', function () {
 			overlay.close();
 			onCloseInternalHandler();
 		});
@@ -291,7 +291,7 @@ exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
 
 		var idOfTheOverlay = "oCommentUi_showChangePseudonymDialog";
 		var overlay = new Overlay(idOfTheOverlay, {
-			html: form.getDomElement(),
+			html: form.getContainerDomElement(),
 			heading: {
 				title: "Commenting Settings"
 			},
@@ -300,7 +300,7 @@ exports.showChangePseudonymDialog = function (currentPseudonym, callbacks) {
 
 		var ignoreCloseEvent = false;
 
-		form.getDomElement().addEventListener('submit', function (evt) {
+		form.getFormDomElement().addEventListener('submit', function (evt) {
 			if (!inProgress) {
 				inProgress = true;
 				form.disableButtons();

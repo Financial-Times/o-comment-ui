@@ -110,8 +110,13 @@ function OverlayFormContent (config) {
 	init.call(this);
 
 
-	this.getDomElement = function () {
+	this.getContainerDomElement = function () {
 		return container;
+	};
+	this.getDomElement = this.getContainerDomElement;
+
+	this.getFormDomElement = function () {
+		return formObject;
 	};
 
 
