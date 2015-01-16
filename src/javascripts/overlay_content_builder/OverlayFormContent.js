@@ -97,7 +97,7 @@ function OverlayFormContent (config) {
 
 			var cancelButtons = sizzle('.o-comment-ui--cancel-button', formObject);
 			var triggerCancel = function () {
-				container.dispatchEvent(new Event('oCommentUi.form.cancel', {
+				container.dispatchEvent(new CustomEvent('oCommentUi.form.cancel', {
 					bubbles: true
 				}));
 			};
