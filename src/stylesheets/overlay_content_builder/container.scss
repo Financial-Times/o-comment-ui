@@ -13,9 +13,14 @@
 	-webkit-border-radius: 9px;
 	margin: 0;
 
-
 	a {
+		color: oColorsGetPaletteColor(blue);
+		text-decoration: none;
 		padding: 0;
+
+		&:hover {
+			color: oColorsGetPaletteColor(black);
+		}
 	}
 
 	.o-comment-ui--overlay-message,
