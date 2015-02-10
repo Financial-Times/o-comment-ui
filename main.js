@@ -15,8 +15,8 @@ exports.templates = require('./src/javascripts/templates.js');
 exports.utils = require('./src/javascripts/utils.js');
 
 exports.overlayContentBuilder = {
-    OverlayFormContent: require('./src/javascripts/overlay_content_builder/OverlayFormContent.js'),
-    formFragments: require('./src/javascripts/overlay_content_builder/formFragments.js')
+	OverlayFormContent: require('./src/javascripts/overlay_content_builder/OverlayFormContent.js'),
+	formFragments: require('./src/javascripts/overlay_content_builder/formFragments.js')
 };
 
 /**
@@ -24,7 +24,7 @@ exports.overlayContentBuilder = {
  * @type {function}
  */
 exports.enableLogging = function () {
-    oCommentUtilities.logger.enable.apply(this, arguments);
+	oCommentUtilities.logger.enable.apply(this, arguments);
 };
 
 /**
@@ -32,7 +32,7 @@ exports.enableLogging = function () {
  * @type {function}
  */
 exports.disableLogging = function () {
-    oCommentUtilities.logger.disable.apply(this, arguments);
+	oCommentUtilities.logger.disable.apply(this, arguments);
 };
 
 /**
@@ -40,5 +40,5 @@ exports.disableLogging = function () {
  * @type {number|string}
  */
 exports.setLoggingLevel = function () {
-    oCommentUtilities.logger.setLevel.apply(this, arguments);
+	oCommentUtilities.logger.setLevel.apply(this, arguments);
 };

@@ -1,7 +1,6 @@
 "use strict";
 
 var hogan = require('hogan');
-var sizzle = require('sizzle');
 
 var templates = require('../templates.js');
 
@@ -61,7 +60,7 @@ function OverlayFormContent (config) {
 
 		if (config.buttons && config.buttons.length) {
 			formObject.appendChild(utils.toDOM(buttonContainerTemplate.render()));
-			var buttonContainer = sizzle('.o-comment-ui--overlay-button-container', formObject)[0];
+			var buttonContainer = formObject.querySelector('.o-comment-ui--overlay-button-container');
 
 			for (i = 0; i < config.buttons.length; i++) {
 				button = config.buttons[i];
@@ -95,7 +94,7 @@ function OverlayFormContent (config) {
 
 			formObject.appendChild(utils.toDOM(clearTemplate.render()));
 
-			var cancelButtons = sizzle('.o-comment-ui--cancel-button', formObject);
+			var cancelButtons = formObject.querySelectorAll('.o-comment-ui--cancel-button');
 			var triggerCancel = function () {
 				container.dispatchEvent(new CustomEvent('oCommentUi.form.cancel', {
 					bubbles: true
@@ -168,10 +167,10 @@ function OverlayFormContent (config) {
 	 * @param  {String} errMessages The error message to show.
 	 */
 	this.showError = function (errMessages) {
-		var errMessageContainer = sizzle('.o-comment-ui--overlay-error-message', formObject);
+		var errMessageContainer = formObject.querySelector('.o-comment-ui--overlay-error-message');
 
-		if (errMessageContainer.length) {
-			errMessageContainer[0].innerHTML = errMessages;
+		if (errMessageContainer) {
+			errMessageContainer.innerHTML = errMessages;
 		}
 	};
 
@@ -179,10 +178,10 @@ function OverlayFormContent (config) {
 	 * Clears all the errors.
 	 */
 	this.clearError = function () {
-		var errMessageContainer = sizzle('.o-comment-ui--overlay-error-message', formObject);
+		var errMessageContainer = formObject.querySelector('.o-comment-ui--overlay-error-message');
 
-		if (errMessageContainer.length) {
-			errMessageContainer[0].innerHTML = "";
+		if (errMessageContainer) {
+			errMessageContainer.innerHTML = "";
 		}
 	};
 
@@ -201,9 +200,9 @@ function OverlayFormContent (config) {
      * Disables the buttons (useful when an action is already in progress).
      */
     this.disableButtons = function() {
-        var buttons = sizzle('button', formObject);
-        var buttonInputs = sizzle('input[type=button]', formObject);
-        var submitInputs = sizzle('input[type=submit]', formObject);
+        var buttons = formObject.querySelectorAll('button');
+        var buttonInputs = formObject.querySelectorAll('input[type=button]');
+        var submitInputs = formObject.querySelectorAll('input[type=submit]');
 
         disableAllButtons(buttons);
         disableAllButtons(buttonInputs);
@@ -226,9 +225,9 @@ function OverlayFormContent (config) {
      * and the user is given back the control).
      */
     this.enableButtons = function() {
-        var buttons = sizzle('button', formObject);
-        var buttonInputs = sizzle('input[type=button]', formObject);
-        var submitInputs = sizzle('input[type=submit]', formObject);
+        var buttons = formObject.querySelectorAll('button');
+        var buttonInputs = formObject.querySelectorAll('input[type=button]');
+        var submitInputs = formObject.querySelectorAll('input[type=submit]');
 
         enableAllButtons(buttons);
         enableAllButtons(buttonInputs);
