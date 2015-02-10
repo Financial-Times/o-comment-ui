@@ -3,8 +3,6 @@
 var oCommentUtilities = require('o-comment-utilities'),
 	WidgetUi = require('./WidgetUi.js');
 
-var sizzle = require('sizzle');
-
 /**
  * Widget is responsible to coordinate getting initialization data, loading resources and initializing the Ui.
  * While this class implements some of the basic functionality (handling errors, loading timeout),
@@ -65,7 +63,7 @@ function Widget (config) {
 			widgetEl = document.getElementById(config.elId);
 		} else {
 			if (typeof config.container === "string") {
-				var widgetElSelected = sizzle(config.container);
+				var widgetElSelected = document.querySelectorAll(config.container);
 				if (widgetElSelected.length) {
 					widgetEl = widgetElSelected[0];
 				} else {

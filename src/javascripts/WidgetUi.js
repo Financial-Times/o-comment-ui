@@ -3,8 +3,6 @@
 var i18n = require('./i18n.js'),
 	templates = require('./templates.js');
 
-var sizzle = require('sizzle');
-
 /**
  * This class is responsible to handle the UI part of a commenting widget. An instance of this is created within an instance of the `Widget`.
  * While this implementation has predefined methods, it can be extended with particular UI methods.
@@ -17,9 +15,9 @@ function WidgetUi (widgetContainer) {
 
 	try {
 		if (typeof widgetContainer === "string") {
-			var widgetElSelect = sizzle(widgetContainer);
+			var widgetElSelect = document.querySelectorAll(widgetContainer);
 			if (widgetElSelect.length) {
-				this.widgetContainer = widgetContainer;
+				this.widgetContainer = widgetContainer[0];
 			} else {
 				throw "Selector not valid or does not exists.";
 			}
