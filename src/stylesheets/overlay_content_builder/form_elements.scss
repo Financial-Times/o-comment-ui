@@ -22,7 +22,7 @@
 		display: block;
 	}
 
-	label.inline {
+	.label-inline {
 		display: inline-block;
 		vertical-align: middle;
 		width: 30%;
@@ -35,8 +35,7 @@
 		vertical-align: middle;
 	}
 
-	input.text,
-	input.password,
+	.input-text,
 	textarea,
 	select {
 		display: block;
@@ -50,16 +49,13 @@
 		padding: 0;
 	}
 
-	input.text.inline,
-	input.password.inline,
-	textarea.inline,
-	select.inline {
+	.input-inline {
 		display: inline-block;
 		width: 60%;
 	}
 
-	input.checkbox,
-	input.radio {
+	.checkbox,
+	.radio {
 		margin: 0 5px 0 0;
 		padding: 0;
 	}

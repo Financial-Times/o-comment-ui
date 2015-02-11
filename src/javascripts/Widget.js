@@ -78,7 +78,7 @@ function Widget (config) {
 	}
 
 	if (!widgetEl.id) {
-		widgetEl.id = self.eventNamespace + '-' + Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+		widgetEl.id = self.eventNamespace + '-' + oCommentUtilities.generateId();
 		config.elId = widgetEl.id;
 	}
 
