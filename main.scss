@@ -1,6 +1,8 @@
 @import 'o-colors/main';
 @import 'o-assets/main';
 @import "o-fonts/main";
+
+$o-overlay-is-silent: false;
 @import "o-overlay/main";
 
 $o-ft-icons-is-silent: false;
