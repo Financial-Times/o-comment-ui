@@ -91,10 +91,6 @@ function Widget (config) {
 		throw "Container does not exist.";
 	}
 
-	if (config.layout) {
-		widgetEl.className += ' comment-layout-' + config.layout;
-	}
-
 
 	this.config = config;
 
