@@ -1,12 +1,12 @@
 {
   "name": "o-comment-ui",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "main": [
     "main.js",
     "main.scss"
   ],
   "dependencies": {
-    "o-comment-utilities": "^0.5.0",
+    "o-comment-utilities": "^1.0.0",
     "o-ft-icons": "^2.3.2",
     "o-colors": "^2.3.17",
     "o-assets": "^0.4.2",
