@@ -2,6 +2,7 @@
 
 var Overlay = require('o-overlay'),
 	OverlayFormContent = require('../overlay_content_builder/OverlayFormContent.js');
+var userDialogsHelper = require('./userDialogsHelper.js');
 
 var shown = false;
 
@@ -115,6 +116,7 @@ exports.show = function (currentData, callbacks) {
 
 			if (overlayInstance) {
 				overlayInstance.wrapper.removeEventListener('oOverlay.destroy', onCloseInternalHandler);
+				document.removeEventListener('oOverlay.ready', autofocusHandlerAttached);
 				overlayInstance.destroy();
 				overlayInstance = null;
 			}
@@ -126,6 +128,7 @@ exports.show = function (currentData, callbacks) {
 			}
 		};
 
+		var autofocusHandlerAttached = userDialogsHelper.addAutofocus(overlayInstance);
 		overlayInstance.open();
 
 		var onCancelHandler = function () {
