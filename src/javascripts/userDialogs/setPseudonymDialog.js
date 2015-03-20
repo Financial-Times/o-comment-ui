@@ -3,7 +3,6 @@
 var Overlay = require('o-overlay'),
 	OverlayFormContent = require('../overlay_content_builder/OverlayFormContent.js'),
 	oCommentUtilities = require('o-comment-utilities');
-var userDialogsHelper = require('./userDialogsHelper.js');
 
 var shown = false;
 

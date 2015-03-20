@@ -2,7 +2,6 @@
 
 var Overlay = require('o-overlay'),
 	OverlayFormContent = require('../overlay_content_builder/OverlayFormContent.js');
-var userDialogsHelper = require('./userDialogsHelper.js');
 
 var shown = false;
 /**
