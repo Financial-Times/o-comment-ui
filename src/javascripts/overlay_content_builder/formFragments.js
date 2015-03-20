@@ -18,8 +18,7 @@ exports.initialPseudonym = function () {
         content: pseudonymTemplate.render({
             name: 'pseudonym',
             label: 'In order to use the commenting system, please choose a pseudonym.',
-            currentPseudonym: '',
-            autofocus: true
+            currentPseudonym: ''
         })
     });
 };
@@ -36,8 +35,7 @@ exports.changePseudonym = function (config) {
             name: 'pseudonym',
             label: 'This is displayed with your comments. If you change it, previous '+
                 'comments will also be attributed to the new pseudonym.',
-            currentPseudonym: config.currentPseudonym || '',
-            autofocus: true
+            currentPseudonym: config.currentPseudonym || ''
         })
     });
 };

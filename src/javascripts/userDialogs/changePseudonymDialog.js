@@ -110,7 +110,6 @@ exports.show = function (currentPseudonym, callbacks) {
 
 			if (overlayInstance) {
 				overlayInstance.wrapper.removeEventListener('oOverlay.destroy', onCloseInternalHandler);
-				document.removeEventListener('oOverlay.ready', autofocusHandlerAttached);
 				overlayInstance.destroy();
 				overlayInstance = null;
 			}
@@ -122,7 +121,6 @@ exports.show = function (currentPseudonym, callbacks) {
 			}
 		};
 
-		var autofocusHandlerAttached = userDialogsHelper.addAutofocus(overlayInstance);
 		overlayInstance.open();
 
 		var onCancelHandler = function () {
