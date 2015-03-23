@@ -187,52 +187,52 @@ function OverlayFormContent (config) {
 
 
 	/**
-     * Disable all buttons of a button collection.
-     * @param  {Array} buttons Array of buttons (DOM objects).
-     */
-    var disableAllButtons = function (buttons) {
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].setAttribute('disabled', 'disabled');
-        }
-    };
+	 * Disable all buttons of a button collection.
+	 * @param  {Array} buttons Array of buttons (DOM objects).
+	 */
+	var disableAllButtons = function (buttons) {
+		for (var i = 0; i < buttons.length; i++) {
+			buttons[i].setAttribute('disabled', 'disabled');
+		}
+	};
 
-    /**
-     * Disables the buttons (useful when an action is already in progress).
-     */
-    this.disableButtons = function() {
-        var buttons = formObject.querySelectorAll('button');
-        var buttonInputs = formObject.querySelectorAll('input[type=button]');
-        var submitInputs = formObject.querySelectorAll('input[type=submit]');
+	/**
+	 * Disables the buttons (useful when an action is already in progress).
+	 */
+	this.disableButtons = function() {
+		var buttons = formObject.querySelectorAll('button');
+		var buttonInputs = formObject.querySelectorAll('input[type=button]');
+		var submitInputs = formObject.querySelectorAll('input[type=submit]');
 
-        disableAllButtons(buttons);
-        disableAllButtons(buttonInputs);
-        disableAllButtons(submitInputs);
-    };
+		disableAllButtons(buttons);
+		disableAllButtons(buttonInputs);
+		disableAllButtons(submitInputs);
+	};
 
 
-    /**
-     * Enable all buttons of a button collection.
-     * @param  {Array} buttons Array of buttons (DOM objects).
-     */
-    var enableAllButtons = function (buttons) {
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].removeAttribute('disabled');
-        }
-    };
+	/**
+	 * Enable all buttons of a button collection.
+	 * @param  {Array} buttons Array of buttons (DOM objects).
+	 */
+	var enableAllButtons = function (buttons) {
+		for (var i = 0; i < buttons.length; i++) {
+			buttons[i].removeAttribute('disabled');
+		}
+	};
 
-    /**
-     * Enables the buttons (useful when the buttons were disabled while an action was in progress
-     * and the user is given back the control).
-     */
-    this.enableButtons = function() {
-        var buttons = formObject.querySelectorAll('button');
-        var buttonInputs = formObject.querySelectorAll('input[type=button]');
-        var submitInputs = formObject.querySelectorAll('input[type=submit]');
+	/**
+	 * Enables the buttons (useful when the buttons were disabled while an action was in progress
+	 * and the user is given back the control).
+	 */
+	this.enableButtons = function() {
+		var buttons = formObject.querySelectorAll('button');
+		var buttonInputs = formObject.querySelectorAll('input[type=button]');
+		var submitInputs = formObject.querySelectorAll('input[type=submit]');
 
-        enableAllButtons(buttons);
-        enableAllButtons(buttonInputs);
-        enableAllButtons(submitInputs);
-    };
+		enableAllButtons(buttons);
+		enableAllButtons(buttonInputs);
+		enableAllButtons(submitInputs);
+	};
 
 	this.destroy = function () {
 		formObject = null;
