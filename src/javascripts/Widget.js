@@ -22,60 +22,20 @@ var oCommentUtilities = require('o-comment-utilities'),
  *
  * @param {Object} config Configuration object, as described in the class description.
  */
-function Widget (config) {
+function Widget (rootEl, config) {
 	var widgetEl, self;
 
 	self = this;
 
-	/**
-	 * Validation of the initial configuration object.
-	 */
-	if (!config) {
-		throw "Config not specified.";
+	if (!rootEl) {
+		rootEl = document.body;
+	} else if (!(rootEl instanceof HTMLElement)) {
+		rootEl = document.querySelector(rootEl);
 	}
 
-	if (!config.articleId) {
-		if (!config.articleid) {
-			throw "Article ID is not specified.";
-		} else {
-			config.articleId = config.articleid;
-		}
-	}
+	rootEl.setAttribute('data-'+ self.classNamespace +'-js', '');
 
-	if (!config.url) {
-		throw "URL is not speficied.";
-	}
-
-	if (!config.title) {
-		throw "Title is not specified.";
-	}
-
-	try {
-		if (!config.container) {
-			if (!config.elId) {
-				if (!config.elid) {
-					throw "Container element is not specified.";
-				} else {
-					config.elId = config.elid;
-				}
-			}
-
-			widgetEl = document.getElementById(config.elId);
-		} else {
-			if (typeof config.container === "string") {
-				var widgetElSelected = document.querySelectorAll(config.container);
-				if (widgetElSelected.length) {
-					widgetEl = widgetElSelected[0];
-				} else {
-					throw "Selector not valid or does not exists.";
-				}
-			} else if ((window.HTMLElement && config.container instanceof window.HTMLElement) || (window.Element && config.container instanceof window.Element)) {
-				widgetEl = config.container;
-			}
-		}
-	} catch (e) {
-		widgetEl = config.container;
-	}
+	widgetEl = rootEl;
 
 	if (!widgetEl.id) {
 		widgetEl.id = self.eventNamespace + '-' + oCommentUtilities.generateId();
@@ -83,13 +43,32 @@ function Widget (config) {
 	}
 
 
+	/**
+	 * Validation of the initial configuration object.
+	 */
+	if (!config) {
+		return;
+	}
+
+	if (!config.articleId) {
+		if (!config.articleid) {
+			return;
+		} else {
+			config.articleId = config.articleid;
+		}
+	}
+
+	if (!config.url) {
+		return;
+	}
+
+	if (!config.title) {
+		return;
+	}
+
+
 
 	config.timeout = config.timeout || 15;
-
-
-	if (!widgetEl) {
-		throw "Container does not exist.";
-	}
 
 
 	this.config = config;
@@ -160,7 +139,7 @@ function Widget (config) {
 	 * save it in the constructor in a variable (var self = this)
 	 * and use that variable.
 	 */
-	this.init = undefined;
+	this.loadInitData = undefined;
 
 
 	this.onTimeout = function () {
@@ -185,13 +164,13 @@ function Widget (config) {
 	};
 }
 
-Widget.prototype.loadCalled = false;
+Widget.prototype.initCalled = false;
 
-Widget.prototype.load = function () {
+Widget.prototype.init = function () {
 	var self = this;
 
-	if (!this.loadCalled) {
-		this.loadCalled = true;
+	if (!this.initCalled) {
+		this.initCalled = true;
 
 		var timeout;
 		if (this.config.timeout > 0) {
@@ -204,14 +183,14 @@ Widget.prototype.load = function () {
 
 		oCommentUtilities.functionSync.parallel({
 			loadResources: this.loadResources,
-			init: this.init
+			loadInitData: this.loadInitData
 		}, function (err, data) {
 			if (err) {
 				if (err.key === 'loadResources') {
 					self.trigger('error.resources', err.error);
 				}
 
-				if (err.key === 'init') {
+				if (err.key === 'loadInitData') {
 					self.trigger('error.init', err.error);
 				}
 
@@ -242,8 +221,9 @@ Widget.prototype.load = function () {
 	}
 };
 Widget.prototype.eventNamespace = 'oCommentUi';
+Widget.prototype.classNamespace = 'o-comment-ui';
 
-Widget.__extend = function(child, eventNamespace) {
+Widget.__extend = function(child, eventNamespace, classNamespace) {
 	if (typeof Object.create === 'function') {
 		child.prototype = Object.create(Widget.prototype);
 	} else {
@@ -255,6 +235,7 @@ Widget.__extend = function(child, eventNamespace) {
 
 	if (eventNamespace) {
 		child.prototype.eventNamespace = eventNamespace;
+		child.prototype.classNamespace = classNamespace;
 	}
 };
 
