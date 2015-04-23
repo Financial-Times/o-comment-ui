@@ -9,8 +9,8 @@
     "o-ft-icons": "^2.3.2",
     "o-colors": "^2.3.17",
     "o-assets": "^0.4.2",
-    "o-fonts": "^1.4.1",
     "o-overlay": "^1.1.2",
+    
     "hogan": "git+https://github.com/twitter/hogan.js.git#3.0.0"
   },
   "ignore": [
