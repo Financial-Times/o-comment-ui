@@ -6,10 +6,10 @@
   ],
   "dependencies": {
     "o-comment-utilities": "^1.0.0",
-    "o-ft-icons": "^2.3.2",
-    "o-colors": "^2.3.17",
-    "o-assets": "^0.4.2",
-    "o-overlay": "^1.1.2",
+    "o-ft-icons": "^2.3.6",
+    "o-colors": "^2.4.7",
+    "o-assets": "^2.0.0",
+    "o-overlay": "^1.4.5",
     
     "hogan": "git+https://github.com/twitter/hogan.js.git#3.0.0"
   },
