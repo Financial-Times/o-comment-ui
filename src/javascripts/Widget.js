@@ -168,6 +168,10 @@ Widget.prototype.initCalled = false;
 Widget.prototype.init = function () {
 	var self = this;
 
+	if (!this.config) {
+		return;
+	}
+
 	if (!this.initCalled) {
 		this.initCalled = true;
 
