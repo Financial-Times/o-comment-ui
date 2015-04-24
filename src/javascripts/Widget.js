@@ -11,7 +11,6 @@ var oCommentUtilities = require('o-comment-utilities'),
  * #### Configuration
  * ###### Mandatory fields:
  *
- * - elId: ID of the HTML element in which the widget should be loaded
  * - articleId: ID of the article, any string
  * - url: canonical URL of the page
  * - title: Title of the page
@@ -39,8 +38,8 @@ function Widget (rootEl, config) {
 
 	if (!widgetEl.id) {
 		widgetEl.id = self.eventNamespace + '-' + oCommentUtilities.generateId();
-		config.elId = widgetEl.id;
 	}
+	config.elId = widgetEl.id;
 
 
 	/**
