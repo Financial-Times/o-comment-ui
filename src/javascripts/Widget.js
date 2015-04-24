@@ -183,14 +183,14 @@ Widget.prototype.init = function () {
 
 		oCommentUtilities.functionSync.parallel({
 			loadResources: this.loadResources,
-			loadInitData: this.loadInitData
+			initData: this.loadInitData
 		}, function (err, data) {
 			if (err) {
 				if (err.key === 'loadResources') {
 					self.trigger('error.resources', err.error);
 				}
 
-				if (err.key === 'loadInitData') {
+				if (err.key === 'initData') {
 					self.trigger('error.init', err.error);
 				}
 
@@ -201,10 +201,10 @@ Widget.prototype.init = function () {
 				return;
 			}
 
-			if (data.init) {
-				self.trigger('data.init', data.init);
+			if (data.initData) {
+				self.trigger('data.init', data.initData);
 
-				self.render(data.init, function (err) {
+				self.render(data.initData, function (err) {
 					if (err) {
 						self.trigger('error.widget', err);
 						self.onError(err);
