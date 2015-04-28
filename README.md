@@ -10,7 +10,7 @@ JavaScript module which incorporates common UI elements of the FT commenting sys
      * <a href="#widgetui">Widget UI</a>
      * <a href="#dialogs">Dialogs</a>
      * <a href="#templates">Templates</a>
-     * <a href="#i18n">Internatinalization</a>
+     * <a href="#i18n">Internationalization</a>
      * <a href="#logging">Logging</a>
  * <a href="#sassapi"> Sass API
      * <a href="#fontfamily">Font family</a>
