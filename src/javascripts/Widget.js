@@ -114,7 +114,7 @@ function Widget (rootEl, config) {
 	this.trigger = function (eventName, data) {
 		var payload = {
 			data: data,
-			widget: this,
+			instance: self,
 			id: config.elId
 		};
 
