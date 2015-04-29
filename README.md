@@ -4,7 +4,6 @@ JavaScript module which incorporates common UI elements of the FT commenting sys
 
 ## Contents
 
- * <a href="#howtouseit">How to use it</a>
  * <a href="#jsapi">JavaScript API</a>
      * <a href="#widget">Widget</a>
      * <a href="#widgetui">Widget UI</a>
@@ -16,20 +15,6 @@ JavaScript module which incorporates common UI elements of the FT commenting sys
      * <a href="#fontfamily">Font family</a>
  * <a href="#browser">Browser support</a>
  * <a href="#core">Core/enhanced experience</a>
-
-## <div id="howtouseit"></div> How to use it
-
-Javascript:
-
-```javascript
-var oCommentUi = require('o-comment-ui');
-```
-
-SCSS:
-
-```css
-@import 'o-comment-ui/main';
-```
 
 ## <div id="jsapi"></div> JavaScript API
 ### <div id="widget"></div> Widget
