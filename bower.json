@@ -7,7 +7,7 @@
   "dependencies": {
     "o-comment-utilities": "^1.0.0",
     "o-ft-icons": "^2.3.6",
-    "o-colors": "^2.4.7",
+    "o-colors": ">=2.4.7 <4",
     "o-assets": "^2.0.0",
     "o-overlay": "^1.4.5",
     
