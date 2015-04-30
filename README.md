@@ -314,7 +314,7 @@ There is a default font-family set for o-comment-ui: `BentonSans, sans-serif`
 In order to override the default font, set a value for the following variable:
 
 ```scss
-$o-comment-ui-font-family: 'Your font-family here';
+$o-comment-ui-font-family: font1, font2;
 ```
 
 ## <div id="browser"></div> Browser support 
