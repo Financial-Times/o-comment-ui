@@ -189,10 +189,10 @@ Widget.prototype.init = function () {
 				return;
 			}
 
-			if (data.initData) {
-				self.trigger('data.init', data.initData);
+			if (data) {
+				self.trigger('data.init', data);
 
-				self.render(data.initData, function (err) {
+				self.render(data, function (err) {
 					if (err) {
 						self.trigger('error.widget', err);
 
