@@ -18,7 +18,7 @@ JavaScript module which incorporates common UI elements of the FT commenting sys
 
 ## <div id="jsapi"></div> JavaScript API
 ### <div id="widget"></div> Widget
-Widget is responsible to coordinate getting initialization data, loading resources and initializing the Ui. While this class implements some of the basic functionality (handling errors, loading timeout), it should be extended by providing an implementation for getting the initialization data and loading the resources.
+Widget is responsible to coordinate getting initialization data, initializing the Ui. While this class implements some of the basic functionality (handling errors, loading timeout), it should be extended by providing an implementation for getting the initialization data.
 
 #### Constructor
 
@@ -50,8 +50,8 @@ new oCommentUi.Widget(el, {
 
 #### Final methods
 ###### init
-This method will initiate the process of loading the resources that are needed to render the widget and the rendering of the UI. This method uses hook methods which are not implemented in this module, but should be implemented in the module that extends it.
-`Init` will handle errors of the process of loading the widget, also timeout if an error is not clearly available.
+This method will initiate the process of loading the initialization data that are needed to render the widget and the rendering of the UI. This method uses hook methods which are not implemented in this module, but should be implemented in the module that extends it.
+`init` will handle errors of the process of loading the widget, also timeout if an error is not available.
 
 This method can be called once on an instance (calling it multiple types will have no effect).
 
@@ -59,11 +59,8 @@ This method can be called once on an instance (calling it multiple types will ha
 ###### loadInitData
 This method is responsible for gathering data that is needed to initialize the widget (e.g. metadata, site ID, comments, etc.).
 
-###### loadResources
-This method is responsible for loading resources like JavaScript libraries, stylesheets.
-
 ###### render
-This method is responsible for rendering the UI of the widget on the page. Render is called when the initialization process is done and all resources are loaded.
+This method is responsible for rendering the UI of the widget on the page. Render is called when the initialization process is done.
 This method is called using the data gathered during the init process:
 
 ```javascript

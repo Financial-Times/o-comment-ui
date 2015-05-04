@@ -130,15 +130,9 @@ function Widget (rootEl, config) {
 	 * save it in the constructor in a variable (var self = this)
 	 * and use that variable.
 	 */
-	this.loadResources = undefined;
-
-	/**
-	 * ! 'this' could not have the value of the instance.
-	 * To be sure you use the correct instance value, you should
-	 * save it in the constructor in a variable (var self = this)
-	 * and use that variable.
-	 */
-	this.loadInitData = undefined;
+	this.loadInitData = function (callback) {
+		callback(new Error("Not implemented"));
+	};
 
 
 	this.onTimeout = function () {
@@ -184,20 +178,11 @@ Widget.prototype.init = function () {
 			}, this.config.timeout * 1000);
 		}
 
-		oCommentUtilities.functionSync.parallel({
-			loadResources: this.loadResources,
-			initData: this.loadInitData
-		}, function (err, data) {
+		self.loadInitData(function (err, data) {
 			if (err) {
-				if (err.key === 'loadResources') {
-					self.trigger('error.resources', err.error);
-				}
-
-				if (err.key === 'initData') {
-					self.trigger('error.init', err.error);
-				}
-
+				self.trigger('error.init', err.error);
 				self.trigger('error.widget', err.error);
+
 				self.onError(err);
 
 				clearTimeout(timeout);
@@ -210,6 +195,7 @@ Widget.prototype.init = function () {
 				self.render(data.initData, function (err) {
 					if (err) {
 						self.trigger('error.widget', err);
+
 						self.onError(err);
 
 						clearTimeout(timeout);
