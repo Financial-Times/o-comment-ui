@@ -26,10 +26,23 @@ function Widget (rootEl, config) {
 
 	self = this;
 
-	if (!rootEl) {
-		rootEl = document.body;
-	} else if (!(rootEl instanceof HTMLElement)) {
-		rootEl = document.querySelector(rootEl);
+	try {
+		if (!rootEl) {
+			rootEl = document.body;
+		} else if (!(rootEl instanceof HTMLElement)) { // could throw exception in IE
+			rootEl = document.querySelector(rootEl);
+		}
+	} catch (e) {
+		var el;
+		if (typeof rootEl === 'string') {
+			el = document.querySelector(rootEl);
+		}
+
+		if (el) {
+			rootEl = el;
+		} else {
+			rootEl = document.body;
+		}
 	}
 
 	rootEl.setAttribute('data-'+ self.classNamespace +'-js', '');
