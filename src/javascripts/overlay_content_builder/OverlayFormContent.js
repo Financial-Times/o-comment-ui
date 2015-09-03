@@ -1,29 +1,27 @@
-"use strict";
+const hogan = require('hogan');
 
-var hogan = require('hogan');
+const templates = require('../templates.js');
 
-var templates = require('../templates.js');
+const utils = require('../utils.js');
+const formFragments = require('./formFragments.js');
 
-var utils = require('../utils.js');
-var formFragments = require('./formFragments.js');
-
-var errorMessageContainerTemplate = hogan.compile(requireText('../../templates/form/errorMessageContainer.ms'));
-var buttonContainerTemplate = hogan.compile(requireText('../../templates/form/buttonContainer.ms'));
-var buttonTemplate = hogan.compile(requireText('../../templates/form/button.ms'));
-var buttonCancelTemplate = hogan.compile(requireText('../../templates/form/buttonCancel.ms'));
-var dismissTemplate = hogan.compile(requireText('../../templates/form/dismiss.ms'));
-var clearTemplate = templates.clearLine;
+const errorMessageContainerTemplate = hogan.compile(requireText('../../templates/form/errorMessageContainer.ms'));
+const buttonContainerTemplate = hogan.compile(requireText('../../templates/form/buttonContainer.ms'));
+const buttonTemplate = hogan.compile(requireText('../../templates/form/button.ms'));
+const buttonCancelTemplate = hogan.compile(requireText('../../templates/form/buttonCancel.ms'));
+const dismissTemplate = hogan.compile(requireText('../../templates/form/dismiss.ms'));
+const clearTemplate = templates.clearLine;
 
 /**
  * Helper to serialize form values into JavaScript Object (key-value pairs).
  * @param  {DOMObject} form DOM Object of the form element.
  * @return {Object}     Serialized key-value pairs of the form.
  */
-var serializeForm = function (form) {
-	var field,
-		assocArray = {},
-		i,
-		j;
+const serializeForm = function (form) {
+	let field;
+	const assocArray = {};
+	let i;
+	let j;
 
 	if (typeof form === 'object' && form.nodeName === "FORM"){
 		for (i = form.elements.length-1; i >= 0; i--){
@@ -52,20 +50,21 @@ var serializeForm = function (form) {
 /**
  * Form is a helper for creating a form. It handles constructing the form element, generating buttons, forwarding submit and cancel events.
  * @param {Object} config Configuration object which specifies the elements of the form (form fragments, buttons).
+ * @return {undefined}
  */
 function OverlayFormContent (config) {
 	if (!config || typeof config !== 'object') {
 		throw "Configuration missing or invalid.";
 	}
 
-	var myself = this;
-	var formObject;
-	var container;
+	let myself = this;
+	let formObject;
+	let container;
 
 	function init () {
-		var item;
-		var button;
-		var i;
+		let item;
+		let button;
+		let i;
 
 
 		container = document.createElement('div');
@@ -95,7 +94,7 @@ function OverlayFormContent (config) {
 
 		if (config.buttons && config.buttons.length) {
 			formObject.appendChild(utils.toDOM(buttonContainerTemplate.render()));
-			var buttonContainer = formObject.querySelector('.o-comment-ui--overlay-button-container');
+			const buttonContainer = formObject.querySelector('.o-comment-ui--overlay-button-container');
 
 			for (i = 0; i < config.buttons.length; i++) {
 				button = config.buttons[i];
@@ -131,14 +130,14 @@ function OverlayFormContent (config) {
 
 			formObject.appendChild(utils.toDOM(clearTemplate.render()));
 
-			var cancelButtons = formObject.querySelectorAll('.o-comment-ui--cancel-button');
-			var triggerCancel = function () {
+			const cancelButtons = formObject.querySelectorAll('.o-comment-ui--cancel-button');
+			const triggerCancel = function () {
 				container.dispatchEvent(new CustomEvent('oCommentUi.form.cancel', {
 					bubbles: true
 				}));
 			};
 
-			for (var j = 0; j < cancelButtons.length; j++) {
+			for (let j = 0; j < cancelButtons.length; j++) {
 				cancelButtons[j].addEventListener('click', triggerCancel);
 			}
 		}
@@ -166,9 +165,10 @@ function OverlayFormContent (config) {
 	/**
 	 * Shows an error message on top of the form.
 	 * @param  {String} errMessages The error message to show.
+	 * @return {undefined}
 	 */
 	this.showError = function (errMessages) {
-		var errMessageContainer = formObject.querySelector('.o-comment-ui--overlay-error-message');
+		const errMessageContainer = formObject.querySelector('.o-comment-ui--overlay-error-message');
 
 		if (errMessageContainer) {
 			errMessageContainer.innerHTML = errMessages;
@@ -177,9 +177,10 @@ function OverlayFormContent (config) {
 
 	/**
 	 * Clears all the errors.
+	 * @return {undefined}
 	 */
 	this.clearError = function () {
-		var errMessageContainer = formObject.querySelector('.o-comment-ui--overlay-error-message');
+		const errMessageContainer = formObject.querySelector('.o-comment-ui--overlay-error-message');
 
 		if (errMessageContainer) {
 			errMessageContainer.innerHTML = "";
@@ -190,20 +191,22 @@ function OverlayFormContent (config) {
 	/**
 	 * Disable all buttons of a button collection.
 	 * @param  {Array} buttons Array of buttons (DOM objects).
+	 * @return {undefined}
 	 */
-	var disableAllButtons = function (buttons) {
-		for (var i = 0; i < buttons.length; i++) {
+	const disableAllButtons = function (buttons) {
+		for (let i = 0; i < buttons.length; i++) {
 			buttons[i].setAttribute('disabled', 'disabled');
 		}
 	};
 
 	/**
 	 * Disables the buttons (useful when an action is already in progress).
+	 * @return {undefined}
 	 */
 	this.disableButtons = function() {
-		var buttons = formObject.querySelectorAll('button');
-		var buttonInputs = formObject.querySelectorAll('input[type=button]');
-		var submitInputs = formObject.querySelectorAll('input[type=submit]');
+		const buttons = formObject.querySelectorAll('button');
+		const buttonInputs = formObject.querySelectorAll('input[type=button]');
+		const submitInputs = formObject.querySelectorAll('input[type=submit]');
 
 		disableAllButtons(buttons);
 		disableAllButtons(buttonInputs);
@@ -214,9 +217,10 @@ function OverlayFormContent (config) {
 	/**
 	 * Enable all buttons of a button collection.
 	 * @param  {Array} buttons Array of buttons (DOM objects).
+	 * @return {undefined}
 	 */
-	var enableAllButtons = function (buttons) {
-		for (var i = 0; i < buttons.length; i++) {
+	const enableAllButtons = function (buttons) {
+		for (let i = 0; i < buttons.length; i++) {
 			buttons[i].removeAttribute('disabled');
 		}
 	};
@@ -224,11 +228,12 @@ function OverlayFormContent (config) {
 	/**
 	 * Enables the buttons (useful when the buttons were disabled while an action was in progress
 	 * and the user is given back the control).
+	 * @return {undefined}
 	 */
 	this.enableButtons = function() {
-		var buttons = formObject.querySelectorAll('button');
-		var buttonInputs = formObject.querySelectorAll('input[type=button]');
-		var submitInputs = formObject.querySelectorAll('input[type=submit]');
+		const buttons = formObject.querySelectorAll('button');
+		const buttonInputs = formObject.querySelectorAll('input[type=button]');
+		const submitInputs = formObject.querySelectorAll('input[type=submit]');
 
 		enableAllButtons(buttons);
 		enableAllButtons(buttonInputs);

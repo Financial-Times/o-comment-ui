@@ -1,21 +1,20 @@
-"use strict";
-
-var i18n = require('./i18n.js'),
-	templates = require('./templates.js');
+const i18n = require('./i18n.js');
+const templates = require('./templates.js');
 
 /**
  * This class is responsible to handle the UI part of a commenting widget. An instance of this is created within an instance of the `Widget`.
  * While this implementation has predefined methods, it can be extended with particular UI methods.
  * @param {DOMObject} widgetContainer DOM Object or selector of the container of the widget.
+ * @return {undefined}
  */
 function WidgetUi (widgetContainer) {
-	var self = this;
+	const self = this;
 
 	this.widgetContainer = undefined;
 
 	try {
 		if (typeof widgetContainer === "string") {
-			var widgetElSelect = document.querySelectorAll(widgetContainer);
+			const widgetElSelect = document.querySelectorAll(widgetContainer);
 			if (widgetElSelect.length) {
 				this.widgetContainer = widgetContainer[0];
 			} else {
@@ -31,10 +30,11 @@ function WidgetUi (widgetContainer) {
 	/**
 	 * Scrolls the page to the widget.
 	 * @param  {Function} callback Called when the scroll animation is finished.
+	 * @return {undefined}
 	 */
 	this.scrollToWidget = function (callback) {
-		var callbackCalled = false;
-		var done = function () {
+		let callbackCalled = false;
+		const done = function () {
 			if (!callbackCalled) {
 				callbackCalled = true;
 
@@ -50,6 +50,7 @@ function WidgetUi (widgetContainer) {
 
 	/**
 	 * Inserts message when comments is not available, either because of the web services or Livefyre.
+	 * @return {undefined}
 	 */
 	this.addNotAvailableMessage = function () {
 		self.widgetContainer.innerHTML = templates.unavailableTemplate.render({
@@ -59,6 +60,7 @@ function WidgetUi (widgetContainer) {
 
 	/**
 	 * Clears the container's content.
+	 * @return {undefined}
 	 */
 	this.clearContainer = function () {
 		self.widgetContainer.innerHTML = "";
@@ -82,7 +84,7 @@ WidgetUi.__extend = function(child) {
 		child.prototype = Object.create(WidgetUi.prototype);
 		child.prototype = Object.create(WidgetUi.prototype);
 	} else {
-		var Tmp = function () {};
+		const Tmp = function () {};
 		Tmp.prototype = WidgetUi.prototype;
 		child.prototype = new Tmp();
 		child.prototype.constructor = child;

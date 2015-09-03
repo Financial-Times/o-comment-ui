@@ -1,9 +1,7 @@
-"use strict";
+const Overlay = require('o-overlay');
+const OverlayFormContent = require('../overlay_content_builder/OverlayFormContent.js');
 
-var Overlay = require('o-overlay'),
-	OverlayFormContent = require('../overlay_content_builder/OverlayFormContent.js');
-
-var shown = false;
+let shown = false;
 
 /**
  * Settings dialog where the user can change its pseudonym or email preferences.
@@ -11,6 +9,7 @@ var shown = false;
  * @param  {Object} callbacks Object with callback functions. Possible fields:
  *                                - submit: Required. Function that is called when the form is submitted
  *                                - close:  Optional. Function that is called when the dialog is closed.
+ * @return {undefined}
  */
 exports.show = function (currentData, callbacks) {
 	if (shown === false) {
@@ -23,13 +22,13 @@ exports.show = function (currentData, callbacks) {
 		}
 
 		shown = true;
-		var inProgress = false;
+		let inProgress = false;
 
 
-		var currentSettings = (currentData && typeof currentData === 'object' && currentData.settings) ? currentData.settings : {};
-		var currentPseudonym = (currentData && typeof currentData === 'object' && currentData.displayName) ? currentData.displayName : "";
+		const currentSettings = (currentData && typeof currentData === 'object' && currentData.settings) ? currentData.settings : {};
+		const currentPseudonym = (currentData && typeof currentData === 'object' && currentData.displayName) ? currentData.displayName : "";
 
-		var form = new OverlayFormContent({
+		let form = new OverlayFormContent({
 			method: 'GET',
 			action: "",
 			name: 'changepseudonym',
@@ -54,7 +53,7 @@ exports.show = function (currentData, callbacks) {
 			]
 		});
 
-		var overlayInstance = new Overlay("oCommentUi_settingsDialog", {
+		let overlayInstance = new Overlay("oCommentUi_settingsDialog", {
 			html: form.getContainerDomElement(),
 			heading: {
 				title: "Commenting Settings"
@@ -63,14 +62,14 @@ exports.show = function (currentData, callbacks) {
 		});
 
 
-		var ignoreCloseEvent = false;
+		let ignoreCloseEvent = false;
 
-		var onSubmitHandler = function (evt) {
+		const onSubmitHandler = function (evt) {
 			if (!inProgress) {
 				inProgress = true;
 				form.disableButtons();
 
-				var formData = form.serialize();
+				const formData = form.serialize();
 
 				if (formData.emailautofollow !== 'on') {
 					formData.emailautofollow = 'off';
@@ -103,7 +102,7 @@ exports.show = function (currentData, callbacks) {
 		};
 		form.getFormDomElement().addEventListener('submit', onSubmitHandler);
 
-		var onCloseInternalHandler = function () {
+		const onCloseInternalHandler = function () {
 			shown = false;
 
 			if (form) {
@@ -127,7 +126,7 @@ exports.show = function (currentData, callbacks) {
 
 		overlayInstance.open();
 
-		var onCancelHandler = function () {
+		const onCancelHandler = function () {
 			overlayInstance.close();
 		};
 		form.getContainerDomElement().addEventListener('oCommentUi.form.cancel', onCancelHandler);

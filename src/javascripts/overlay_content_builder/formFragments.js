@@ -1,16 +1,14 @@
-"use strict";
+const hogan = require('hogan');
 
-var hogan = require('hogan');
-
-var fieldsetTemplate = hogan.compile(requireText('../../templates/formFragments/fieldset.ms'));
-var pseudonymTemplate = hogan.compile(requireText('../../templates/formFragments/pseudonym.ms'));
-var emailSettingsTemplate = hogan.compile(requireText('../../templates/formFragments/emailSettings.ms'));
-var explanationTemplate = hogan.compile(requireText('../../templates/formFragments/explanation.ms'));
-var sessionExpiredTemplate = hogan.compile(requireText('../../templates/formFragments/sessionExpired.ms'));
+const fieldsetTemplate = hogan.compile(requireText('../../templates/formFragments/fieldset.ms'));
+const pseudonymTemplate = hogan.compile(requireText('../../templates/formFragments/pseudonym.ms'));
+const emailSettingsTemplate = hogan.compile(requireText('../../templates/formFragments/emailSettings.ms'));
+const explanationTemplate = hogan.compile(requireText('../../templates/formFragments/explanation.ms'));
+const sessionExpiredTemplate = hogan.compile(requireText('../../templates/formFragments/sessionExpired.ms'));
 
 /**
  * Form fragment that contains setting the initial pseudonym.
- * @return {Mustache compiled template}
+ * @return {String} Mustache template
  */
 exports.initialPseudonym = function () {
 	return fieldsetTemplate.render({
@@ -26,7 +24,7 @@ exports.initialPseudonym = function () {
 /**
  * Form fragment that contains changing the initial pseudonym.
  * @param  {Object} config Configuration object. If a pseudonym exists, it should be set in config.currentPseudonym.
- * @return {Mustache compiled template}
+ * @return {String} Mustache template
  */
 exports.changePseudonym = function (config) {
 	return fieldsetTemplate.render({
@@ -43,9 +41,9 @@ exports.changePseudonym = function (config) {
 /**
  * Form fragment that contains the form inputs for the email preferences.
  * @param  {Object} config Current settings.
- * @return {Mustache compiled template}
+ * @return {String} Mustache template
  */
-var emailSettingsForm = function (config) {
+const emailSettingsForm = function (config) {
 	if (!config || typeof config !== 'object') {
 		config = {};
 	}
@@ -133,7 +131,7 @@ var emailSettingsForm = function (config) {
 /**
  * Email settings fragment within a dialog that contains pseudonym as well.
  * @param  {Object} config Current settings.
- * @return {Mustache compiled template}
+ * @return {String} Mustache template
  */
 exports.emailSettings = function (config) {
 	return fieldsetTemplate.render({
@@ -145,7 +143,7 @@ exports.emailSettings = function (config) {
 /**
  * Email settings fragment which is shown standalone within the dialog.
  * @param  {Object} config Current settings.
- * @return {Mustache compiled template}
+ * @return {String} Mustache template
  */
 exports.emailSettingsStandalone = function (config) {
 	return fieldsetTemplate.render({
@@ -156,7 +154,7 @@ exports.emailSettingsStandalone = function (config) {
 
 /**
  * Explanation with image of the Follow functionality.
- * @return {Mustache compiled template}
+ * @return {String} Mustache template
  */
 exports.followExplanation = function () {
 	return explanationTemplate.render({
@@ -168,7 +166,7 @@ exports.followExplanation = function () {
 
 /**
  * Explanation with image of the commenting settings dialog.
- * @return {Mustache compiled template}
+ * @return {String} Mustache template
  */
 exports.commentingSettingsExplanation = function () {
 	return explanationTemplate.render({
@@ -179,7 +177,7 @@ exports.commentingSettingsExplanation = function () {
 
 /**
  * Session expired dialog content.
- * @return {Mustache compiled template}
+ * @return {String} Mustache template
  */
 exports.sessionExpired = function () {
 	return sessionExpiredTemplate.render({

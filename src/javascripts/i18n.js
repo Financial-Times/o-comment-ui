@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Custom messages that are used in the FrontEnd.
  * @type {Object}

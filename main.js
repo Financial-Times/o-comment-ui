@@ -1,6 +1,4 @@
-"use strict";
-
-var oCommentUtilities = require('o-comment-utilities');
+const oCommentUtilities = require('o-comment-utilities');
 
 /**
  * Exports of submodules
@@ -16,7 +14,7 @@ exports.templates = require('./src/javascripts/templates.js');
 
 /**
  * Enables logging.
- * @type {function}
+ * @return {undefined}
  */
 exports.enableLogging = function () {
 	oCommentUtilities.logger.enable.apply(this, arguments);
@@ -24,7 +22,7 @@ exports.enableLogging = function () {
 
 /**
  * Disables logging.
- * @type {function}
+ * @return {undefined}
  */
 exports.disableLogging = function () {
 	oCommentUtilities.logger.disable.apply(this, arguments);
@@ -32,7 +30,7 @@ exports.disableLogging = function () {
 
 /**
  * Sets logging level.
- * @type {number|string}
+ * @return {undefined}
  */
 exports.setLoggingLevel = function () {
 	oCommentUtilities.logger.setLevel.apply(this, arguments);

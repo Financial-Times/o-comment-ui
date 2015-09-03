@@ -1,15 +1,14 @@
-"use strict";
+const Overlay = require('o-overlay');
+const OverlayFormContent = require('../overlay_content_builder/OverlayFormContent.js');
 
-var Overlay = require('o-overlay'),
-	OverlayFormContent = require('../overlay_content_builder/OverlayFormContent.js');
-
-var shown = false;
+let shown = false;
 
 /**
  * Shows a dialog with a sign in link to re-login after a session expire.
  * @param  {Object} callbacks Object with callback functions. Possible fields:
  *                                - submit: Required. Function that is called when the form is submitted
  *                                - close:  Optional. Function that is called when the dialog is closed.
+ * @return {undefined}
  */
 exports.show = function (callbacks) {
 	if (shown === false) {
@@ -24,7 +23,7 @@ exports.show = function (callbacks) {
 		shown = true;
 
 
-		var form = new OverlayFormContent(
+		let form = new OverlayFormContent(
 			{
 				method: 'GET',
 				action: '',
@@ -46,7 +45,7 @@ exports.show = function (callbacks) {
 			}
 		);
 
-		var overlayInstance = new Overlay("oCommentUi_inactivityMessageDialog", {
+		let overlayInstance = new Overlay("oCommentUi_inactivityMessageDialog", {
 			html: form.getContainerDomElement(),
 			heading: {
 				title: "Session expired"
@@ -54,7 +53,7 @@ exports.show = function (callbacks) {
 			modal: true
 		});
 
-		var onSubmitHandler = function (evt) {
+		const onSubmitHandler = function (evt) {
 			callbacks.submit();
 
 			if (evt.preventDefault) {
@@ -67,7 +66,7 @@ exports.show = function (callbacks) {
 		};
 		form.getDomElement().addEventListener('submit', onSubmitHandler);
 
-		var onCloseInternalHandler = function () {
+		const onCloseInternalHandler = function () {
 			shown = false;
 
 			if (form) {
@@ -89,7 +88,7 @@ exports.show = function (callbacks) {
 
 		overlayInstance.open();
 
-		var onCancelHandler = function () {
+		const onCancelHandler = function () {
 			overlayInstance.close();
 		};
 		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCancelHandler);

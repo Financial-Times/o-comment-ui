@@ -1,5 +1,3 @@
-"use strict";
-
 exports.showSetPseudonymDialog = require('./userDialogs/setPseudonymDialog.js').show;
 exports.showSettingsDialog = require('./userDialogs/settingsDialog.js').show;
 exports.showChangePseudonymDialog = require('./userDialogs/changePseudonymDialog.js').show;

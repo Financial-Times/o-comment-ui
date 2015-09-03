@@ -1,14 +1,13 @@
-"use strict";
+const Overlay = require('o-overlay');
+const OverlayFormContent = require('../overlay_content_builder/OverlayFormContent.js');
 
-var Overlay = require('o-overlay'),
-	OverlayFormContent = require('../overlay_content_builder/OverlayFormContent.js');
-
-var shown = false;
+let shown = false;
 /**
  * Shows a dialog which reminds the user to save its email preferences if he/she didn't do so.
  * @param  {Object} callbacks Object with callback functions. Possible fields:
  *                                - submit: Required. Function that is called when the form is submitted
  *                                - close:  Optional. Function that is called when the dialog is closed.
+ * @return {undefined}
  */
 exports.show = function (callbacks) {
 	if (shown === false) {
@@ -22,11 +21,11 @@ exports.show = function (callbacks) {
 
 
 		shown = true;
-		var inProgress = false;
+		let inProgress = false;
 
-		var ignoreCloseEvent = false;
+		let ignoreCloseEvent = false;
 
-		var form = new OverlayFormContent({
+		let form = new OverlayFormContent({
 			method: 'GET',
 			action: "",
 			name: 'changepseudonym',
@@ -54,7 +53,7 @@ exports.show = function (callbacks) {
 			]
 		});
 
-		var overlayInstance = new Overlay("oCommentUi_emailAlertDialog", {
+		let overlayInstance = new Overlay("oCommentUi_emailAlertDialog", {
 			html: form.getContainerDomElement(),
 			heading: {
 				title: "Commenting Settings"
@@ -62,11 +61,11 @@ exports.show = function (callbacks) {
 			modal: true
 		});
 
-		var onSubmitHandler = function (evt) {
+		const onSubmitHandler = function (evt) {
 			if (!inProgress) {
 				inProgress = true;
 
-				var formData = form.serialize();
+				const formData = form.serialize();
 
 				if (formData.emailautofollow !== 'on') {
 					formData.emailautofollow = 'off';
@@ -101,7 +100,7 @@ exports.show = function (callbacks) {
 		};
 		form.getDomElement().addEventListener('submit', onSubmitHandler);
 
-		var onCloseInternalHandler = function () {
+		const onCloseInternalHandler = function () {
 			shown = false;
 
 			if (form) {
@@ -125,7 +124,7 @@ exports.show = function (callbacks) {
 
 		overlayInstance.open();
 
-		var onCancelHandler = function () {
+		const onCancelHandler = function () {
 			overlayInstance.close();
 		};
 		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCancelHandler);

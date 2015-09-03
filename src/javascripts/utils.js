@@ -1,15 +1,13 @@
-"use strict";
-
 /**
  * Converts a plain HTML string into a DOM object.
  * @param  {String} htmlString Plain HTML in a string format.
- * @return {DOM object}
+ * @return {DOMObject} DOM Object
  */
 exports.toDOM = function (htmlString) {
-	var d = document,
-		i,
-		a = d.createElement("div"),
-		b = d.createDocumentFragment();
+	const d = document;
+	let i;
+	const a = d.createElement("div");
+	const b = d.createDocumentFragment();
 
 	a.innerHTML = htmlString;
 
@@ -23,14 +21,15 @@ exports.toDOM = function (htmlString) {
 
 /**
  * getComputedStyle polyfill for IE. If native function is available, that one is used.
- * @param  {DOMObject} el     DOM element of which style will be computed.
+ * @param  {DOMObject} el     The Element for which to get the computed style.
+ * @param {DOMObject} pseudoElement Optional. A string specifying the pseudo-element to match. Must be omitted (or null) for regular elements.
  * @return {Object}            Object that has a getPropertyValue function which gets a property name as parameter.
  */
 exports.getComputedStyle = function (el, pseudoElement) {
 	if (!window.getComputedStyle) {
 		return {
 			getPropertyValue: function (prop) {
-				var re = /(\-([a-zA-Z]){1})/g;
+				const re = /(\-([a-zA-Z]){1})/g;
 				if (prop === 'float') {
 					prop = 'styleFloat';
 				}
@@ -54,12 +53,12 @@ exports.getComputedStyle = function (el, pseudoElement) {
  * @return {Object} {width: XX, height: YY}
  */
 exports.windowSize = function () {
-	var w = window,
-		d = document,
-		e = d.documentElement,
-		g = d.getElementsByTagName('body')[0],
-		x = w.innerWidth || g.clientWidth || e.clientWidth,
-		y = w.innerHeight || g.clientHeight || e.clientHeight;
+	const w = window;
+	const d = document;
+	const e = d.documentElement;
+	const g = d.getElementsByTagName('body')[0];
+	const x = w.innerWidth || g.clientWidth || e.clientWidth;
+	const y = w.innerHeight || g.clientHeight || e.clientHeight;
 
 	return {
 		width: x,

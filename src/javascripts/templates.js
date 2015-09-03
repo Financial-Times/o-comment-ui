@@ -1,6 +1,4 @@
-"use strict";
-
-var hogan = require('hogan');
+const hogan = require('hogan');
 
 /**
  * Mustache templates, compiled but not rendered.

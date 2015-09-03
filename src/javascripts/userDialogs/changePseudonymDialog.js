@@ -1,9 +1,7 @@
-"use strict";
+const OverlayFormContent = require('../overlay_content_builder/OverlayFormContent.js');
+const Overlay = require('o-overlay');
 
-var OverlayFormContent = require('../overlay_content_builder/OverlayFormContent.js'),
-	Overlay = require('o-overlay');
-
-var shown = false;
+let shown = false;
 
 
 /**
@@ -12,6 +10,7 @@ var shown = false;
  * @param  {Object} callbacks Object with callback functions. Possible fields:
  *                                - submit: Required. Function that is called when the form is submitted
  *                                - close:  Optional. Function that is called when the dialog is closed.
+ * @return {undefined}
  */
 exports.show = function (currentPseudonym, callbacks) {
 	if (shown === false) {
@@ -28,11 +27,11 @@ exports.show = function (currentPseudonym, callbacks) {
 		}
 
 		shown = true;
-		var inProgress = false;
+		let inProgress = false;
 
 		currentPseudonym = currentPseudonym || "";
 
-		var form = new OverlayFormContent({
+		let form = new OverlayFormContent({
 			method: 'GET',
 			action: "",
 			name: 'changepseudonym',
@@ -53,7 +52,7 @@ exports.show = function (currentPseudonym, callbacks) {
 			]
 		});
 
-		var overlayInstance = new Overlay("oCommentUi_changePseudonymDialog", {
+		let overlayInstance = new Overlay("oCommentUi_changePseudonymDialog", {
 			html: form.getContainerDomElement(),
 			heading: {
 				title: "Commenting Settings"
@@ -61,14 +60,14 @@ exports.show = function (currentPseudonym, callbacks) {
 			modal: true
 		});
 
-		var ignoreCloseEvent = false;
+		let ignoreCloseEvent = false;
 
-		var onSubmitHandler = function (evt) {
+		const onSubmitHandler = function (evt) {
 			if (!inProgress) {
 				inProgress = true;
 				form.disableButtons();
 
-				var formData = form.serialize();
+				const formData = form.serialize();
 
 				callbacks.submit(formData, function (err) {
 					if (err) {
@@ -97,7 +96,7 @@ exports.show = function (currentPseudonym, callbacks) {
 		};
 		form.getFormDomElement().addEventListener('submit', onSubmitHandler);
 
-		var onCloseInternalHandler = function () {
+		const onCloseInternalHandler = function () {
 			shown = false;
 
 			if (form) {
@@ -121,7 +120,7 @@ exports.show = function (currentPseudonym, callbacks) {
 
 		overlayInstance.open();
 
-		var onCancelHandler = function () {
+		const onCancelHandler = function () {
 			overlayInstance.close();
 		};
 		form.getDomElement().addEventListener('oCommentUi.form.cancel', onCancelHandler);

@@ -1,7 +1,5 @@
-"use strict";
-
-var oCommentUtilities = require('o-comment-utilities'),
-	WidgetUi = require('./WidgetUi.js');
+const oCommentUtilities = require('o-comment-utilities');
+const WidgetUi = require('./WidgetUi.js');
 
 /**
  * Widget is responsible to coordinate getting initialization data, loading resources and initializing the Ui.
@@ -19,10 +17,13 @@ var oCommentUtilities = require('o-comment-utilities'),
  *
  *  - timeout: Period of time after a timeout is triggered. Default is 15000 ms (15 sec). Its value should be given in milliseconds (ms).
  *
+ * @param {String|Object} rootEl Selector or DOM element where the widget should be loaded.
  * @param {Object} config Configuration object, as described in the class description.
+ * @return {undefined}
  */
 function Widget (rootEl, config) {
-	var widgetEl, self;
+	let widgetEl;
+	let self;
 
 	self = this;
 
@@ -33,7 +34,7 @@ function Widget (rootEl, config) {
 			rootEl = document.querySelector(rootEl);
 		}
 	} catch (e) {
-		var el;
+		let el;
 		if (typeof rootEl === 'string') {
 			el = document.querySelector(rootEl);
 		}
@@ -90,7 +91,7 @@ function Widget (rootEl, config) {
 
 	/**
 	 * Returns the widget container DOM element
-	 * @return {native DOM object}
+	 * @return {DOMObject} Widget's DOM element
 	 */
 	this.getWidgetEl = function () {
 		return widgetEl;
@@ -100,7 +101,8 @@ function Widget (rootEl, config) {
 	 * Attach new event handlers.
 	 * @type {function}
 	 * @param {string} eventName Required. Name of the event to which to attach the handler.
-	 * @param {function} handler Required. Handler Function which will be called when the event is triggered.
+	 * @param {function} eventHandler Required. Handler Function which will be called when the event is triggered.
+	 * @return {undefined}
 	 */
 	this.on = function (eventName, eventHandler) {
 		widgetEl.addEventListener(self.eventNamespace + '.' + eventName, eventHandler);
@@ -111,8 +113,9 @@ function Widget (rootEl, config) {
 	 * @type {function}
 	 * @param {string} eventName Required. Specifies the event from which all handlers should be removed.
 	 *  If omitted, all event handlers are removed from all events.
-	 * @param {function} handler Required. The event name should be specified as well if this is specified.
+	 * @param {function} eventHandler Required. The event name should be specified as well if this is specified.
 	 *  Specifies the handler which should be removed from the event specified.
+	 * @return {undefined}
 	 */
 	this.off = function (eventName, eventHandler) {
 		widgetEl.removeEventListener(self.eventNamespace + '.' + eventName, eventHandler);
@@ -123,9 +126,10 @@ function Widget (rootEl, config) {
 	 * @type {function}
 	 * @param {string} eventName Required. Name of the event which will be triggered.
 	 * @param {object} data Optional. Data to be passed to the handler.
+	 * @return {undefined}
 	 */
 	this.trigger = function (eventName, data) {
-		var payload = {
+		const payload = {
 			data: data,
 			instance: self,
 			id: config.elId
@@ -142,6 +146,8 @@ function Widget (rootEl, config) {
 	 * To be sure you use the correct instance value, you should
 	 * save it in the constructor in a variable (var self = this)
 	 * and use that variable.
+	 * @param {Function} callback function (err, data), where data is the init data
+	 * @return {undefined}
 	 */
 	this.loadInitData = function (callback) {
 		callback(new Error("Not implemented"));
@@ -173,7 +179,7 @@ function Widget (rootEl, config) {
 Widget.prototype.initCalled = false;
 
 Widget.prototype.init = function () {
-	var self = this;
+	const self = this;
 
 	if (!this.config) {
 		return;
@@ -182,7 +188,7 @@ Widget.prototype.init = function () {
 	if (!this.initCalled) {
 		this.initCalled = true;
 
-		var timeout;
+		let timeout;
 		if (this.config.timeout > 0) {
 			timeout = setTimeout(function () {
 				self.trigger('widget.timeout');
@@ -229,7 +235,7 @@ Widget.__extend = function(child, eventNamespace, classNamespace) {
 	if (typeof Object.create === 'function') {
 		child.prototype = Object.create(Widget.prototype);
 	} else {
-		var Tmp = function () {};
+		const Tmp = function () {};
 		Tmp.prototype = Widget.prototype;
 		child.prototype = new Tmp();
 		child.prototype.constructor = child;
