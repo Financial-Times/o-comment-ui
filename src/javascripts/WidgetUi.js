@@ -1,5 +1,6 @@
 const i18n = require('./i18n.js');
 const templates = require('./templates.js');
+const utils = require('./utils');
 
 /**
  * This class is responsible to handle the UI part of a commenting widget. An instance of this is created within an instance of the `Widget`.
@@ -64,6 +65,12 @@ function WidgetUi (widgetContainer) {
 	 */
 	this.clearContainer = function () {
 		self.widgetContainer.innerHTML = "";
+	};
+
+	this.showEnvironment = function (envName) {
+		self.widgetContainer.insertBefore(utils.toDOM(templates.environmentDisplay.render({
+			envName: envName
+		})), self.widgetContainer.firstChild);
 	};
 
 	this.addTermsAndGuidelineMessage = undefined;
