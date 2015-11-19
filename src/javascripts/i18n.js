@@ -21,3 +21,9 @@ exports.serviceMessageOverrides = {
 	'User profile (.*) does not have permission to access the desired action.': 'You don\'t have permission to perform this action.',
 	'Commenting is closed for conversation=([0-9]+)': 'This conversation is closed to new comments.'
 };
+
+exports.serviceCodeMessages = {
+	401: "You are not authorized for this action.",
+	403: "You are not authorized for this action.",
+	404: "The resource was not found."
+};
