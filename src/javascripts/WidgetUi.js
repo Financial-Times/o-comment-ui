@@ -60,7 +60,7 @@ function WidgetUi (widgetContainer) {
 	};
 
 	this.hideTermsAndGuidelinesMessage = function () {
-		const termsElement = self.widgetContainer.querySelector('o-comment-ui--terms-message');
+		const termsElement = self.widgetContainer.querySelector('.o-comment-ui--terms-message');
 
 		if (termsElement) {
 			termsElement.style.display = 'none';
@@ -68,7 +68,7 @@ function WidgetUi (widgetContainer) {
 	};
 
 	this.showTermsAndGuidelinesMessage = function () {
-		const termsElement = self.widgetContainer.querySelector('o-comment-ui--terms-message');
+		const termsElement = self.widgetContainer.querySelector('.o-comment-ui--terms-message');
 
 		if (termsElement) {
 			termsElement.style.display = 'block';
