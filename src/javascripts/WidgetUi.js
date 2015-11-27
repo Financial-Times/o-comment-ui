@@ -59,6 +59,22 @@ function WidgetUi (widgetContainer) {
 		});
 	};
 
+	this.hideTermsAndGuidelinesMessage = function () {
+		const termsElement = self.widgetContainer.querySelector('o-comment-ui--terms-message');
+
+		if (termsElement) {
+			termsElement.style.display = 'none';
+		}
+	};
+
+	this.showTermsAndGuidelinesMessage = function () {
+		const termsElement = self.widgetContainer.querySelector('o-comment-ui--terms-message');
+
+		if (termsElement) {
+			termsElement.style.display = 'block';
+		}
+	};
+
 	/**
 	 * Clears the container's content.
 	 * @return {undefined}
