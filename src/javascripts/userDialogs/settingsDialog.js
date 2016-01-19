@@ -28,6 +28,8 @@ exports.show = function (currentData, callbacks) {
 		const currentSettings = (currentData && typeof currentData === 'object' && currentData.settings) ? currentData.settings : {};
 		const currentPseudonym = (currentData && typeof currentData === 'object' && currentData.displayName) ? currentData.displayName : "";
 
+		console.log('o-comment-ui.settingsDialog, currentPseudonym', currentPseudonym);
+
 		let form = new OverlayFormContent({
 			method: 'GET',
 			action: "",
