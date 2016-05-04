@@ -5,10 +5,10 @@ const hogan = require('hogan');
  * @type {Object}
  */
 module.exports = {
-	unavailableTemplate: hogan.compile(requireText('../templates/unavailable.ms')),
-	authUnavailableTemplate: hogan.compile(requireText('../templates/authUnavailable.ms')),
-	termsAndGuidelinesTemplate: hogan.compile(requireText('../templates/termsAndGuidelines.ms')),
-	clearLine: hogan.compile(requireText('../templates/clearLine.ms')),
-	commentingSettingsLink: hogan.compile(requireText('../templates/commentingSettingsLink.ms')),
-	environmentDisplay: hogan.compile(requireText('../templates/environmentDisplay.ms')),
+	unavailableTemplate: hogan.compile(require('../templates/unavailable.html')),
+	authUnavailableTemplate: hogan.compile(require('../templates/authUnavailable.html')),
+	termsAndGuidelinesTemplate: hogan.compile(require('../templates/termsAndGuidelines.html')),
+	clearLine: hogan.compile(require('../templates/clearLine.html')),
+	commentingSettingsLink: hogan.compile(require('../templates/commentingSettingsLink.html')),
+	environmentDisplay: hogan.compile(require('../templates/environmentDisplay.html')),
 };
