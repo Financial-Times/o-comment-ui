@@ -5,11 +5,11 @@ const templates = require('../templates.js');
 const utils = require('../utils.js');
 const formFragments = require('./formFragments.js');
 
-const errorMessageContainerTemplate = hogan.compile(requireText('../../templates/form/errorMessageContainer.ms'));
-const buttonContainerTemplate = hogan.compile(requireText('../../templates/form/buttonContainer.ms'));
-const buttonTemplate = hogan.compile(requireText('../../templates/form/button.ms'));
-const buttonCancelTemplate = hogan.compile(requireText('../../templates/form/buttonCancel.ms'));
-const dismissTemplate = hogan.compile(requireText('../../templates/form/dismiss.ms'));
+const errorMessageContainerTemplate = hogan.compile(require('../../templates/form/errorMessageContainer.html'));
+const buttonContainerTemplate = hogan.compile(require('../../templates/form/buttonContainer.html'));
+const buttonTemplate = hogan.compile(require('../../templates/form/button.html'));
+const buttonCancelTemplate = hogan.compile(require('../../templates/form/buttonCancel.html'));
+const dismissTemplate = hogan.compile(require('../../templates/form/dismiss.html'));
 const clearTemplate = templates.clearLine;
 
 /**

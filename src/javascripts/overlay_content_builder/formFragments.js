@@ -1,10 +1,10 @@
 const hogan = require('hogan');
 
-const fieldsetTemplate = hogan.compile(requireText('../../templates/formFragments/fieldset.ms'));
-const pseudonymTemplate = hogan.compile(requireText('../../templates/formFragments/pseudonym.ms'));
-const emailSettingsTemplate = hogan.compile(requireText('../../templates/formFragments/emailSettings.ms'));
-const explanationTemplate = hogan.compile(requireText('../../templates/formFragments/explanation.ms'));
-const sessionExpiredTemplate = hogan.compile(requireText('../../templates/formFragments/sessionExpired.ms'));
+const fieldsetTemplate = hogan.compile(require('../../templates/formFragments/fieldset.html'));
+const pseudonymTemplate = hogan.compile(require('../../templates/formFragments/pseudonym.html'));
+const emailSettingsTemplate = hogan.compile(require('../../templates/formFragments/emailSettings.html'));
+const explanationTemplate = hogan.compile(require('../../templates/formFragments/explanation.html'));
+const sessionExpiredTemplate = hogan.compile(require('../../templates/formFragments/sessionExpired.html'));
 
 /**
  * Form fragment that contains setting the initial pseudonym.
