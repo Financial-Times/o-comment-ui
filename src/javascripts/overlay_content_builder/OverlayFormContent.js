@@ -5,11 +5,11 @@ const templates = require('../templates.js');
 const utils = require('../utils.js');
 const formFragments = require('./formFragments.js');
 
-const errorMessageContainerTemplate = templatingEngine.compile(require('../../templates/form/errorMessageContainer.ms'));
-const buttonContainerTemplate = templatingEngine.compile(require('../../templates/form/buttonContainer.ms'));
-const buttonTemplate = templatingEngine.compile(require('../../templates/form/button.ms'));
-const buttonCancelTemplate = templatingEngine.compile(require('../../templates/form/buttonCancel.ms'));
-const dismissTemplate = templatingEngine.compile(require('../../templates/form/dismiss.ms'));
+const errorMessageContainerTemplate = templatingEngine.compile(require('../../templates/form/errorMessageContainer.html'));
+const buttonContainerTemplate = templatingEngine.compile(require('../../templates/form/buttonContainer.html'));
+const buttonTemplate = templatingEngine.compile(require('../../templates/form/button.html'));
+const buttonCancelTemplate = templatingEngine.compile(require('../../templates/form/buttonCancel.html'));
+const dismissTemplate = templatingEngine.compile(require('../../templates/form/dismiss.html'));
 const clearTemplate = templates.clearLine;
 
 /**
