@@ -6,6 +6,12 @@ $o-overlay-is-silent: false;
 
 @import "o-icons/main";
 
+@import 'o-fonts/main';
+// @font-face declarations for all Benton Sans weights
+@include oFontsInclude(BentonSans, light);
+@include oFontsInclude(BentonSans, regular);
+@include oFontsInclude(BentonSans, bold);
+
 @import './src/stylesheets/variables';
 
 @import './src/stylesheets/buttons';

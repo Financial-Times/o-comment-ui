@@ -10,6 +10,7 @@
     "o-colors": ">=2.4.7 <4",
     "o-assets": "^3.0.0",
     "o-overlay": "^1.4.5",
+    "o-fonts": "^2.1.2",
     
     "hogan": "git+https://github.com/twitter/hogan.js.git#^3.0.2"
   },
