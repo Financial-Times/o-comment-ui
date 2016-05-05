@@ -12,11 +12,6 @@
 	}
 
 	.o-comment-ui--settings-icon {
-		@include oIconsGetIcon('settings', oColorsGetPaletteColor('blue'), 32);
-	}
-
-	i {
-		font-size: 14px;
-		vertical-align: bottom;
+		@include oIconsGetIcon('settings', oColorsGetPaletteColor('blue'), 14);
 	}
 }
