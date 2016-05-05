@@ -1,15 +1,15 @@
-const hogan = require('hogan');
+const templatingEngine = require('../templatingEngine');
 
 const templates = require('../templates.js');
 
 const utils = require('../utils.js');
 const formFragments = require('./formFragments.js');
 
-const errorMessageContainerTemplate = hogan.compile(requireText('../../templates/form/errorMessageContainer.ms'));
-const buttonContainerTemplate = hogan.compile(requireText('../../templates/form/buttonContainer.ms'));
-const buttonTemplate = hogan.compile(requireText('../../templates/form/button.ms'));
-const buttonCancelTemplate = hogan.compile(requireText('../../templates/form/buttonCancel.ms'));
-const dismissTemplate = hogan.compile(requireText('../../templates/form/dismiss.ms'));
+const errorMessageContainerTemplate = templatingEngine.compile(requireText('../../templates/form/errorMessageContainer.ms'));
+const buttonContainerTemplate = templatingEngine.compile(requireText('../../templates/form/buttonContainer.ms'));
+const buttonTemplate = templatingEngine.compile(requireText('../../templates/form/button.ms'));
+const buttonCancelTemplate = templatingEngine.compile(requireText('../../templates/form/buttonCancel.ms'));
+const dismissTemplate = templatingEngine.compile(requireText('../../templates/form/dismiss.ms'));
 const clearTemplate = templates.clearLine;
 
 /**

@@ -1,14 +1,14 @@
-const hogan = require('hogan');
+const templatingEngine = require('./templatingEngine');
 
 /**
  * Mustache templates, compiled but not rendered.
  * @type {Object}
  */
 module.exports = {
-	unavailableTemplate: hogan.compile(requireText('../templates/unavailable.ms')),
-	authUnavailableTemplate: hogan.compile(requireText('../templates/authUnavailable.ms')),
-	termsAndGuidelinesTemplate: hogan.compile(requireText('../templates/termsAndGuidelines.ms')),
-	clearLine: hogan.compile(requireText('../templates/clearLine.ms')),
-	commentingSettingsLink: hogan.compile(requireText('../templates/commentingSettingsLink.ms')),
-	environmentDisplay: hogan.compile(requireText('../templates/environmentDisplay.ms')),
+	unavailableTemplate: templatingEngine.compile(requireText('../templates/unavailable.ms')),
+	authUnavailableTemplate: templatingEngine.compile(requireText('../templates/authUnavailable.ms')),
+	termsAndGuidelinesTemplate: templatingEngine.compile(requireText('../templates/termsAndGuidelines.ms')),
+	clearLine: templatingEngine.compile(requireText('../templates/clearLine.ms')),
+	commentingSettingsLink: templatingEngine.compile(requireText('../templates/commentingSettingsLink.ms')),
+	environmentDisplay: templatingEngine.compile(requireText('../templates/environmentDisplay.ms')),
 };

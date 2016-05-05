@@ -11,6 +11,7 @@ exports.utils = require('./src/javascripts/utils.js');
 
 exports.i18n = require('./src/javascripts/i18n.js');
 exports.templates = require('./src/javascripts/templates.js');
+exports.templatingEngine = require('./src/javascripts/templatingEngine.js');
 
 /**
  * Enables logging.
