@@ -11,6 +11,10 @@
 		vertical-align: bottom; // aligns the gear icon
 	}
 
+	.o-comment-ui--settings-icon {
+		@include oIconsGetIcon('settings', oColorsGetPaletteColor('blue'), 32);
+	}
+
 	i {
 		font-size: 14px;
 		vertical-align: bottom;

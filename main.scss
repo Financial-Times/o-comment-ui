@@ -4,8 +4,7 @@
 $o-overlay-is-silent: false;
 @import "o-overlay/main";
 
-$o-ft-icons-is-silent: false;
-@import "o-ft-icons/main";
+@import "o-icons/main";
 
 @import './src/stylesheets/variables';
 
