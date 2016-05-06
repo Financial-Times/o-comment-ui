@@ -12,5 +12,7 @@
 
 	.o-comment-ui--settings-icon {
 		@include oIconsGetIcon('settings', oColorsGetPaletteColor('blue'), 14);
+
+		margin-top: -2px;
 	}
 }
