@@ -7,8 +7,8 @@
   "dependencies": {
     "o-comment-utilities": "^2.2.0",
     "o-icons": "^4.0.0",
-    "o-colors": ">=2.4.7 <4",
-    "o-assets": ">=2.4.7 <4",
+    "o-colors": ">=2.0.0 <4",
+    "o-assets": ">=2.0.0 <4",
     "o-overlay": "^1.4.5",
     "o-fonts": "^2.1.2",
     
