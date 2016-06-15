@@ -1,10 +1,10 @@
 const templatingEngine = require('../templatingEngine');
 
-const fieldsetTemplate = templatingEngine.compile(requireText('../../templates/formFragments/fieldset.html'));
-const pseudonymTemplate = templatingEngine.compile(requireText('../../templates/formFragments/pseudonym.html'));
-const emailSettingsTemplate = templatingEngine.compile(requireText('../../templates/formFragments/emailSettings.html'));
-const explanationTemplate = templatingEngine.compile(requireText('../../templates/formFragments/explanation.html'));
-const sessionExpiredTemplate = templatingEngine.compile(requireText('../../templates/formFragments/sessionExpired.html'));
+const fieldsetTemplate = templatingEngine.compile(require('../../templates/formFragments/fieldset.html'));
+const pseudonymTemplate = templatingEngine.compile(require('../../templates/formFragments/pseudonym.html'));
+const emailSettingsTemplate = templatingEngine.compile(require('../../templates/formFragments/emailSettings.html'));
+const explanationTemplate = templatingEngine.compile(require('../../templates/formFragments/explanation.html'));
+const sessionExpiredTemplate = templatingEngine.compile(require('../../templates/formFragments/sessionExpired.html'));
 
 /**
  * Form fragment that contains setting the initial pseudonym.
