@@ -314,7 +314,13 @@ In order to override the default font, set a value for the following variable:
 $o-comment-ui-font-family: font1, font2;
 ```
 
-## <div id="browser"></div> Browser support 
+In order to suppress downloading the web fonts set the following variable
+
+```scss
+$o-comment-ui-include-fonts: false;
+```
+
+## <div id="browser"></div> Browser support
 Works in accordance with our [support policy](https://docs.google.com/a/ft.com/document/d/1dX92MPm9ZNY2jqFidWf_E6V4S6pLkydjcPmk5F989YI/edit)
 
 ## <div id="core"></div> Core/Enhanced Experience
