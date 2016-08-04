@@ -1,3 +1,4 @@
+@import './src/stylesheets/variables';
 @import 'o-colors/main';
 @import 'o-assets/main';
 
@@ -7,12 +8,14 @@ $o-overlay-is-silent: false;
 @import "o-icons/main";
 
 @import 'o-fonts/main';
-// @font-face declarations for all Benton Sans weights
-@include oFontsInclude(BentonSans, light);
-@include oFontsInclude(BentonSans, regular);
-@include oFontsInclude(BentonSans, bold);
 
-@import './src/stylesheets/variables';
+@if $o-comment-ui-include-fonts == true {
+	// @font-face declarations for all Benton Sans weights
+	@include oFontsInclude(BentonSans, light);
+	@include oFontsInclude(BentonSans, regular);
+	@include oFontsInclude(BentonSans, bold);
+}
+
 
 @import './src/stylesheets/buttons';
 @import './src/stylesheets/icons';
