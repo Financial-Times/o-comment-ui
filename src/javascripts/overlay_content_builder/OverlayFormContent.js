@@ -1,15 +1,13 @@
-const templatingEngine = require('../templatingEngine');
-
 const templates = require('../templates.js');
 
 const utils = require('../utils.js');
 const formFragments = require('./formFragments.js');
 
-const errorMessageContainerTemplate = templatingEngine.compile(require('../../templates/form/errorMessageContainer.html'));
-const buttonContainerTemplate = templatingEngine.compile(require('../../templates/form/buttonContainer.html'));
-const buttonTemplate = templatingEngine.compile(require('../../templates/form/button.html'));
-const buttonCancelTemplate = templatingEngine.compile(require('../../templates/form/buttonCancel.html'));
-const dismissTemplate = templatingEngine.compile(require('../../templates/form/dismiss.html'));
+const errorMessageContainerTemplate = require('../../templates/form/errorMessageContainer.html');
+const buttonContainerTemplate = require('../../templates/form/buttonContainer.html');
+const buttonTemplate = require('../../templates/form/button.html');
+const buttonCancelTemplate = require('../../templates/form/buttonCancel.html');
+const dismissTemplate = require('../../templates/form/dismiss.html');
 const clearTemplate = templates.clearLine;
 
 /**
@@ -77,7 +75,7 @@ function OverlayFormContent (config) {
 
 		container.appendChild(formObject);
 
-		formObject.appendChild(utils.toDOM(errorMessageContainerTemplate.render()));
+		formObject.appendChild(utils.toDOM(errorMessageContainerTemplate()));
 
 
 		if (config.items && config.items.length) {
@@ -93,7 +91,7 @@ function OverlayFormContent (config) {
 		}
 
 		if (config.buttons && config.buttons.length) {
-			formObject.appendChild(utils.toDOM(buttonContainerTemplate.render()));
+			formObject.appendChild(utils.toDOM(buttonContainerTemplate()));
 			const buttonContainer = formObject.querySelector('.o-comment-ui--overlay-button-container');
 
 			for (i = 0; i < config.buttons.length; i++) {
@@ -102,33 +100,33 @@ function OverlayFormContent (config) {
 				switch(button.type) {
 					case 'button':
 						if (typeof button.label !== "undefined" && button.label) {
-							buttonContainer.appendChild(utils.toDOM(buttonTemplate.render({
+							buttonContainer.appendChild(utils.toDOM(buttonTemplate({
 								type: 'button',
 								label: button.label
 							})));
 						}
 						break;
 					case 'submitButton':
-						buttonContainer.appendChild(utils.toDOM(buttonTemplate.render({
+						buttonContainer.appendChild(utils.toDOM(buttonTemplate({
 							type: 'submit',
 							label: button.label ? button.label : 'Submit'
 						})));
 						break;
 					case 'cancelButton':
-						buttonContainer.appendChild(utils.toDOM(buttonCancelTemplate.render({
+						buttonContainer.appendChild(utils.toDOM(buttonCancelTemplate({
 							label: button.label ? button.label : 'cancel'
 						})));
 						break;
 					case 'dismiss':
 						if (typeof button.label !== "undefined" && button.label) {
-							buttonContainer.appendChild(utils.toDOM(dismissTemplate.render({
+							buttonContainer.appendChild(utils.toDOM(dismissTemplate({
 								label: button.label
 							})));
 						}
 				}
 			}
 
-			formObject.appendChild(utils.toDOM(clearTemplate.render()));
+			formObject.appendChild(utils.toDOM(clearTemplate()));
 
 			const cancelButtons = formObject.querySelectorAll('.o-comment-ui--cancel-button');
 			const triggerCancel = function () {
