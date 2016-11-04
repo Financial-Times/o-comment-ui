@@ -1,19 +1,17 @@
-const templatingEngine = require('../templatingEngine');
-
-const fieldsetTemplate = templatingEngine.compile(require('../../templates/formFragments/fieldset.html'));
-const pseudonymTemplate = templatingEngine.compile(require('../../templates/formFragments/pseudonym.html'));
-const emailSettingsTemplate = templatingEngine.compile(require('../../templates/formFragments/emailSettings.html'));
-const explanationTemplate = templatingEngine.compile(require('../../templates/formFragments/explanation.html'));
-const sessionExpiredTemplate = templatingEngine.compile(require('../../templates/formFragments/sessionExpired.html'));
+const fieldsetTemplate = require('../../templates/formFragments/fieldset.html');
+const pseudonymTemplate = require('../../templates/formFragments/pseudonym.html');
+const emailSettingsTemplate = require('../../templates/formFragments/emailSettings.html');
+const explanationTemplate = require('../../templates/formFragments/explanation.html');
+const sessionExpiredTemplate = require('../../templates/formFragments/sessionExpired.html');
 
 /**
  * Form fragment that contains setting the initial pseudonym.
  * @return {String} Mustache template
  */
 exports.initialPseudonym = function () {
-	return fieldsetTemplate.render({
+	return fieldsetTemplate({
 		legend: 'Pseudonym',
-		content: pseudonymTemplate.render({
+		content: pseudonymTemplate({
 			name: 'pseudonym',
 			label: 'In order to use the commenting system, please choose a pseudonym.',
 			currentPseudonym: ''
@@ -27,9 +25,9 @@ exports.initialPseudonym = function () {
  * @return {String} Mustache template
  */
 exports.changePseudonym = function (config) {
-	return fieldsetTemplate.render({
+	return fieldsetTemplate({
 		legend: 'Pseudonym',
-		content: pseudonymTemplate.render({
+		content: pseudonymTemplate({
 			name: 'pseudonym',
 			label: 'This is displayed with your comments. If you change it, previous '+
 				'comments will also be attributed to the new pseudonym.',
@@ -52,7 +50,7 @@ const emailSettingsForm = function (config) {
 	config.emailreplies = config.emailreplies || "immediately";
 	config.emaillikes = config.emaillikes || "never";
 
-	return emailSettingsTemplate.render({
+	return emailSettingsTemplate({
 		selects: [
 			{
 				name: 'emailreplies',
@@ -134,7 +132,7 @@ const emailSettingsForm = function (config) {
  * @return {String} Mustache template
  */
 exports.emailSettings = function (config) {
-	return fieldsetTemplate.render({
+	return fieldsetTemplate({
 		legend: 'Email Settings',
 		content: 'Receive alerts when:<br/>' + emailSettingsForm(config.currentSettings)
 	});
@@ -146,7 +144,7 @@ exports.emailSettings = function (config) {
  * @return {String} Mustache template
  */
 exports.emailSettingsStandalone = function (config) {
-	return fieldsetTemplate.render({
+	return fieldsetTemplate({
 		legend: 'Email Settings',
 		content: emailSettingsForm(config.currentSettings)
 	});
@@ -157,7 +155,7 @@ exports.emailSettingsStandalone = function (config) {
  * @return {String} Mustache template
  */
 exports.followExplanation = function () {
-	return explanationTemplate.render({
+	return explanationTemplate({
 		text: 'To receive email alerts about conversations that you\'re interested in, '+
 			'click the \'follow\' button that now appears on the comment box.',
 		type: 'follow'
@@ -169,7 +167,7 @@ exports.followExplanation = function () {
  * @return {String} Mustache template
  */
 exports.commentingSettingsExplanation = function () {
-	return explanationTemplate.render({
+	return explanationTemplate({
 		text: 'You can manage your settings in the Commenting settings panel above the comment box.',
 		type: 'settings'
 	});
@@ -180,7 +178,7 @@ exports.commentingSettingsExplanation = function () {
  * @return {String} Mustache template
  */
 exports.sessionExpired = function () {
-	return sessionExpiredTemplate.render({
+	return sessionExpiredTemplate({
 		location: encodeURIComponent(document.location.href)
 	});
 };
