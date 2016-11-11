@@ -1,6 +1,7 @@
 {
 	"description": "Shared UI components used by o-comments and o-chat.",
 	"origamiType": "module",
+	"origamiCategory": "components",
 	"origamiVersion": 1,
 	"support": "https://jira.ft.com/secure/RapidBoard.jspa?rapidView=57&view=detail",
 	"supportStatus": "active",
