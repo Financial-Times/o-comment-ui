@@ -54,7 +54,7 @@ function WidgetUi (widgetContainer) {
 	 * @return {undefined}
 	 */
 	this.addNotAvailableMessage = function () {
-		self.widgetContainer.innerHTML = templates.unavailableTemplate({
+		self.widgetContainer.innerHTML = templates.unavailableTemplate.render({
 			message: i18n.texts.unavailable
 		});
 	};
@@ -84,7 +84,7 @@ function WidgetUi (widgetContainer) {
 	};
 
 	this.showEnvironment = function (envName) {
-		self.widgetContainer.insertBefore(utils.toDOM(templates.environmentDisplay({
+		self.widgetContainer.insertBefore(utils.toDOM(templates.environmentDisplay.render({
 			envName: envName
 		})), self.widgetContainer.firstChild);
 	};

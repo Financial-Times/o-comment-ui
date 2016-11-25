@@ -1,12 +1,14 @@
+const templatingEngine = require('./templatingEngine');
+
 /**
  * Mustache templates, compiled but not rendered.
  * @type {Object}
  */
 module.exports = {
-	unavailableTemplate: require('../templates/unavailable.html'),
-	authUnavailableTemplate: require('../templates/authUnavailable.html'),
-	termsAndGuidelinesTemplate: require('../templates/termsAndGuidelines.html'),
-	clearLine: require('../templates/clearLine.html'),
-	commentingSettingsLink: require('../templates/commentingSettingsLink.html'),
-	environmentDisplay: require('../templates/environmentDisplay.html')
+	unavailableTemplate: templatingEngine.compile(require('../templates/unavailable.html')),
+	authUnavailableTemplate: templatingEngine.compile(require('../templates/authUnavailable.html')),
+	termsAndGuidelinesTemplate: templatingEngine.compile(require('../templates/termsAndGuidelines.html')),
+	clearLine: templatingEngine.compile(require('../templates/clearLine.html')),
+	commentingSettingsLink: templatingEngine.compile(require('../templates/commentingSettingsLink.html')),
+	environmentDisplay: templatingEngine.compile(require('../templates/environmentDisplay.html')),
 };
