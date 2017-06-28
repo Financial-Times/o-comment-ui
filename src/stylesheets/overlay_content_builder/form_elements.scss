@@ -12,7 +12,7 @@
 			font-weight: bold;
 			padding: 0;
 			margin: 0 0 5px;
-			color: oColorsGetPaletteColor("grey-tint4");
+			color: oColorsGetPaletteColor("black-70");
 		}
 	}
 
@@ -40,7 +40,7 @@
 	select {
 		display: block;
 		margin-bottom: 6px;
-		border: 1px solid oColorsGetPaletteColor("pink-tint4");
+		border: 1px solid oColorsGetPaletteColor("black-30");
 		width: 97%;
 		padding: 3px 6px;
 	}

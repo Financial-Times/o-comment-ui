@@ -7,11 +7,11 @@
   "dependencies": {
     "o-comment-utilities": "^2.2.0",
     "o-icons": "^4.0.0",
-    "o-colors": ">=2.0.0 <4",
+    "o-colors": "^4.0.0",
     "o-assets": ">=2.0.0 <4",
-    "o-overlay": "^1.4.5",
-    "o-fonts": "^2.1.2",
-    
+    "o-overlay": "^2.0.0",
+    "o-fonts": "^3.0.0",
+
     "hogan": "git+https://github.com/twitter/hogan.js.git#^3.0.2"
   },
   "ignore": [
