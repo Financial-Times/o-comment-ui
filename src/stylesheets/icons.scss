@@ -1,5 +1,5 @@
 .o-comment-ui--icon-lock {
-	@include oIconsGetIcon('padlock', oColorsGetPaletteColor("grey-tint4"), 15);
+	@include oIconsGetIcon('padlock', oColorsGetPaletteColor("black-70"), 15);
 
 	display: inline-block;
 }

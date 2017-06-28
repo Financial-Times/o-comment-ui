@@ -1,17 +1,17 @@
 .o-comment-ui--settings {
 	display: inline-block;
 	margin-left: 10px;
-	color: oColorsGetPaletteColor("pink-tint3");
+	color: oColorsGetPaletteColor("black-20");
 
 	.o-comment-ui--settings-text {
 		padding-left: 10px;
-		color: oColorsGetPaletteColor("blue");
+		color: oColorsGetPaletteColor("oxford");
 		cursor: pointer;
 		display: inline-block;
 	}
 
 	.o-comment-ui--settings-icon {
-		@include oIconsGetIcon('settings', oColorsGetPaletteColor('blue'), 14);
+		@include oIconsGetIcon('settings', oColorsGetPaletteColor('oxford'), 14);
 
 		margin-top: -2px;
 	}
