@@ -5,10 +5,10 @@ const templatingEngine = require('./templatingEngine');
  * @type {Object}
  */
 module.exports = {
-	unavailableTemplate: templatingEngine.compile(require('../templates/unavailable.html')),
-	authUnavailableTemplate: templatingEngine.compile(require('../templates/authUnavailable.html')),
-	termsAndGuidelinesTemplate: templatingEngine.compile(require('../templates/termsAndGuidelines.html')),
-	clearLine: templatingEngine.compile(require('../templates/clearLine.html')),
-	commentingSettingsLink: templatingEngine.compile(require('../templates/commentingSettingsLink.html')),
-	environmentDisplay: templatingEngine.compile(require('../templates/environmentDisplay.html')),
+	unavailableTemplate: templatingEngine.compile(require('../templates/unavailable.txt')),
+	authUnavailableTemplate: templatingEngine.compile(require('../templates/authUnavailable.txt')),
+	termsAndGuidelinesTemplate: templatingEngine.compile(require('../templates/termsAndGuidelines.txt')),
+	clearLine: templatingEngine.compile(require('../templates/clearLine.txt')),
+	commentingSettingsLink: templatingEngine.compile(require('../templates/commentingSettingsLink.txt')),
+	environmentDisplay: templatingEngine.compile(require('../templates/environmentDisplay.txt')),
 };
