@@ -1,13 +1,12 @@
 {
   "name": "o-comment-ui",
   "private": true,
-  "dependencies": {},
   "devDependencies": {
-    "origami-build-tools": "^5.0.0",
-    "gulp": "^3.8.10",
-    "gulp-watch": "^1.1.0",
-    "run-sequence": "^1.0.2",
-    "del": "^1.1.1",
-    "gulp-run": "^1.6.6"
+    "origami-build-tools": "^7.1.0",
+    "gulp": "^3.9.1",
+    "gulp-watch": "^4.3.11",
+    "run-sequence": "^2.2.0",
+    "del": "^3.0.0",
+    "gulp-run": "^1.7.1"
   }
 }
