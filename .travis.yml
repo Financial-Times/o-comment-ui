@@ -3,11 +3,11 @@ language: node_js
 node_js:
   - 6
 before_install:
-  - npm install -g origami-build-tools
+  - npm install -g origami-build-tools@^7
   - obt install
 script:
-  - obt test
   - obt verify
+  - obt test
 cache:
   directories:
   - node_modules
