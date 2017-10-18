@@ -19,7 +19,7 @@ function WidgetUi (widgetContainer) {
 			if (widgetElSelect.length) {
 				this.widgetContainer = widgetContainer[0];
 			} else {
-				throw "Selector not valid or does not exists.";
+				throw new Error("Selector not valid or does not exists.");
 			}
 		} else if ((window.HTMLElement && widgetContainer instanceof window.HTMLElement) || (window.Element && widgetContainer instanceof window.Element)) {
 			this.widgetContainer = widgetContainer;

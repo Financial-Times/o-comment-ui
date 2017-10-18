@@ -54,7 +54,7 @@ const serializeForm = function (form) {
  */
 function OverlayFormContent (config) {
 	if (!config || typeof config !== 'object') {
-		throw "Configuration missing or invalid.";
+		throw new Error("Configuration missing or invalid.");
 	}
 
 	let myself = this;
@@ -125,6 +125,9 @@ function OverlayFormContent (config) {
 								label: button.label
 							})));
 						}
+						break;
+					default:
+						throw new Error('A button of type: ' + button.type + ' has been passed but is not expected.');
 				}
 			}
 
