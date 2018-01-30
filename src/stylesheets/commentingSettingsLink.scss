@@ -11,7 +11,7 @@
 	}
 
 	.o-comment-ui--settings-icon {
-		@include oIconsGetIcon('settings', oColorsGetPaletteColor('oxford'), 14);
+		@include oIconsGetIcon('settings', oColorsGetPaletteColor('oxford'), 14, $iconset-version: 1);
 
 		margin-top: -2px;
 	}
