@@ -6,7 +6,7 @@
   ],
   "dependencies": {
     "o-comment-utilities": "^2.2.0",
-    "o-icons": "^4.0.0",
+    "o-icons": ">=4.0.0 <6",
     "o-colors": "^4.0.0",
     "o-assets": ">=2.0.0 <4",
     "o-overlay": "^2.0.0",
