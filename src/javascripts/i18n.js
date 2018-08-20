@@ -10,7 +10,7 @@ exports.texts = {
 	commentingSettingsLabel: 'Commenting settings'
 };
 
-var invalidSession;
+let invalidSession;
 /**
  * Error messages coming from the web services could be not user friendly.
  * So some of the messages are mapped to a more user friendly message.
