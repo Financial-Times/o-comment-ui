@@ -10,14 +10,23 @@ exports.texts = {
 	commentingSettingsLabel: 'Commenting settings'
 };
 
+let invalidSession;
 /**
  * Error messages coming from the web services could be not user friendly.
  * So some of the messages are mapped to a more user friendly message.
  * @type {Object}
  */
 exports.serviceMessageOverrides = {
-	'User session is not valid.': 'You are not currently signed in to FT.com, please '+
-			'<a href="https://accounts.ft.com/login?location='+ encodeURIComponent(document.location.href) +'">sign in</a> to create a pseudonym',
+	set 'User session is not valid.' (message) {
+		invalidSession = message;
+	},
+	get 'User session is not valid.' () {
+		if (!invalidSession) {
+			invalidSession = 'You are not currently signed in to FT.com, please '+
+			'<a href="https://accounts.ft.com/login?location='+ encodeURIComponent(document.location.href) +'">sign in</a> to create a pseudonym';
+		}
+		return invalidSession;
+	},
 	'User profile (.*) does not have permission to access the desired action.': 'You don\'t have permission to perform this action.',
 	'Commenting is closed for conversation=([0-9]+)': 'This conversation is closed to new comments.'
 };
