@@ -1,5 +1,7 @@
 # o-comment-ui [![Build Status](https://travis-ci.org/Financial-Times/o-comment-ui.svg?branch=master)](https://travis-ci.org/Financial-Times/o-comment-ui) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](#licence)
 
+📢 **The commenting platform for ft.com, the app, interactive graphics & alphaville is currently being replaced. Please speak to the [Comments team](https://github.com/orgs/Financial-Times/teams/comments) if you intend to start using this component or which to make any changes to it.**
+
 JavaScript module which incorporates common UI elements of the FT commenting system like dialogs, forms, common parts of a commenting widget with DOM manipulation and a unified way to load it.
 
 ## Contents
