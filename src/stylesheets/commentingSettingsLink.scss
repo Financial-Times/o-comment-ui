@@ -1,17 +1,17 @@
 .o-comment-ui--settings {
 	display: inline-block;
 	margin-left: 10px;
-	color: oColorsGetPaletteColor("black-20");
+	color: oColorsByName("black-20");
 
 	.o-comment-ui--settings-text {
 		padding-left: 10px;
-		color: oColorsGetPaletteColor("oxford");
+		color: oColorsByName("oxford");
 		cursor: pointer;
 		display: inline-block;
 	}
 
 	.o-comment-ui--settings-icon {
-		@include oIconsGetIcon('settings', oColorsGetPaletteColor('oxford'), 25, $iconset-version: 1);
+		@include oIconsContent('settings', oColorsByName('oxford'), $size: 25);
 		vertical-align: bottom;
 	}
 }

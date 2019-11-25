@@ -6,11 +6,11 @@
   ],
   "dependencies": {
     "o-comment-utilities": "^2.2.0",
-    "o-icons": ">=4.0.0 <6",
-    "o-colors": "^4.0.0",
-    "o-assets": ">=2.0.0 <4",
-    "o-overlay": "^2.0.0",
-    "o-fonts": "^3.0.0",
+    "o-icons": "^6.0.0",
+    "o-colors": "^5.0.2",
+    "o-assets": "^3.4.2",
+    "o-overlay": "^3.0.0",
+    "o-fonts": "^4.0.0",
     "hogan": "^3.0.2"
   },
   "ignore": [
