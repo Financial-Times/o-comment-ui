@@ -10,12 +10,14 @@ $o-overlay-is-silent: false;
 @import 'o-fonts/main';
 
 @if $o-comment-ui-include-fonts == true {
-	// @font-face declarations for all Benton Sans weights
-	@include oFontsInclude(MetricWeb, light);
-	@include oFontsInclude(MetricWeb, regular);
-	@include oFontsInclude(MetricWeb, bold);
+	@include oFonts($opts: (
+		'metric': (
+	        ('weight': 'light', 'style': 'normal'),
+	        ('weight': 'regular', 'style': 'normal'),
+	        ('weight': 'bold', 'style': 'normal'),
+	    )
+	));
 }
-
 
 @import './src/stylesheets/buttons';
 @import './src/stylesheets/icons';
