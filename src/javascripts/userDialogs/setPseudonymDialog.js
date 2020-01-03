@@ -1,4 +1,4 @@
-import Overlay from 'o-overlay';
+const Overlay = require('o-overlay').default;
 const OverlayFormContent = require('../overlay_content_builder/OverlayFormContent.js');
 const oCommentUtilities = require('o-comment-utilities');
 
