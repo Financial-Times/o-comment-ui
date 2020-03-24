@@ -25,8 +25,8 @@ exports.show = function (currentData, callbacks) {
 		let inProgress = false;
 
 
-		const currentSettings = (currentData && typeof currentData === 'object' && currentData.settings) ? currentData.settings : {};
-		const currentPseudonym = (currentData && typeof currentData === 'object' && currentData.displayName) ? currentData.displayName : "";
+		const currentSettings = currentData && typeof currentData === 'object' && currentData.settings ? currentData.settings : {};
+		const currentPseudonym = currentData && typeof currentData === 'object' && currentData.displayName ? currentData.displayName : "";
 
 		let form = new OverlayFormContent({
 			method: 'GET',

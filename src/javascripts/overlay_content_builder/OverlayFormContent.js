@@ -34,8 +34,8 @@ const serializeForm = function (form) {
 						}
 					}
 				} else {
-					if ((field.type !== 'submit' && field.type !== 'button')) {
-						if ((field.type !== 'checkbox' && field.type !== 'radio') || field.checked) {
+					if (field.type !== 'submit' && field.type !== 'button') {
+						if (field.type !== 'checkbox' && field.type !== 'radio' || field.checked) {
 							assocArray[field.name] = field.value;
 						}
 					}
