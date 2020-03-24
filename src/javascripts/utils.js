@@ -43,7 +43,7 @@ exports.getComputedStyle = function (el, pseudoElement) {
 			}
 		};
 	} else {
-		pseudoElement = (typeof pseudoElement === 'boolean' ? pseudoElement : false);
+		pseudoElement = typeof pseudoElement === 'boolean' ? pseudoElement : false;
 		return window.getComputedStyle(el, pseudoElement);
 	}
 };
